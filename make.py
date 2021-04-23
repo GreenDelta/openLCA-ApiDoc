@@ -6,7 +6,7 @@ import subprocess
 def main():
     pull_sources()
     generate_java_doc()
-
+    generate_grpc_doc()
 
 def pull_sources():
     if not os.path.exists('build'):
@@ -39,6 +39,30 @@ def generate_java_doc():
             continue
         shutil.move(doc_path, target_dir + '/' + mod)
 
+
+def generate_grpc_doc():
+    proto_dir = './build/olca-modules/olca-proto/src/main/proto'
+    target_dir = './docs/grpc'
+
+    # delete the old doc
+    os.makedirs(target_dir, exist_ok=True)
+    for old in os.listdir(target_dir):
+        old_file = target_dir + '/' + old
+        os.remove(old_file)
+
+    if not os.path.exists(proto_dir):
+        return
+    for proto in os.listdir(proto_dir):
+        if not proto.endswith('.proto'):
+            continue
+
+        subprocess.call([
+            'protoc',
+            '-I' + proto_dir,
+            '--doc_out=./docs/grpc',
+            '--doc_opt=html,%s.html' % proto.replace('.proto', ''),
+            proto_dir + '/' + proto
+        ])
 
 if __name__ == '__main__':
     main()
