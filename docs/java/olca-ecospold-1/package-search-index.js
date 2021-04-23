@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"org.openlca.ecospold"},{"l":"org.openlca.ecospold.internal.impact"},{"l":"org.openlca.ecospold.internal.process"},{"l":"org.openlca.ecospold.io"}];updateSearchResults();

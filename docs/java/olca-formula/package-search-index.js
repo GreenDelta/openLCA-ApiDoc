@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"org.openlca.expressions"},{"l":"org.openlca.expressions.functions"},{"l":"org.openlca.formula"}];updateSearchResults();

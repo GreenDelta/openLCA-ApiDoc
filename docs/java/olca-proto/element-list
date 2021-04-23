@@ -1,0 +1,8 @@
+org.openlca.proto
+org.openlca.proto.generated
+org.openlca.proto.generated.data
+org.openlca.proto.generated.mappings
+org.openlca.proto.generated.results
+org.openlca.proto.input
+org.openlca.proto.output
+org.openlca.proto.server

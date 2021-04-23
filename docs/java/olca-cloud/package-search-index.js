@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"org.openlca.cloud.api"},{"l":"org.openlca.cloud.api.data"},{"l":"org.openlca.cloud.api.update"},{"l":"org.openlca.cloud.error"},{"l":"org.openlca.cloud.model"},{"l":"org.openlca.cloud.model.data"},{"l":"org.openlca.cloud.util"}];updateSearchResults();

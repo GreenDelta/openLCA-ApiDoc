@@ -17,3 +17,13 @@ openLCA backend:
 **Note** that openLCA 2.0 is still heavily under development and not officially
 released yet.
 
+olca-cloud
+olca-core
+olca-ecospold-1
+olca-ecospold-2
+olca-formula
+olca-ilcd
+olca-io
+olca-ipc
+olca-proto
+olca-simapro-csv
