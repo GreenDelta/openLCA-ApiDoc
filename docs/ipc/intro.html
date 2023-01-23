@@ -1,0 +1,207 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Introduction - Inter-process communication with openLCA</title>
+        <!-- Custom HTML head -->
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        <!-- MathJax -->
+        <script async type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded "><a href="intro.html" class="active"><strong aria-hidden="true">1.</strong> Introduction</a></li><li class="chapter-item expanded "><a href="servers.html"><strong aria-hidden="true">2.</strong> Stand-alone servers</a></li><li class="chapter-item expanded "><a href="data/data.html"><strong aria-hidden="true">3.</strong> Data management</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="data/get_descriptors.html"><strong aria-hidden="true">3.1.</strong> Get descriptors</a></li><li class="chapter-item expanded "><a href="data/get_by_id.html"><strong aria-hidden="true">3.2.</strong> Get by ID</a></li><li class="chapter-item expanded "><a href="data/get_by_name.html"><strong aria-hidden="true">3.3.</strong> Get by name</a></li><li class="chapter-item expanded "><a href="data/get_descriptor.html"><strong aria-hidden="true">3.4.</strong> Get descriptor</a></li><li class="chapter-item expanded "><a href="data/get_all.html"><strong aria-hidden="true">3.5.</strong> Get all</a></li><li class="chapter-item expanded "><a href="data/get_parameters.html"><strong aria-hidden="true">3.6.</strong> Get parameters</a></li><li class="chapter-item expanded "><a href="data/get_providers.html"><strong aria-hidden="true">3.7.</strong> Get providers</a></li><li class="chapter-item expanded "><a href="data/get_providers_for_flow.html"><strong aria-hidden="true">3.8.</strong> Get providers for flow</a></li><li class="chapter-item expanded "><a href="data/put.html"><strong aria-hidden="true">3.9.</strong> Insert or update a data set</a></li><li class="chapter-item expanded "><a href="data/delete.html"><strong aria-hidden="true">3.10.</strong> Delete a data set</a></li></ol></li><li class="chapter-item expanded "><a href="results/results.html"><strong aria-hidden="true">4.</strong> Calculation and results</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="results/calculate.html"><strong aria-hidden="true">4.1.</strong> Calculate</a></li><li class="chapter-item expanded "><a href="results/get_state.html"><strong aria-hidden="true">4.2.</strong> Get state</a></li><li class="chapter-item expanded "><a href="results/dispose.html"><strong aria-hidden="true">4.3.</strong> Dispose result</a></li><li class="chapter-item expanded "><a href="results/elements/tech-flows.html"><strong aria-hidden="true">4.4.</strong> Technosphere flows</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="results/tech-flows/demand.html"><strong aria-hidden="true">4.4.1.</strong> The final demand</a></li><li class="chapter-item expanded "><a href="results/tech-flows/total-requirements.html"><strong aria-hidden="true">4.4.2.</strong> Total requirements</a></li><li class="chapter-item expanded "><a href="results/tech-flows/direct-requirements.html"><strong aria-hidden="true">4.4.3.</strong> Direct requirements</a></li><li class="chapter-item expanded "><a href="results/tech-flows/scaling-vector.html"><strong aria-hidden="true">4.4.4.</strong> Scaling factors</a></li><li class="chapter-item expanded "><a href="results/tech-flows/totality-factors.html"><strong aria-hidden="true">4.4.5.</strong> Totality factors</a></li><li class="chapter-item expanded "><a href="results/tech-flows/unscaled-requirements.html"><strong aria-hidden="true">4.4.6.</strong> Unscaled requirements</a></li></ol></li><li class="chapter-item expanded "><a href="results/elements/envi-flows.html"><strong aria-hidden="true">4.5.</strong> Intervention flows</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="results/envi-flows/inventory-result.html"><strong aria-hidden="true">4.5.1.</strong> Inventory result</a></li><li class="chapter-item expanded "><a href="results/envi-flows/direct-contributions.html"><strong aria-hidden="true">4.5.2.</strong> Direct contributions</a></li><li class="chapter-item expanded "><a href="results/envi-flows/total-values.html"><strong aria-hidden="true">4.5.3.</strong> Total values</a></li><li class="chapter-item expanded "><a href="results/envi-flows/direct-results.html"><strong aria-hidden="true">4.5.4.</strong> Direct process result</a></li><li class="chapter-item expanded "><a href="results/envi-flows/total-results.html"><strong aria-hidden="true">4.5.5.</strong> Total process result</a></li><li class="chapter-item expanded "><a href="results/envi-flows/intensities.html"><strong aria-hidden="true">4.5.6.</strong> Intensities</a></li><li class="chapter-item expanded "><a href="results/envi-flows/unscaled.html"><strong aria-hidden="true">4.5.7.</strong> Unscaled flows</a></li></ol></li><li class="chapter-item expanded "><a href="results/elements/impact-categories.html"><strong aria-hidden="true">4.6.</strong> Impact categories</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="results/impacts/impact-result.html"><strong aria-hidden="true">4.6.1.</strong> Impact assessment result</a></li><li class="chapter-item expanded "><a href="results/impacts/normalized.html"><strong aria-hidden="true">4.6.2.</strong> Normalized results</a></li><li class="chapter-item expanded "><a href="results/impacts/weighted.html"><strong aria-hidden="true">4.6.3.</strong> Weighted results</a></li><li class="chapter-item expanded "><a href="results/impacts/direct-contributions.html"><strong aria-hidden="true">4.6.4.</strong> Direct contributions</a></li><li class="chapter-item expanded "><a href="results/impacts/direct-results.html"><strong aria-hidden="true">4.6.5.</strong> Direct process result</a></li><li class="chapter-item expanded "><a href="results/impacts/total-results.html"><strong aria-hidden="true">4.6.6.</strong> Total process result</a></li><li class="chapter-item expanded "><a href="results/impacts/intensities.html"><strong aria-hidden="true">4.6.7.</strong> Intensities</a></li></ol></li><li class="chapter-item expanded "><a href="results/elements/costs.html"><strong aria-hidden="true">4.7.</strong> Costs</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="results/costs/cost-result.html"><strong aria-hidden="true">4.7.1.</strong> Life cycle costing result</a></li><li class="chapter-item expanded "><a href="results/costs/direct-contributions.html"><strong aria-hidden="true">4.7.2.</strong> Direct contributions</a></li><li class="chapter-item expanded "><a href="results/costs/total-values.html"><strong aria-hidden="true">4.7.3.</strong> Total values</a></li><li class="chapter-item expanded "><a href="results/costs/intensities.html"><strong aria-hidden="true">4.7.4.</strong> Intensities</a></li><li class="chapter-item expanded "><a href="results/costs/unscaled.html"><strong aria-hidden="true">4.7.5.</strong> Unscaled costs</a></li></ol></li></ol></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Inter-process communication with openLCA</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="introduction"><a class="header" href="#introduction">Introduction</a></h1>
+<p><strong>Note that the new IPC API and this documentation is still under development.</strong></p>
+<p>openLCA provides an API for inter-process communication (IPC) that can be used by any application written in any programming language (e.g. Python, JavaScript/TypeScript, .Net, Go, etc.)<sup class="footnote-reference"><a href="#java_note">1</a></sup>. This IPC protocol is provided by an openLCA server which can be a running instance of the openLCA desktop application or a web-server with an openLCA back-end that exposes this protocol. An application can connect to such an IPC server to call functions in openLCA:</p>
+<pre><code>
+        +--------+                  +--------------------+
+        | Client | &lt;--------------&gt; | openLCA IPC Server |
+        +--------+                  +--------------------+
+                    IPC - Protocol
+                    * data management
+                    * calculations
+                    * result details
+                    * ...
+</code></pre>
+<h2 id="starting-an-ipc-server"><a class="header" href="#starting-an-ipc-server">Starting an IPC server</a></h2>
+<p>In the openLCA desktop application, you can start an IPC server for the
+currently active database from the tools menu: <code>Tools &gt; Developer tools &gt; IPC Server</code>. This
+brings up the following dialog where you can start and stop the server:</p>
+<p><img src="./images/start-ipc-server.png" alt="Starting an IPC server in openLCA" /></p>
+<p>For headless stand-alone servers, please see the next chapter.</p>
+<h2 id="available-protocols"><a class="header" href="#available-protocols">Available protocols</a></h2>
+<p>In the dialog, you can select to start a standard IPC server or a <a href="https://grpc.io/">gRPC</a> server. The standard IPC server is based on the <a href="https://www.jsonrpc.org/">JSON-RPC</a> protocol provided over HTTP. This protocol is easy to implement as it is just based on JSON and HTTP. For example, it can be directly used from a web-browser using the <a href="https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API">Fetch API</a>.</p>
+<p>The <a href="https://grpc.io/">gRPC</a> protocol is another option, especially when you are already familiar with it or when your platform has good support for this option. In this case, you can just generate the client side interface from the <a href="https://github.com/GreenDelta/olca-proto">openLCA service declaration</a>.</p>
+<p>A third option is the <a href="https://en.wikipedia.org/wiki/Representational_state_transfer">REST</a> API provided by openLCA web-services. This protocol is also just based on JSON and HTTP and especially useful when integrating the openLCA back-end into web-applications.</p>
+<p>In this documentation we try to cover all these protocols as they just provide an interface to the same service back-end of the openLCA kernel. Also, all of these protocols are based on the <a href="http://greendelta.github.io/olca-schema/">openLCA Schema</a> as the data exchange format. Thus, parameter and return types of the this documentations often link to their respective description in the openLCA schema documentation.</p>
+<h2 id="client-libraries-and-example-applications"><a class="header" href="#client-libraries-and-example-applications">Client libraries and example applications</a></h2>
+<p>The table below lists some client libraries and demo applications based on the openLCA IPC protocol:</p>
+<div class="table-wrapper"><table><thead><tr><th></th><th>Language</th><th>Type</th><th>Protocol</th></tr></thead><tbody>
+<tr><td><a href="https://github.com/GreenDelta/olca-ipc.py">olca-opc.py</a></td><td>Python</td><td>Client library</td><td>JSON-RPC, REST</td></tr>
+<tr><td><a href="https://github.com/msrocka/ProtoLCA-Demo">ProtoLCA-Demo</a></td><td>C#</td><td>Demo</td><td>gRPC</td></tr>
+<tr><td><a href="https://github.com/msrocka/protolca-js-example">protolca-js-example</a></td><td>JavaScript/Node</td><td>Client library</td><td>gRPC</td></tr>
+<tr><td><a href="https://github.com/GreenDelta/olcarpc.py">olcarpc.py</a></td><td>Python</td><td>Client library</td><td>gRPC</td></tr>
+</tbody></table>
+</div>
+<hr />
+<p><sup class="footnote-reference"><a href="#java_note">1</a></sup> openLCA is a Java application and if your application is written in a language that also runs on the Java virtual machine (like Java, Kotlin, Scala, Clojure etc.) it is recommended to directly use the openLCA Java API instead of an IPC server. The kernel of openLCA can be used independently from the user interface and can be integrated as a set of standard Java libraries in JVM based applications. For example, the integrated Python editor in openLCA is in fact a Python implementation for the JVM (<a href="https://www.jython.org/">Jython</a>), with which you can call the Java API of openLCA.</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="next" href="servers.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="next" href="servers.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+        <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
+        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+    </body>
+</html>
