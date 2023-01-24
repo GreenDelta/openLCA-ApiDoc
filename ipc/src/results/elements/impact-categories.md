@@ -23,7 +23,7 @@ $$
 ### Python IPC
 
 ```py
-{{#include ../results_ipc.py:impact-categories}}
+{{#include _elements.py:impacts}}
 ```
 
 ### JSON-RPC via Fetch API

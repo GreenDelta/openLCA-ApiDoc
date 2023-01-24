@@ -24,7 +24,7 @@ $$
 ### Python IPC
 
 ```py
-{{#include ../results_ipc.py:tech-flows}}
+{{#include _elements.py:tech-flows}}
 ```
 
 ### JSON-RPC via Fetch API
