@@ -1,4 +1,7 @@
 # openLCA-ApiDoc
+
+__A new documentation for the IPC interface of openLCA 2 is currently under development, the current version is available here: (https://greendelta.github.io/openLCA-ApiDoc/ipc/)[https://greendelta.github.io/openLCA-ApiDoc/ipc/]__
+
 This repository contains the generated documentation of the Java and gRPC API of
 the openLCA 2.0 backend. The Java API can be used with any programming language
 that runs on the [JVM](https://adoptopenjdk.net/) (Java, Kotlin, Scala, Clojure,
@@ -17,7 +20,7 @@ openLCA backend:
 **Note** that openLCA 2.0 is still heavily under development and not officially
 released yet.
 
-Documentation of the Java API: 
+Documentation of the Java API:
 
 * [olca-cloud](https://greendelta.github.io/openLCA-ApiDoc/java/olca-cloud)
 * [olca-core](https://greendelta.github.io/openLCA-ApiDoc/java/olca-core)
