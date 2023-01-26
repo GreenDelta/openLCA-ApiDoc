@@ -57,8 +57,8 @@ Next, we define the interventions of these processes with the environment:
 | solid waste [kg] |                    2.0 |                 10.0 |                       0.0 |                          1.0 |
 
 
-In the paper, the inventory is calculated for 10 sandwitch packages, which we
-can quickly do with NumPy now:
+In the paper, the inventory is calculated for 10 sandwitch packages as the final
+demand \\(f\\) of the system, which we can quickly do with NumPy now:
 
 ```py
 {{#include pyipc_from_scratch.py:numsol}}
@@ -123,10 +123,80 @@ openLCA data exchange format in general):
 }
 ```
 
+Next, we create the flows of the example. In the snippet below, it iterates
+over the rows of the data frames and creates a product or elementary flow for
+each row, extracting the unit from the row label and mapping the corresponding
+flow property:
+
+```py
+{{#include pyipc_from_scratch.py:flows}}
+```
+
+Then we iterate over the columns of the data frames and create the corrsponding
+processes with their inputs and outputs of the flows we just created. One the
+diagonal of the technosphere matrix, the reference products of the respective
+processes are located and we set the these exchanges as the quantitative
+reference of the corresponding process:
+
+```py
+{{#include pyipc_from_scratch.py:processes}}
+```
+
+When you refresh the navigation in openLCA again, you should now see these
+new processes and flows:
+
+![](./images/py_scratch_processes.png)
+
+
+Now we can calculate the inventory of this system. We create a calculation setup
+for the sandwitch packaging process as calculation target. We do not need to set
+the unit in the setup as it would take the unit of the quantitative reference of
+the process by default, but we need to set the amount as we want the result for
+10 sandwitches but the process has 100 as quantitative reference. The
+calculation immediately returns a result object but this is maybe not ready yet,
+so we wait for the calculation to be finished via the `wait_until_ready`
+method:
+
+```py
+{{#include pyipc_from_scratch.py:calc}}
+```
+
+When the result is ready, we can query the inventory from it:
+
+```py
+{{#include pyipc_from_scratch.py:inventory}}
+```
+
+This prints the following expected values:
+
+```
+          Flow  Is input?  Amount Unit
+0          CO2      False   30.60   kg
+1    crude oil       True    5.10   kg
+2  solid waste      False   22.52   kg
+3      bauxite       True    1.01   kg
+```
+
+Finally, when we do not need the result anymore, we need to dispose it so that
+allocated resources can be freed on the openLCA side:
+
+```py
+{{#include pyipc_from_scratch.py:free-inventory}}
+```
+
+## Full workbook
+
+Below is the full example. Note that you can run it as a note-book, cell by
+cell, in VS Code:
+
+```py
+{{#include pyipc_from_scratch.py}}
+```
 ---
 
 [^paper]: Reinout Heijungs: A generic method for the identification of options
     for cleaner products. Ecological Economics, Volume 10, Issue 1, 1994, Pages
     69-81, ISSN 0921-8009,
     [https://doi.org/10.1016/0921-8009(94)90038-8](https://www.sciencedirect.com/science/article/abs/pii/0921800994900388).
-[^no] it is of course just an illustrative example and not real data
+
+[^no]: it is of course just an illustrative example and not real data

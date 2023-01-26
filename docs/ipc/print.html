@@ -238,6 +238,7 @@ import pandas as pd
 import numpy as np
 
 from typing import Callable
+
 </code></pre>
 <h2 id="a-historic-example"><a class="header" href="#a-historic-example">A historic example</a></h2>
 <p>Our example was taken from <a href="https://www.sciencedirect.com/science/article/abs/pii/0921800994900388">Heijungs
@@ -302,8 +303,8 @@ print(interventions)
 <tr><td>solid waste [kg]</td><td>2.0</td><td>10.0</td><td>0.0</td><td>1.0</td></tr>
 </tbody></table>
 </div>
-<p>In the paper, the inventory is calculated for 10 sandwitch packages, which we
-can quickly do with NumPy now:</p>
+<p>In the paper, the inventory is calculated for 10 sandwitch packages as the final
+demand \(f\) of the system, which we can quickly do with NumPy now:</p>
 <pre><code class="language-py">f = [
     0.0,
     0.0,
@@ -370,13 +371,339 @@ openLCA data exchange format in general):</p>
   &quot;version&quot;: &quot;01.00.000&quot;
 }
 </code></pre>
+<p>Next, we create the flows of the example. In the snippet below, it iterates
+over the rows of the data frames and creates a product or elementary flow for
+each row, extracting the unit from the row label and mapping the corresponding
+flow property:</p>
+<pre><code class="language-py">def create_flow(
+    row_label: str, fn: Callable[[str, schema.FlowProperty], schema.Flow]
+) -&gt; schema.Flow:
+    parts = row_label.split(&quot;[&quot;)
+    name = parts[0].strip()
+    unit = parts[1][0:-1].strip()
+    match unit:
+        case &quot;kg&quot;:
+            prop = mass
+        case &quot;MJ&quot;:
+            prop = energy
+        case &quot;Item(s)&quot;:
+            prop = count
+    flow = fn(name, prop)
+    client.put(flow)
+    return flow
+
+
+tech_flows = [
+    create_flow(label, schema.new_product) for label in technosphere.index
+]
+envi_flows = [
+    create_flow(label, schema.new_elementary_flow)
+    for label in interventions.index
+]
+</code></pre>
+<p>Then we iterate over the columns of the data frames and create the corrsponding
+processes with their inputs and outputs of the flows we just created. One the
+diagonal of the technosphere matrix, the reference products of the respective
+processes are located and we set the these exchanges as the quantitative
+reference of the corresponding process:</p>
+<pre><code class="language-py">def create_process(index: int, name: str) -&gt; schema.Process:
+    process = schema.new_process(name)
+
+    def exchange(flow: schema.Flow, value: float) -&gt; schema.Exchange | None:
+        if value == 0:
+            return None
+        if value &lt; 0:
+            return schema.new_input(process, flow, abs(value))
+        else:
+            return schema.new_output(process, flow, value)
+
+    for (i, tech_flow) in enumerate(tech_flows):
+        value = technosphere.iat[i, index]
+        e = exchange(tech_flow, value)
+        if e and i == index:
+            e.is_quantitative_reference = True
+
+    for (i, envi_flow) in enumerate(envi_flows):
+        value = interventions.iat[i, index]
+        exchange(envi_flow, value)
+
+    client.put(process)
+    return process
+
+
+processes = [
+    create_process(index, name)
+    for (index, name) in enumerate(technosphere.columns)
+]
+</code></pre>
+<p>When you refresh the navigation in openLCA again, you should now see these
+new processes and flows:</p>
+<p><img src="examples/./images/py_scratch_processes.png" alt="" /></p>
+<p>Now we can calculate the inventory of this system. We create a calculation setup
+for the sandwitch packaging process as calculation target. We do not need to set
+the unit in the setup as it would take the unit of the quantitative reference of
+the process by default, but we need to set the amount as we want the result for
+10 sandwitches but the process has 100 as quantitative reference. The
+calculation immediately returns a result object but this is maybe not ready yet,
+so we wait for the calculation to be finished via the <code>wait_until_ready</code>
+method:</p>
+<pre><code class="language-py">setup = results.CalculationSetup(
+    target=schema.Ref(model_type=&quot;Process&quot;, id=processes[3].id),
+    unit=count.unit_group.ref_unit,  # &quot;Item(s)&quot;
+    amount=10,
+)
+result = client.calculate(setup)
+result.wait_until_ready()
+</code></pre>
+<p>When the result is ready, we can query the inventory from it:</p>
+<pre><code class="language-py">inventory = result.get_total_flows()
+print(
+    pd.DataFrame(
+        data=[
+            (
+                i.envi_flow.flow.name,
+                i.envi_flow.is_input,
+                i.amount,
+                i.envi_flow.flow.ref_unit,
+            )
+            for i in inventory
+        ],
+        columns=[&quot;Flow&quot;, &quot;Is input?&quot;, &quot;Amount&quot;, &quot;Unit&quot;]
+    )
+)
+</code></pre>
+<p>This prints the following expected values:</p>
+<pre><code>          Flow  Is input?  Amount Unit
+0          CO2      False   30.60   kg
+1    crude oil       True    5.10   kg
+2  solid waste      False   22.52   kg
+3      bauxite       True    1.01   kg
+</code></pre>
+<p>Finally, when we do not need the result anymore, we need to dispose it so that
+allocated resources can be freed on the openLCA side:</p>
+<pre><code class="language-py">result.dispose()
+</code></pre>
+<h2 id="full-workbook"><a class="header" href="#full-workbook">Full workbook</a></h2>
+<p>Below is the full example. Note that you can run it as a note-book, cell by
+cell, in VS Code:</p>
+<pre><code class="language-py"># %%
+# ANCHOR: imports
+import olca_ipc as ipc
+import olca_schema as schema
+import olca_schema.results as results
+import pandas as pd
+import numpy as np
+
+from typing import Callable
+
+# ANCHOR_END: imports
+
+
+# %%
+# ANCHOR: techsphere
+technosphere = pd.DataFrame(
+    data=[
+        [1.0, -50.0, -1.0, 0.0],
+        [-0.01, 1.0, -1.0, 0.0],
+        [0.0, 0.0, 1.0, -1.0],
+        [0.0, 0.0, 0.0, 100],
+    ],
+    columns=[
+        &quot;electricity production&quot;,
+        &quot;aluminium production&quot;,
+        &quot;aluminium foil production&quot;,
+        &quot;sandwitch package production&quot;,
+    ],
+    index=[
+        &quot;electricity [MJ]&quot;,
+        &quot;aluminium [kg]&quot;,
+        &quot;aluminium foil [kg]&quot;,
+        &quot;sandwitch package [Item(s)]&quot;,
+    ],
+)
+print(technosphere)
+# ANCHOR_END: techsphere
+
+
+# %%
+# ANCHOR: envisphere
+interventions = pd.DataFrame(
+    data=[
+        [0.0, -5.0, 0.0, 0.0],
+        [-0.5, 0.0, 0.0, 0.0],
+        [3.0, 0.0, 0.0, 0.0],
+        [2.0, 10.0, 0.0, 1.0],
+    ],
+    columns=technosphere.columns,
+    index=[
+        &quot;bauxite [kg]&quot;,
+        &quot;crude oil [kg]&quot;,
+        &quot;CO2 [kg]&quot;,
+        &quot;solid waste [kg]&quot;,
+    ],
+)
+print(interventions)
+# ANCHOR_END: envisphere
+
+
+# %%
+# ANCHOR: numsol
+f = [
+    0.0,
+    0.0,
+    0.0,
+    10,
+]
+s = np.linalg.solve(technosphere.to_numpy(), f)
+g = interventions.to_numpy() @ s
+print(pd.DataFrame(g, index=interventions.index))
+# ANCHOR_END: numsol
+
+
+# %%
+# ANCHOR: mkclient
+client = ipc.Client(8080)
+# ANCHOR_END: mkclient
+
+
+# %%
+# ANCHOR: units
+mass_units = schema.new_unit_group(&quot;Mass units&quot;, &quot;kg&quot;)
+energy_units = schema.new_unit_group(&quot;Energy units&quot;, &quot;MJ&quot;)
+counting_units = schema.new_unit_group(&quot;Counting units&quot;, &quot;Item(s)&quot;)
+mass = schema.new_flow_property(&quot;Mass&quot;, mass_units)
+energy = schema.new_flow_property(&quot;Energy&quot;, energy_units)
+count = schema.new_flow_property(&quot;Number of items&quot;, counting_units)
+
+client.put_all(
+    mass_units,
+    energy_units,
+    counting_units,
+    mass,
+    energy,
+    count,
+)
+# ANCHOR_END: units
+
+
+# %%
+# ANCHOR: mass
+print(client.get(schema.FlowProperty, name=&quot;Mass&quot;).to_json())
+# ANCHOR_END: mass
+
+
+# %%
+# ANCHOR: flows
+def create_flow(
+    row_label: str, fn: Callable[[str, schema.FlowProperty], schema.Flow]
+) -&gt; schema.Flow:
+    parts = row_label.split(&quot;[&quot;)
+    name = parts[0].strip()
+    unit = parts[1][0:-1].strip()
+    match unit:
+        case &quot;kg&quot;:
+            prop = mass
+        case &quot;MJ&quot;:
+            prop = energy
+        case &quot;Item(s)&quot;:
+            prop = count
+    flow = fn(name, prop)
+    client.put(flow)
+    return flow
+
+
+tech_flows = [
+    create_flow(label, schema.new_product) for label in technosphere.index
+]
+envi_flows = [
+    create_flow(label, schema.new_elementary_flow)
+    for label in interventions.index
+]
+# ANCHOR_END: flows
+
+
+# %%
+# ANCHOR: processes
+def create_process(index: int, name: str) -&gt; schema.Process:
+    process = schema.new_process(name)
+
+    def exchange(flow: schema.Flow, value: float) -&gt; schema.Exchange | None:
+        if value == 0:
+            return None
+        if value &lt; 0:
+            return schema.new_input(process, flow, abs(value))
+        else:
+            return schema.new_output(process, flow, value)
+
+    for (i, tech_flow) in enumerate(tech_flows):
+        value = technosphere.iat[i, index]
+        e = exchange(tech_flow, value)
+        if e and i == index:
+            e.is_quantitative_reference = True
+
+    for (i, envi_flow) in enumerate(envi_flows):
+        value = interventions.iat[i, index]
+        exchange(envi_flow, value)
+
+    client.put(process)
+    return process
+
+
+processes = [
+    create_process(index, name)
+    for (index, name) in enumerate(technosphere.columns)
+]
+# ANCHOR_END: processes
+
+
+# %%
+# ANCHOR: calc
+setup = results.CalculationSetup(
+    target=schema.Ref(model_type=&quot;Process&quot;, id=processes[3].id),
+    unit=count.unit_group.ref_unit,  # &quot;Item(s)&quot;
+    amount=10,
+)
+result = client.calculate(setup)
+result.wait_until_ready()
+# ANCHOR_END: calc
+
+
+# %%
+# ANCHOR: inventory
+inventory = result.get_total_flows()
+print(
+    pd.DataFrame(
+        data=[
+            (
+                i.envi_flow.flow.name,
+                i.envi_flow.is_input,
+                i.amount,
+                i.envi_flow.flow.ref_unit,
+            )
+            for i in inventory
+        ],
+        columns=[&quot;Flow&quot;, &quot;Is input?&quot;, &quot;Amount&quot;, &quot;Unit&quot;]
+    )
+)
+# ANCHOR_END: inventory
+
+
+# %%
+# ANCHOR: free-inventory
+result.dispose()
+# ANCHOR_END: free-inventory
+
+# %%
+</code></pre>
 <hr />
 <div class="footnote-definition" id="paper"><sup class="footnote-definition-label">1</sup>
 <p>Reinout Heijungs: A generic method for the identification of options
 for cleaner products. Ecological Economics, Volume 10, Issue 1, 1994, Pages
 69-81, ISSN 0921-8009,
-<a href="https://www.sciencedirect.com/science/article/abs/pii/0921800994900388">https://doi.org/10.1016/0921-8009(94)90038-8</a>.
-<sup class="footnote-reference"><a href="#no">2</a></sup> it is of course just an illustrative example and not real data</p>
+<a href="https://www.sciencedirect.com/science/article/abs/pii/0921800994900388">https://doi.org/10.1016/0921-8009(94)90038-8</a>.</p>
+</div>
+<div class="footnote-definition" id="no"><sup class="footnote-definition-label">2</sup>
+<p>it is of course just an illustrative example and not real data</p>
 </div>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="data-management"><a class="header" href="#data-management">Data management</a></h1>
 <p>The openLCA IPC protocol is based on the <a href="http://greendelta.github.io/olca-schema/">openLCA Schema</a> as data exchange format. Thus, parameter and return types of this documentation often link to their respective description in the openLCA schema documentation. The openLCA schema is a typed data format with the following <a href="http://greendelta.github.io/olca-schema/#format-concepts">principles</a>:</p>

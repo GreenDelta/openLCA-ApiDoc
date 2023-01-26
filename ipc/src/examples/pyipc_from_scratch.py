@@ -7,6 +7,7 @@ import pandas as pd
 import numpy as np
 
 from typing import Callable
+
 # ANCHOR_END: imports
 
 
@@ -104,6 +105,7 @@ print(client.get(schema.FlowProperty, name="Mass").to_json())
 
 
 # %%
+# ANCHOR: flows
 def create_flow(
     row_label: str, fn: Callable[[str, schema.FlowProperty], schema.Flow]
 ) -> schema.Flow:
@@ -129,11 +131,13 @@ envi_flows = [
     create_flow(label, schema.new_elementary_flow)
     for label in interventions.index
 ]
+# ANCHOR_END: flows
+
 
 # %%
+# ANCHOR: processes
 def create_process(index: int, name: str) -> schema.Process:
     process = schema.new_process(name)
-    process.category = "Python IPC - From scratch"
 
     def exchange(flow: schema.Flow, value: float) -> schema.Exchange | None:
         if value == 0:
@@ -161,9 +165,11 @@ processes = [
     create_process(index, name)
     for (index, name) in enumerate(technosphere.columns)
 ]
+# ANCHOR_END: processes
 
 
 # %%
+# ANCHOR: calc
 setup = results.CalculationSetup(
     target=schema.Ref(model_type="Process", id=processes[3].id),
     unit=count.unit_group.ref_unit,  # "Item(s)"
@@ -171,8 +177,32 @@ setup = results.CalculationSetup(
 )
 result = client.calculate(setup)
 result.wait_until_ready()
+# ANCHOR_END: calc
+
 
 # %%
+# ANCHOR: inventory
 inventory = result.get_total_flows()
+print(
+    pd.DataFrame(
+        data=[
+            (
+                i.envi_flow.flow.name,
+                i.envi_flow.is_input,
+                i.amount,
+                i.envi_flow.flow.ref_unit,
+            )
+            for i in inventory
+        ],
+        columns=["Flow", "Is input?", "Amount", "Unit"]
+    )
+)
+# ANCHOR_END: inventory
+
+
+# %%
+# ANCHOR: free-inventory
+result.dispose()
+# ANCHOR_END: free-inventory
 
 # %%
