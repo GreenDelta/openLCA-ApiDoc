@@ -18,6 +18,8 @@ add type annotations in our code, compatible with Python 3.11.
 {{#include pyipc_from_scratch.py:imports}}
 ```
 
+## A historic example
+
 Our example was taken from [Heijungs
 1994](https://www.sciencedirect.com/science/article/abs/pii/0921800994900388)[^paper]
 and extended a bit. First, we define the technosphere of our system which are
@@ -72,9 +74,54 @@ This gives the expected result:
 | solid waste [kg] | 22.52 |
 
 
+## Inventory calculations
 
+Now we do the same in openLCA via the IPC interface. First, we create an IPC
+client that holds our connection data:
 
+```py
+{{#include pyipc_from_scratch.py:mkclient}}
+```
 
+As we have nothing in our database, we first need to create the units and flow
+properties (quantity kinds) in which the flows of the examples are measured:
+
+```py
+{{#include pyipc_from_scratch.py:units}}
+```
+
+While IPC server is running, you can also continue to use the openLCA user
+interface, just do not close the dialog of the server. When you refresh the
+navigation, you will see the newly created unit groups and flow properties:
+
+![](./images/py_scratch_units.png)
+
+However, typically you will not create units and flow properties but use the
+reference data from openLCA. For example, we can get the flow property `Mass`
+by its name:
+
+```py
+{{#include pyipc_from_scratch.py:mass}}
+```
+
+This will print the JSON serialization of that flow property which is the
+internal communication format of the IPC interface (and also the standard
+openLCA data exchange format in general):
+
+```json
+{
+  "@type": "FlowProperty",
+  "@id": "b24a123b-f5a1-40fb-a481-afeeb50f6159",
+  "lastChange": "2023-01-26T13:36:37.954Z",
+  "name": "Mass",
+  "unitGroup": {
+    "@type": "UnitGroup",
+    "@id": "3e912f50-9490-473c-89fc-1393ed2eea03",
+    "name": "Mass units"
+  },
+  "version": "01.00.000"
+}
+```
 
 ---
 
