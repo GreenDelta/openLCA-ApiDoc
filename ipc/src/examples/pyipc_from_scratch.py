@@ -1,13 +1,16 @@
 # %%
+# ANCHOR: imports
 import olca_ipc as ipc
 import olca_schema as schema
+import olca_schema.results as results
 import pandas as pd
 import numpy as np
 
 from typing import Callable
-
+# ANCHOR_END: imports
 
 # %%
+# ANCHOR: techsphere
 technosphere = pd.DataFrame(
     data=[
         [1.0, -50.0, -1.0, 0.0],
@@ -28,15 +31,12 @@ technosphere = pd.DataFrame(
         "sandwitch package [Item(s)]",
     ],
 )
-
 print(technosphere)
-#                             electricity  aluminium   al. foil   packackage
-# electricity [MJ]                   1.00      -50.0       -1.0          0.0
-# aluminium [kg]                    -0.01        1.0       -1.0          0.0
-# aluminium foil [kg]                0.00        0.0        1.0         -1.0
-# sandwitch package [Item(s)]        0.00        0.0        0.0        100.0
+# ANCHOR_END: techsphere
+
 
 # %%
+# ANCHOR: envisphere
 interventions = pd.DataFrame(
     data=[
         [0.0, -5.0, 0.0, 0.0],
@@ -53,24 +53,22 @@ interventions = pd.DataFrame(
     ],
 )
 print(interventions)
-#                   electricity  aluminium   al. foil   packackage
-# bauxite [kg]              0.0       -5.0        0.0          0.0
-# crude oil [kg]           -0.5        0.0        0.0          0.0
-# CO2 [kg]                  3.0        0.0        0.0          0.0
-# solid waste [kg]          2.0       10.0        0.0          1.0
+# ANCHOR_END: envisphere
+
 
 # %%
+# ANCHOR: numsol
 f = [
     0.0,
     0.0,
     0.0,
     10,
 ]
-
 s = np.linalg.solve(technosphere.to_numpy(), f)
 g = interventions.to_numpy() @ s
 print(pd.DataFrame(g, index=interventions.index))
-# %%
+# ANCHOR_END: numsol
+
 
 # %%
 client = ipc.Client(8080)
@@ -155,9 +153,18 @@ processes = [
     create_process(index, name)
     for (index, name) in enumerate(technosphere.columns)
 ]
-print(processes)
+
 
 # %%
-technosphere.iat[0, 0]
+setup = results.CalculationSetup(
+    target=schema.Ref(model_type="Process", id=processes[3].id),
+    unit=count.unit_group.ref_unit,  # "Item(s)"
+    amount=10,
+)
+result = client.calculate(setup)
+result.wait_until_ready()
+
+# %%
+inventory = result.get_total_flows()
 
 # %%
