@@ -4,6 +4,8 @@ import olca_schema as schema
 import pandas as pd
 import numpy as np
 
+from typing import Callable
+
 
 # %%
 technosphere = pd.DataFrame(
@@ -96,5 +98,66 @@ client.put_all(
 print(client.get(schema.FlowProperty, name="Mass").to_json())
 
 # %%
-def create_flow(row_label: str) -> schema.Flow:
-    pass
+def create_flow(
+    row_label: str, fn: Callable[[str, schema.FlowProperty], schema.Flow]
+) -> schema.Flow:
+    parts = row_label.split("[")
+    name = parts[0].strip()
+    unit = parts[1][0:-1].strip()
+    match unit:
+        case "kg":
+            prop = mass
+        case "MJ":
+            prop = energy
+        case "Item(s)":
+            prop = count
+    flow = fn(name, prop)
+    client.put(flow)
+    return flow
+
+
+tech_flows = [
+    create_flow(label, schema.new_product) for label in technosphere.index
+]
+envi_flows = [
+    create_flow(label, schema.new_elementary_flow)
+    for label in interventions.index
+]
+
+# %%
+def create_process(index: int, name: str) -> schema.Process:
+    process = schema.new_process(name)
+    process.category = "Python IPC - From scratch"
+
+    def exchange(flow: schema.Flow, value: float) -> schema.Exchange | None:
+        if value == 0:
+            return None
+        if value < 0:
+            return schema.new_input(process, flow, abs(value))
+        else:
+            return schema.new_output(process, flow, value)
+
+    for (i, tech_flow) in enumerate(tech_flows):
+        value = technosphere.iat[i, index]
+        e = exchange(tech_flow, value)
+        if e and i == index:
+            e.is_quantitative_reference = True
+
+    for (i, envi_flow) in enumerate(envi_flows):
+        value = interventions.iat[i, index]
+        exchange(envi_flow, value)
+
+    client.put(process)
+    return process
+
+
+processes = [
+    create_process(index, name)
+    for (index, name) in enumerate(technosphere.columns)
+]
+print(processes)
+
+# %%
+technosphere.iat[0, 0]
+
+# %%
