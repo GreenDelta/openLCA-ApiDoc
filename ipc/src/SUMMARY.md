@@ -14,6 +14,7 @@
   - [Get providers](./data/get_providers.md)
   - [Get providers for flow](./data/get_providers_for_flow.md)
   - [Insert or update a data set](./data/put.md)
+  - [Create a product system](./data/create-system.md)
   - [Delete a data set](./data/delete.md)
 - [Calculation and results](./results/results.md)
   - [Calculate](./results/calculate.md)

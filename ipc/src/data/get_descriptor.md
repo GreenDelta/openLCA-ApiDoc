@@ -2,11 +2,11 @@
 
 Returns the descriptor of the data set with the given type and ID.
 
-|              |                          |
-|--------------|--------------------------|
-| Rest API     | `GET /data/{type}/{id}/info` |
-| JSON-RPC     | `data/get/descriptor`             |
-| Python/IPC   | `` |
+|              |                                                                    |
+| ------------ | ------------------------------------------------------------------ |
+| Rest API     | `GET /data/{type}/{id}/info`                                       |
+| JSON-RPC     | `data/get/descriptor`                                              |
+| Python/IPC   | `Client.get_descriptor`                                            |
 | Return type: | [`Ref`](https://greendelta.github.io/olca-schema/classes/Ref.html) |
 
 ## Examples

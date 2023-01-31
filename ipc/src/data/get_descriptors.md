@@ -12,7 +12,7 @@ as calculation target in a calculation setup).
 | ----------- | ------------------------------------------------------------------------ |
 | Rest API    | `GET /data/{type}`                                                       |
 | JSON-RPC    | `data/get/descriptors`                                                   |
-| Python/IPC  | `client.get_descriptors`                                                 |
+| Python/IPC  | `Client.get_descriptors`                                                 |
 | Return type | [`List[Ref]`](https://greendelta.github.io/olca-schema/classes/Ref.html) |
 
 
