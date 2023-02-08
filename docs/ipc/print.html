@@ -5,8 +5,10 @@
         <meta charset="UTF-8">
         <title>Inter-process communication with openLCA</title>
         <meta name="robots" content="noindex" />
+
+
         <!-- Custom HTML head -->
-        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="theme-color" content="#ffffff" />
@@ -17,27 +19,30 @@
         <link rel="stylesheet" href="css/general.css">
         <link rel="stylesheet" href="css/chrome.css">
         <link rel="stylesheet" href="css/print.css" media="print">
+
         <!-- Fonts -->
         <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
         <link rel="stylesheet" href="fonts/fonts.css">
+
         <!-- Highlight.js Stylesheets -->
         <link rel="stylesheet" href="highlight.css">
         <link rel="stylesheet" href="tomorrow-night.css">
         <link rel="stylesheet" href="ayu-highlight.css">
 
         <!-- Custom theme stylesheets -->
+
         <!-- MathJax -->
-        <script async type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     </head>
     <body>
         <!-- Provide site root to javascript -->
-        <script type="text/javascript">
+        <script>
             var path_to_root = "";
             var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
         </script>
 
         <!-- Work around some values being stored in localStorage wrapped in quotes -->
-        <script type="text/javascript">
+        <script>
             try {
                 var theme = localStorage.getItem('mdbook-theme');
                 var sidebar = localStorage.getItem('mdbook-sidebar');
@@ -53,7 +58,7 @@
         </script>
 
         <!-- Set the theme before any content is loaded, prevents flash -->
-        <script type="text/javascript">
+        <script>
             var theme;
             try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
             if (theme === null || theme === undefined) { theme = default_theme; }
@@ -65,7 +70,7 @@
         </script>
 
         <!-- Hide / unhide sidebar before it is displayed -->
-        <script type="text/javascript">
+        <script>
             var html = document.querySelector('html');
             var sidebar = 'hidden';
             if (document.body.clientWidth >= 1080) {
@@ -78,7 +83,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="intro.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li class="chapter-item expanded "><a href="servers.html"><strong aria-hidden="true">2.</strong> Stand-alone servers</a></li><li class="chapter-item expanded "><a href="data/data.html"><strong aria-hidden="true">3.</strong> Data management</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="data/get_descriptors.html"><strong aria-hidden="true">3.1.</strong> Get descriptors</a></li><li class="chapter-item expanded "><a href="data/get_by_id.html"><strong aria-hidden="true">3.2.</strong> Get by ID</a></li><li class="chapter-item expanded "><a href="data/get_by_name.html"><strong aria-hidden="true">3.3.</strong> Get by name</a></li><li class="chapter-item expanded "><a href="data/get_descriptor.html"><strong aria-hidden="true">3.4.</strong> Get descriptor</a></li><li class="chapter-item expanded "><a href="data/get_all.html"><strong aria-hidden="true">3.5.</strong> Get all</a></li><li class="chapter-item expanded "><a href="data/get_parameters.html"><strong aria-hidden="true">3.6.</strong> Get parameters</a></li><li class="chapter-item expanded "><a href="data/get_providers.html"><strong aria-hidden="true">3.7.</strong> Get providers</a></li><li class="chapter-item expanded "><a href="data/get_providers_for_flow.html"><strong aria-hidden="true">3.8.</strong> Get providers for flow</a></li><li class="chapter-item expanded "><a href="data/put.html"><strong aria-hidden="true">3.9.</strong> Insert or update a data set</a></li><li class="chapter-item expanded "><a href="data/delete.html"><strong aria-hidden="true">3.10.</strong> Delete a data set</a></li></ol></li><li class="chapter-item expanded "><a href="results/results.html"><strong aria-hidden="true">4.</strong> Calculation and results</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="results/calculate.html"><strong aria-hidden="true">4.1.</strong> Calculate</a></li><li class="chapter-item expanded "><a href="results/get_state.html"><strong aria-hidden="true">4.2.</strong> Get state</a></li><li class="chapter-item expanded "><a href="results/dispose.html"><strong aria-hidden="true">4.3.</strong> Dispose result</a></li><li class="chapter-item expanded "><a href="results/elements/tech-flows.html"><strong aria-hidden="true">4.4.</strong> Technosphere flows</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="results/tech-flows/demand.html"><strong aria-hidden="true">4.4.1.</strong> The final demand</a></li><li class="chapter-item expanded "><a href="results/tech-flows/total-requirements.html"><strong aria-hidden="true">4.4.2.</strong> Total requirements</a></li><li class="chapter-item expanded "><a href="results/tech-flows/direct-requirements.html"><strong aria-hidden="true">4.4.3.</strong> Direct requirements</a></li><li class="chapter-item expanded "><a href="results/tech-flows/scaling-vector.html"><strong aria-hidden="true">4.4.4.</strong> Scaling factors</a></li><li class="chapter-item expanded "><a href="results/tech-flows/totality-factors.html"><strong aria-hidden="true">4.4.5.</strong> Totality factors</a></li><li class="chapter-item expanded "><a href="results/tech-flows/unscaled-requirements.html"><strong aria-hidden="true">4.4.6.</strong> Unscaled requirements</a></li></ol></li><li class="chapter-item expanded "><a href="results/elements/envi-flows.html"><strong aria-hidden="true">4.5.</strong> Intervention flows</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="results/envi-flows/inventory-result.html"><strong aria-hidden="true">4.5.1.</strong> Inventory result</a></li><li class="chapter-item expanded "><a href="results/envi-flows/direct-contributions.html"><strong aria-hidden="true">4.5.2.</strong> Direct contributions</a></li><li class="chapter-item expanded "><a href="results/envi-flows/total-values.html"><strong aria-hidden="true">4.5.3.</strong> Total values</a></li><li class="chapter-item expanded "><a href="results/envi-flows/direct-results.html"><strong aria-hidden="true">4.5.4.</strong> Direct process result</a></li><li class="chapter-item expanded "><a href="results/envi-flows/total-results.html"><strong aria-hidden="true">4.5.5.</strong> Total process result</a></li><li class="chapter-item expanded "><a href="results/envi-flows/intensities.html"><strong aria-hidden="true">4.5.6.</strong> Intensities</a></li><li class="chapter-item expanded "><a href="results/envi-flows/unscaled.html"><strong aria-hidden="true">4.5.7.</strong> Unscaled flows</a></li></ol></li><li class="chapter-item expanded "><a href="results/elements/impact-categories.html"><strong aria-hidden="true">4.6.</strong> Impact categories</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="results/impacts/impact-result.html"><strong aria-hidden="true">4.6.1.</strong> Impact assessment result</a></li><li class="chapter-item expanded "><a href="results/impacts/normalized.html"><strong aria-hidden="true">4.6.2.</strong> Normalized results</a></li><li class="chapter-item expanded "><a href="results/impacts/weighted.html"><strong aria-hidden="true">4.6.3.</strong> Weighted results</a></li><li class="chapter-item expanded "><a href="results/impacts/direct-contributions.html"><strong aria-hidden="true">4.6.4.</strong> Direct contributions</a></li><li class="chapter-item expanded "><a href="results/impacts/direct-results.html"><strong aria-hidden="true">4.6.5.</strong> Direct process result</a></li><li class="chapter-item expanded "><a href="results/impacts/total-results.html"><strong aria-hidden="true">4.6.6.</strong> Total process result</a></li><li class="chapter-item expanded "><a href="results/impacts/intensities.html"><strong aria-hidden="true">4.6.7.</strong> Intensities</a></li></ol></li><li class="chapter-item expanded "><a href="results/elements/costs.html"><strong aria-hidden="true">4.7.</strong> Costs</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="results/costs/cost-result.html"><strong aria-hidden="true">4.7.1.</strong> Life cycle costing result</a></li><li class="chapter-item expanded "><a href="results/costs/direct-contributions.html"><strong aria-hidden="true">4.7.2.</strong> Direct contributions</a></li><li class="chapter-item expanded "><a href="results/costs/total-values.html"><strong aria-hidden="true">4.7.3.</strong> Total values</a></li><li class="chapter-item expanded "><a href="results/costs/intensities.html"><strong aria-hidden="true">4.7.4.</strong> Intensities</a></li><li class="chapter-item expanded "><a href="results/costs/unscaled.html"><strong aria-hidden="true">4.7.5.</strong> Unscaled costs</a></li></ol></li></ol></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="intro.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li class="chapter-item expanded "><a href="servers.html"><strong aria-hidden="true">2.</strong> Stand-alone servers</a></li><li class="chapter-item expanded "><a href="examples/examples.html"><strong aria-hidden="true">3.</strong> Examples</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="examples/pyipc_from_scratch.html"><strong aria-hidden="true">3.1.</strong> Python IPC: From scratch</a></li></ol></li><li class="chapter-item expanded "><a href="data/data.html"><strong aria-hidden="true">4.</strong> Data management</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="data/get_descriptors.html"><strong aria-hidden="true">4.1.</strong> Get descriptors</a></li><li class="chapter-item expanded "><a href="data/get_by_id.html"><strong aria-hidden="true">4.2.</strong> Get by ID</a></li><li class="chapter-item expanded "><a href="data/get_by_name.html"><strong aria-hidden="true">4.3.</strong> Get by name</a></li><li class="chapter-item expanded "><a href="data/get_descriptor.html"><strong aria-hidden="true">4.4.</strong> Get descriptor</a></li><li class="chapter-item expanded "><a href="data/get_all.html"><strong aria-hidden="true">4.5.</strong> Get all</a></li><li class="chapter-item expanded "><a href="data/get_parameters.html"><strong aria-hidden="true">4.6.</strong> Get parameters</a></li><li class="chapter-item expanded "><a href="data/get_providers.html"><strong aria-hidden="true">4.7.</strong> Get providers</a></li><li class="chapter-item expanded "><a href="data/get_providers_for_flow.html"><strong aria-hidden="true">4.8.</strong> Get providers for flow</a></li><li class="chapter-item expanded "><a href="data/put.html"><strong aria-hidden="true">4.9.</strong> Insert or update a data set</a></li><li class="chapter-item expanded "><a href="data/create-system.html"><strong aria-hidden="true">4.10.</strong> Create a product system</a></li><li class="chapter-item expanded "><a href="data/delete.html"><strong aria-hidden="true">4.11.</strong> Delete a data set</a></li></ol></li><li class="chapter-item expanded "><a href="results/results.html"><strong aria-hidden="true">5.</strong> Calculation and results</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="results/calculate.html"><strong aria-hidden="true">5.1.</strong> Calculate</a></li><li class="chapter-item expanded "><a href="results/get_state.html"><strong aria-hidden="true">5.2.</strong> Get state</a></li><li class="chapter-item expanded "><a href="results/dispose.html"><strong aria-hidden="true">5.3.</strong> Dispose result</a></li><li class="chapter-item expanded "><a href="results/elements/tech-flows.html"><strong aria-hidden="true">5.4.</strong> Technosphere flows</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="results/tech-flows/demand.html"><strong aria-hidden="true">5.4.1.</strong> The final demand</a></li><li class="chapter-item expanded "><a href="results/tech-flows/total-requirements.html"><strong aria-hidden="true">5.4.2.</strong> Total requirements</a></li><li class="chapter-item expanded "><a href="results/tech-flows/direct-requirements.html"><strong aria-hidden="true">5.4.3.</strong> Direct requirements</a></li><li class="chapter-item expanded "><a href="results/tech-flows/scaling-vector.html"><strong aria-hidden="true">5.4.4.</strong> Scaling factors</a></li><li class="chapter-item expanded "><a href="results/tech-flows/totality-factors.html"><strong aria-hidden="true">5.4.5.</strong> Totality factors</a></li><li class="chapter-item expanded "><a href="results/tech-flows/unscaled-requirements.html"><strong aria-hidden="true">5.4.6.</strong> Unscaled requirements</a></li></ol></li><li class="chapter-item expanded "><a href="results/elements/envi-flows.html"><strong aria-hidden="true">5.5.</strong> Intervention flows</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="results/envi-flows/inventory-result.html"><strong aria-hidden="true">5.5.1.</strong> Inventory result</a></li><li class="chapter-item expanded "><a href="results/envi-flows/direct-contributions.html"><strong aria-hidden="true">5.5.2.</strong> Direct contributions</a></li><li class="chapter-item expanded "><a href="results/envi-flows/total-values.html"><strong aria-hidden="true">5.5.3.</strong> Total values</a></li><li class="chapter-item expanded "><a href="results/envi-flows/direct-results.html"><strong aria-hidden="true">5.5.4.</strong> Direct process result</a></li><li class="chapter-item expanded "><a href="results/envi-flows/total-results.html"><strong aria-hidden="true">5.5.5.</strong> Total process result</a></li><li class="chapter-item expanded "><a href="results/envi-flows/intensities.html"><strong aria-hidden="true">5.5.6.</strong> Intensities</a></li><li class="chapter-item expanded "><a href="results/envi-flows/unscaled.html"><strong aria-hidden="true">5.5.7.</strong> Unscaled flows</a></li></ol></li><li class="chapter-item expanded "><a href="results/elements/impact-categories.html"><strong aria-hidden="true">5.6.</strong> Impact categories</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="results/impacts/impact-result.html"><strong aria-hidden="true">5.6.1.</strong> Impact assessment result</a></li><li class="chapter-item expanded "><a href="results/impacts/normalized.html"><strong aria-hidden="true">5.6.2.</strong> Normalized results</a></li><li class="chapter-item expanded "><a href="results/impacts/weighted.html"><strong aria-hidden="true">5.6.3.</strong> Weighted results</a></li><li class="chapter-item expanded "><a href="results/impacts/direct-contributions.html"><strong aria-hidden="true">5.6.4.</strong> Direct contributions</a></li><li class="chapter-item expanded "><a href="results/impacts/direct-results.html"><strong aria-hidden="true">5.6.5.</strong> Direct process result</a></li><li class="chapter-item expanded "><a href="results/impacts/total-results.html"><strong aria-hidden="true">5.6.6.</strong> Total process result</a></li><li class="chapter-item expanded "><a href="results/impacts/intensities.html"><strong aria-hidden="true">5.6.7.</strong> Intensities</a></li></ol></li><li class="chapter-item expanded "><a href="results/elements/costs.html"><strong aria-hidden="true">5.7.</strong> Costs</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="results/costs/cost-result.html"><strong aria-hidden="true">5.7.1.</strong> Life cycle costing result</a></li><li class="chapter-item expanded "><a href="results/costs/direct-contributions.html"><strong aria-hidden="true">5.7.2.</strong> Direct contributions</a></li><li class="chapter-item expanded "><a href="results/costs/total-values.html"><strong aria-hidden="true">5.7.3.</strong> Total values</a></li><li class="chapter-item expanded "><a href="results/costs/intensities.html"><strong aria-hidden="true">5.7.4.</strong> Intensities</a></li><li class="chapter-item expanded "><a href="results/costs/unscaled.html"><strong aria-hidden="true">5.7.5.</strong> Unscaled costs</a></li></ol></li></ol></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -86,7 +91,7 @@
         <div id="page-wrapper" class="page-wrapper">
 
             <div class="page">
-                <div id="menu-bar-hover-placeholder"></div>
+                                <div id="menu-bar-hover-placeholder"></div>
                 <div id="menu-bar" class="menu-bar sticky bordered">
                     <div class="left-buttons">
                         <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
@@ -96,7 +101,7 @@
                             <i class="fa fa-paint-brush"></i>
                         </button>
                         <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
-                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
@@ -113,6 +118,7 @@
                         <a href="print.html" title="Print this book" aria-label="Print this book">
                             <i id="print-button" class="fa fa-print"></i>
                         </a>
+
                     </div>
                 </div>
 
@@ -126,8 +132,9 @@
                         </ul>
                     </div>
                 </div>
+
                 <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
-                <script type="text/javascript">
+                <script>
                     document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
                     document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
                     Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
@@ -211,6 +218,493 @@ brings up the following dialog where you can start and stop the server:</p>
     If this flag is set, the server will run in readonly mode and modifying the
     database will not be possible via http requests.
 </code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="examples"><a class="header" href="#examples">Examples</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="python-ipc---from-scratch"><a class="header" href="#python-ipc---from-scratch">Python IPC - From scratch</a></h1>
+<p>In this section we will go through a complete example using the openLCA IPC
+interface from the <a href="https://github.com/GreenDelta/olca-ipc.py">olca-ipc.py</a>
+Python package. As we will create everything from scratch, we first create an
+empty database and start an IPC server for that database:</p>
+<p><img src="examples/./images/py_scratch_init_db.png" alt="" /></p>
+<p>In the Python code, we first import the required packages that we will use in
+our example. The <code>olca-schema</code> packages comes is a dependency of the <code>olca-ipc</code>
+package and contains the data type definitions of the openLCA model and some
+utility methods. We will use Pandas for formatting our data output and NumPy,
+which is a dependency of Pandas, for checking the calculation. Also, we will
+add type annotations in our code, compatible with Python 3.11.</p>
+<pre><code class="language-py">import olca_ipc as ipc
+import olca_schema as schema
+import olca_schema.results as results
+import pandas as pd
+import numpy as np
+
+from typing import Callable
+
+</code></pre>
+<h2 id="a-historic-example"><a class="header" href="#a-historic-example">A historic example</a></h2>
+<p>Our example was taken from <a href="https://www.sciencedirect.com/science/article/abs/pii/0921800994900388">Heijungs
+1994</a><sup class="footnote-reference"><a href="#paper">1</a></sup>
+and extended a bit. First, we define the technosphere of our system which are
+4 processes connected by 4 products:</p>
+<pre><code class="language-py">technosphere = pd.DataFrame(
+    data=[
+        [1.0, -50.0, -1.0, 0.0],
+        [-0.01, 1.0, -1.0, 0.0],
+        [0.0, 0.0, 1.0, -1.0],
+        [0.0, 0.0, 0.0, 100],
+    ],
+    columns=[
+        &quot;electricity production&quot;,
+        &quot;aluminium production&quot;,
+        &quot;aluminium foil production&quot;,
+        &quot;sandwitch package production&quot;,
+    ],
+    index=[
+        &quot;electricity [MJ]&quot;,
+        &quot;aluminium [kg]&quot;,
+        &quot;aluminium foil [kg]&quot;,
+        &quot;sandwitch package [Item(s)]&quot;,
+    ],
+)
+print(technosphere)
+</code></pre>
+<p>When we print this data frame, we get the following table:</p>
+<div class="table-wrapper"><table><thead><tr><th></th><th>electricity production</th><th>aluminium production</th><th>aluminium foil production</th><th>sandwitch package production</th></tr></thead><tbody>
+<tr><td>electricity [MJ]</td><td>1.00</td><td>-50.0</td><td>-1.0</td><td>0.0</td></tr>
+<tr><td>aluminium [kg]</td><td>-0.01</td><td>1.0</td><td>-1.0</td><td>0.0</td></tr>
+<tr><td>aluminium foil [kg]</td><td>0.00</td><td>0.0</td><td>1.0</td><td>-1.0</td></tr>
+<tr><td>sandwitch package [Item(s)]</td><td>0.00</td><td>0.0</td><td>0.0</td><td>100.0</td></tr>
+</tbody></table>
+</div>
+<p>In the rows, we have our products, in the columns the processes. Inputs have
+negative and outputs positive values. Thus, for 100 sandwitch packages, we would
+need 1 kg of aluminium foil (this is how sandwitches were packed in the 90s)<sup class="footnote-reference"><a href="#no">2</a></sup>.</p>
+<p>Next, we define the interventions of these processes with the environment:</p>
+<pre><code class="language-py">interventions = pd.DataFrame(
+    data=[
+        [0.0, -5.0, 0.0, 0.0],
+        [-0.5, 0.0, 0.0, 0.0],
+        [3.0, 0.0, 0.0, 0.0],
+        [2.0, 10.0, 0.0, 1.0],
+    ],
+    columns=technosphere.columns,
+    index=[
+        &quot;bauxite [kg]&quot;,
+        &quot;crude oil [kg]&quot;,
+        &quot;CO2 [kg]&quot;,
+        &quot;solid waste [kg]&quot;,
+    ],
+)
+print(interventions)
+</code></pre>
+<div class="table-wrapper"><table><thead><tr><th></th><th>electricity production</th><th>aluminium production</th><th>aluminium foil production</th><th>sandwitch package production</th></tr></thead><tbody>
+<tr><td>bauxite [kg]</td><td>0.0</td><td>-5.0</td><td>0.0</td><td>0.0</td></tr>
+<tr><td>crude oil [kg]</td><td>-0.5</td><td>0.0</td><td>0.0</td><td>0.0</td></tr>
+<tr><td>CO2 [kg]</td><td>3.0</td><td>0.0</td><td>0.0</td><td>0.0</td></tr>
+<tr><td>solid waste [kg]</td><td>2.0</td><td>10.0</td><td>0.0</td><td>1.0</td></tr>
+</tbody></table>
+</div>
+<p>In the paper, the inventory is calculated for 10 sandwitch packages as the final
+demand \(f\) of the system, which we can quickly do with NumPy now:</p>
+<pre><code class="language-py">f = [
+    0.0,
+    0.0,
+    0.0,
+    10,
+]
+s = np.linalg.solve(technosphere.to_numpy(), f)
+g = interventions.to_numpy() @ s
+print(pd.DataFrame(g, index=interventions.index))
+</code></pre>
+<p>This gives the expected result:</p>
+<div class="table-wrapper"><table><thead><tr><th></th><th></th></tr></thead><tbody>
+<tr><td>bauxite [kg]</td><td>-1.01</td></tr>
+<tr><td>crude oil [kg]</td><td>-5.10</td></tr>
+<tr><td>CO2 [kg]</td><td>30.60</td></tr>
+<tr><td>solid waste [kg]</td><td>22.52</td></tr>
+</tbody></table>
+</div>
+<h2 id="inventory-calculations"><a class="header" href="#inventory-calculations">Inventory calculations</a></h2>
+<p>Now we do the same in openLCA via the IPC interface. First, we create an IPC
+client that holds our connection data:</p>
+<pre><code class="language-py">client = ipc.Client(8080)
+</code></pre>
+<p>As we have nothing in our database, we first need to create the units and flow
+properties (quantity kinds) in which the flows of the examples are measured:</p>
+<pre><code class="language-py">mass_units = schema.new_unit_group(&quot;Mass units&quot;, &quot;kg&quot;)
+energy_units = schema.new_unit_group(&quot;Energy units&quot;, &quot;MJ&quot;)
+counting_units = schema.new_unit_group(&quot;Counting units&quot;, &quot;Item(s)&quot;)
+mass = schema.new_flow_property(&quot;Mass&quot;, mass_units)
+energy = schema.new_flow_property(&quot;Energy&quot;, energy_units)
+count = schema.new_flow_property(&quot;Number of items&quot;, counting_units)
+
+client.put_all(
+    mass_units,
+    energy_units,
+    counting_units,
+    mass,
+    energy,
+    count,
+)
+</code></pre>
+<p>While IPC server is running, you can also continue to use the openLCA user
+interface, just do not close the dialog of the server. When you refresh the
+navigation, you will see the newly created unit groups and flow properties:</p>
+<p><img src="examples/./images/py_scratch_units.png" alt="" /></p>
+<p>However, typically you will not create units and flow properties but use the
+reference data from openLCA. For example, we can get the flow property <code>Mass</code>
+by its name:</p>
+<pre><code class="language-py">print(client.get(schema.FlowProperty, name=&quot;Mass&quot;).to_json())
+</code></pre>
+<p>This will print the JSON serialization of that flow property which is the
+internal communication format of the IPC interface (and also the standard
+openLCA data exchange format in general):</p>
+<pre><code class="language-json">{
+  &quot;@type&quot;: &quot;FlowProperty&quot;,
+  &quot;@id&quot;: &quot;b24a123b-f5a1-40fb-a481-afeeb50f6159&quot;,
+  &quot;lastChange&quot;: &quot;2023-01-26T13:36:37.954Z&quot;,
+  &quot;name&quot;: &quot;Mass&quot;,
+  &quot;unitGroup&quot;: {
+    &quot;@type&quot;: &quot;UnitGroup&quot;,
+    &quot;@id&quot;: &quot;3e912f50-9490-473c-89fc-1393ed2eea03&quot;,
+    &quot;name&quot;: &quot;Mass units&quot;
+  },
+  &quot;version&quot;: &quot;01.00.000&quot;
+}
+</code></pre>
+<p>Next, we create the flows of the example. In the snippet below, it iterates
+over the rows of the data frames and creates a product or elementary flow for
+each row, extracting the unit from the row label and mapping the corresponding
+flow property:</p>
+<pre><code class="language-py">def create_flow(
+    row_label: str, fn: Callable[[str, schema.FlowProperty], schema.Flow]
+) -&gt; schema.Flow:
+    parts = row_label.split(&quot;[&quot;)
+    name = parts[0].strip()
+    unit = parts[1][0:-1].strip()
+    match unit:
+        case &quot;kg&quot;:
+            prop = mass
+        case &quot;MJ&quot;:
+            prop = energy
+        case &quot;Item(s)&quot;:
+            prop = count
+    flow = fn(name, prop)
+    client.put(flow)
+    return flow
+
+
+tech_flows = [
+    create_flow(label, schema.new_product) for label in technosphere.index
+]
+envi_flows = [
+    create_flow(label, schema.new_elementary_flow)
+    for label in interventions.index
+]
+</code></pre>
+<p>Then we iterate over the columns of the data frames and create the corrsponding
+processes with their inputs and outputs of the flows we just created. One the
+diagonal of the technosphere matrix, the reference products of the respective
+processes are located and we set the these exchanges as the quantitative
+reference of the corresponding process:</p>
+<pre><code class="language-py">def create_process(index: int, name: str) -&gt; schema.Process:
+    process = schema.new_process(name)
+
+    def exchange(flow: schema.Flow, value: float) -&gt; schema.Exchange | None:
+        if value == 0:
+            return None
+        if value &lt; 0:
+            return schema.new_input(process, flow, abs(value))
+        else:
+            return schema.new_output(process, flow, value)
+
+    for (i, tech_flow) in enumerate(tech_flows):
+        value = technosphere.iat[i, index]
+        e = exchange(tech_flow, value)
+        if e and i == index:
+            e.is_quantitative_reference = True
+
+    for (i, envi_flow) in enumerate(envi_flows):
+        value = interventions.iat[i, index]
+        exchange(envi_flow, value)
+
+    client.put(process)
+    return process
+
+
+processes = [
+    create_process(index, name)
+    for (index, name) in enumerate(technosphere.columns)
+]
+</code></pre>
+<p>When you refresh the navigation in openLCA again, you should now see these
+new processes and flows:</p>
+<p><img src="examples/./images/py_scratch_processes.png" alt="" /></p>
+<p>Now we can calculate the inventory of this system. We create a calculation setup
+for the sandwitch packaging process as calculation target. We do not need to set
+the unit in the setup as it would take the unit of the quantitative reference of
+the process by default, but we need to set the amount as we want the result for
+10 sandwitches but the process has 100 as quantitative reference. The
+calculation immediately returns a result object but this is maybe not ready yet,
+so we wait for the calculation to be finished via the <code>wait_until_ready</code>
+method:</p>
+<pre><code class="language-py">setup = results.CalculationSetup(
+    target=schema.Ref(model_type=&quot;Process&quot;, id=processes[3].id),
+    unit=count.unit_group.ref_unit,  # &quot;Item(s)&quot;
+    amount=10,
+)
+result = client.calculate(setup)
+result.wait_until_ready()
+</code></pre>
+<p>When the result is ready, we can query the inventory from it:</p>
+<pre><code class="language-py">inventory = result.get_total_flows()
+print(
+    pd.DataFrame(
+        data=[
+            (
+                i.envi_flow.flow.name,
+                i.envi_flow.is_input,
+                i.amount,
+                i.envi_flow.flow.ref_unit,
+            )
+            for i in inventory
+        ],
+        columns=[&quot;Flow&quot;, &quot;Is input?&quot;, &quot;Amount&quot;, &quot;Unit&quot;]
+    )
+)
+</code></pre>
+<p>This prints the following expected values:</p>
+<pre><code>          Flow  Is input?  Amount Unit
+0          CO2      False   30.60   kg
+1    crude oil       True    5.10   kg
+2  solid waste      False   22.52   kg
+3      bauxite       True    1.01   kg
+</code></pre>
+<p>Finally, when we do not need the result anymore, we need to dispose it so that
+allocated resources can be freed on the openLCA side:</p>
+<pre><code class="language-py">result.dispose()
+</code></pre>
+<h2 id="full-workbook"><a class="header" href="#full-workbook">Full workbook</a></h2>
+<p>Below is the full example. Note that you can run it as a note-book, cell by
+cell, in VS Code:</p>
+<pre><code class="language-py"># %%
+# ANCHOR: imports
+import olca_ipc as ipc
+import olca_schema as schema
+import olca_schema.results as results
+import pandas as pd
+import numpy as np
+
+from typing import Callable
+
+# ANCHOR_END: imports
+
+
+# %%
+# ANCHOR: techsphere
+technosphere = pd.DataFrame(
+    data=[
+        [1.0, -50.0, -1.0, 0.0],
+        [-0.01, 1.0, -1.0, 0.0],
+        [0.0, 0.0, 1.0, -1.0],
+        [0.0, 0.0, 0.0, 100],
+    ],
+    columns=[
+        &quot;electricity production&quot;,
+        &quot;aluminium production&quot;,
+        &quot;aluminium foil production&quot;,
+        &quot;sandwitch package production&quot;,
+    ],
+    index=[
+        &quot;electricity [MJ]&quot;,
+        &quot;aluminium [kg]&quot;,
+        &quot;aluminium foil [kg]&quot;,
+        &quot;sandwitch package [Item(s)]&quot;,
+    ],
+)
+print(technosphere)
+# ANCHOR_END: techsphere
+
+
+# %%
+# ANCHOR: envisphere
+interventions = pd.DataFrame(
+    data=[
+        [0.0, -5.0, 0.0, 0.0],
+        [-0.5, 0.0, 0.0, 0.0],
+        [3.0, 0.0, 0.0, 0.0],
+        [2.0, 10.0, 0.0, 1.0],
+    ],
+    columns=technosphere.columns,
+    index=[
+        &quot;bauxite [kg]&quot;,
+        &quot;crude oil [kg]&quot;,
+        &quot;CO2 [kg]&quot;,
+        &quot;solid waste [kg]&quot;,
+    ],
+)
+print(interventions)
+# ANCHOR_END: envisphere
+
+
+# %%
+# ANCHOR: numsol
+f = [
+    0.0,
+    0.0,
+    0.0,
+    10,
+]
+s = np.linalg.solve(technosphere.to_numpy(), f)
+g = interventions.to_numpy() @ s
+print(pd.DataFrame(g, index=interventions.index))
+# ANCHOR_END: numsol
+
+
+# %%
+# ANCHOR: mkclient
+client = ipc.Client(8080)
+# ANCHOR_END: mkclient
+
+
+# %%
+# ANCHOR: units
+mass_units = schema.new_unit_group(&quot;Mass units&quot;, &quot;kg&quot;)
+energy_units = schema.new_unit_group(&quot;Energy units&quot;, &quot;MJ&quot;)
+counting_units = schema.new_unit_group(&quot;Counting units&quot;, &quot;Item(s)&quot;)
+mass = schema.new_flow_property(&quot;Mass&quot;, mass_units)
+energy = schema.new_flow_property(&quot;Energy&quot;, energy_units)
+count = schema.new_flow_property(&quot;Number of items&quot;, counting_units)
+
+client.put_all(
+    mass_units,
+    energy_units,
+    counting_units,
+    mass,
+    energy,
+    count,
+)
+# ANCHOR_END: units
+
+
+# %%
+# ANCHOR: mass
+print(client.get(schema.FlowProperty, name=&quot;Mass&quot;).to_json())
+# ANCHOR_END: mass
+
+
+# %%
+# ANCHOR: flows
+def create_flow(
+    row_label: str, fn: Callable[[str, schema.FlowProperty], schema.Flow]
+) -&gt; schema.Flow:
+    parts = row_label.split(&quot;[&quot;)
+    name = parts[0].strip()
+    unit = parts[1][0:-1].strip()
+    match unit:
+        case &quot;kg&quot;:
+            prop = mass
+        case &quot;MJ&quot;:
+            prop = energy
+        case &quot;Item(s)&quot;:
+            prop = count
+    flow = fn(name, prop)
+    client.put(flow)
+    return flow
+
+
+tech_flows = [
+    create_flow(label, schema.new_product) for label in technosphere.index
+]
+envi_flows = [
+    create_flow(label, schema.new_elementary_flow)
+    for label in interventions.index
+]
+# ANCHOR_END: flows
+
+
+# %%
+# ANCHOR: processes
+def create_process(index: int, name: str) -&gt; schema.Process:
+    process = schema.new_process(name)
+
+    def exchange(flow: schema.Flow, value: float) -&gt; schema.Exchange | None:
+        if value == 0:
+            return None
+        if value &lt; 0:
+            return schema.new_input(process, flow, abs(value))
+        else:
+            return schema.new_output(process, flow, value)
+
+    for (i, tech_flow) in enumerate(tech_flows):
+        value = technosphere.iat[i, index]
+        e = exchange(tech_flow, value)
+        if e and i == index:
+            e.is_quantitative_reference = True
+
+    for (i, envi_flow) in enumerate(envi_flows):
+        value = interventions.iat[i, index]
+        exchange(envi_flow, value)
+
+    client.put(process)
+    return process
+
+
+processes = [
+    create_process(index, name)
+    for (index, name) in enumerate(technosphere.columns)
+]
+# ANCHOR_END: processes
+
+
+# %%
+# ANCHOR: calc
+setup = results.CalculationSetup(
+    target=schema.Ref(model_type=&quot;Process&quot;, id=processes[3].id),
+    unit=count.unit_group.ref_unit,  # &quot;Item(s)&quot;
+    amount=10,
+)
+result = client.calculate(setup)
+result.wait_until_ready()
+# ANCHOR_END: calc
+
+
+# %%
+# ANCHOR: inventory
+inventory = result.get_total_flows()
+print(
+    pd.DataFrame(
+        data=[
+            (
+                i.envi_flow.flow.name,
+                i.envi_flow.is_input,
+                i.amount,
+                i.envi_flow.flow.ref_unit,
+            )
+            for i in inventory
+        ],
+        columns=[&quot;Flow&quot;, &quot;Is input?&quot;, &quot;Amount&quot;, &quot;Unit&quot;]
+    )
+)
+# ANCHOR_END: inventory
+
+
+# %%
+# ANCHOR: free-inventory
+result.dispose()
+# ANCHOR_END: free-inventory
+
+# %%
+</code></pre>
+<hr />
+<div class="footnote-definition" id="paper"><sup class="footnote-definition-label">1</sup>
+<p>Reinout Heijungs: A generic method for the identification of options
+for cleaner products. Ecological Economics, Volume 10, Issue 1, 1994, Pages
+69-81, ISSN 0921-8009,
+<a href="https://www.sciencedirect.com/science/article/abs/pii/0921800994900388">https://doi.org/10.1016/0921-8009(94)90038-8</a>.</p>
+</div>
+<div class="footnote-definition" id="no"><sup class="footnote-definition-label">2</sup>
+<p>it is of course just an illustrative example and not real data</p>
+</div>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="data-management"><a class="header" href="#data-management">Data management</a></h1>
 <p>The openLCA IPC protocol is based on the <a href="http://greendelta.github.io/olca-schema/">openLCA Schema</a> as data exchange format. Thus, parameter and return types of this documentation often link to their respective description in the openLCA schema documentation. The openLCA schema is a typed data format with the following <a href="http://greendelta.github.io/olca-schema/#format-concepts">principles</a>:</p>
 <ul>
@@ -257,11 +751,11 @@ as calculation target in a calculation setup).</p>
 <div class="table-wrapper"><table><thead><tr><th></th><th></th></tr></thead><tbody>
 <tr><td>Rest API</td><td><code>GET /data/{type}</code></td></tr>
 <tr><td>JSON-RPC</td><td><code>data/get/descriptors</code></td></tr>
-<tr><td>Python/IPC</td><td><code>client.get_descriptors</code></td></tr>
+<tr><td>Python/IPC</td><td><code>Client.get_descriptors</code></td></tr>
 <tr><td>Return type</td><td><a href="https://greendelta.github.io/olca-schema/classes/Ref.html"><code>List[Ref]</code></a></td></tr>
 </tbody></table>
 </div>
-<h2 id="examples"><a class="header" href="#examples">Examples</a></h2>
+<h2 id="examples-1"><a class="header" href="#examples-1">Examples</a></h2>
 <h3 id="python-ipc"><a class="header" href="#python-ipc">Python IPC</a></h3>
 <pre><code class="language-py">import olca_ipc as ipc
 import olca_schema as schema
@@ -314,7 +808,7 @@ which is available in modern web-browsers or platforms like
 <tr><td>Return type</td><td><a href="https://greendelta.github.io/olca-schema/classes/RootEntity.html"><code>E &gt; RootEntity</code></a></td></tr>
 </tbody></table>
 </div>
-<h2 id="examples-1"><a class="header" href="#examples-1">Examples</a></h2>
+<h2 id="examples-2"><a class="header" href="#examples-2">Examples</a></h2>
 <h3 id="python-ipc-1"><a class="header" href="#python-ipc-1">Python IPC</a></h3>
 <pre><code class="language-py">import olca_ipc as ipc
 import olca_schema as schema
@@ -373,7 +867,7 @@ will just return the first entity from the database with the given name.</p>
 <tr><td>Return type:</td><td><a href="https://greendelta.github.io/olca-schema/classes/RootEntity.html"><code>E &gt; RootEntity</code></a></td></tr>
 </tbody></table>
 </div>
-<h2 id="examples-2"><a class="header" href="#examples-2">Examples</a></h2>
+<h2 id="examples-3"><a class="header" href="#examples-3">Examples</a></h2>
 <h3 id="python-ipc-2"><a class="header" href="#python-ipc-2">Python IPC</a></h3>
 <pre><code class="language-py">import olca_ipc as ipc
 import olca_schema as schema
@@ -420,11 +914,11 @@ which is available in modern web-browsers or platforms like
 <div class="table-wrapper"><table><thead><tr><th></th><th></th></tr></thead><tbody>
 <tr><td>Rest API</td><td><code>GET /data/{type}/{id}/info</code></td></tr>
 <tr><td>JSON-RPC</td><td><code>data/get/descriptor</code></td></tr>
-<tr><td>Python/IPC</td><td>``</td></tr>
+<tr><td>Python/IPC</td><td><code>Client.get_descriptor</code></td></tr>
 <tr><td>Return type:</td><td><a href="https://greendelta.github.io/olca-schema/classes/Ref.html"><code>Ref</code></a></td></tr>
 </tbody></table>
 </div>
-<h2 id="examples-3"><a class="header" href="#examples-3">Examples</a></h2>
+<h2 id="examples-4"><a class="header" href="#examples-4">Examples</a></h2>
 <h3 id="python-ipc-3"><a class="header" href="#python-ipc-3">Python IPC</a></h3>
 <pre><code class="language-py">import olca_ipc as ipc
 import olca_schema as schema
@@ -482,7 +976,7 @@ just want to query all descriptors of a data set type.</p>
 <tr><td>Return type:</td><td><a href="https://greendelta.github.io/olca-schema/classes/RootEntity.html"><code>List[E &gt; RootEntity]</code></a></td></tr>
 </tbody></table>
 </div>
-<h2 id="examples-4"><a class="header" href="#examples-4">Examples</a></h2>
+<h2 id="examples-5"><a class="header" href="#examples-5">Examples</a></h2>
 <h3 id="python-ipc-4"><a class="header" href="#python-ipc-4">Python IPC</a></h3>
 <pre><code class="language-py">import olca_ipc as ipc
 import olca_schema as schema
@@ -532,20 +1026,18 @@ the respective parameter redefinitions are returned.</p>
 <div class="table-wrapper"><table><thead><tr><th></th><th></th></tr></thead><tbody>
 <tr><td>Rest API</td><td><code>GET /data/{type}/{id}/parameters</code></td></tr>
 <tr><td>JSON-RPC</td><td><code>data/get/parameters</code></td></tr>
-<tr><td>Python/IPC</td><td>``</td></tr>
+<tr><td>Python/IPC</td><td><code>Client.get_parameters</code></td></tr>
+<tr><td>Return type</td><td>*</td></tr>
 </tbody></table>
 </div>
-<ul>
-<li>Return type:
+<p>*Return type:</p>
 <ul>
 <li><a href="https://greendelta.github.io/olca-schema/classes/Parameter.html"><code>List[Parameter]</code></a>
 for processes and impact categories</li>
 <li><a href="https://greendelta.github.io/olca-schema/classes/ParameterRedef.html"><code>List[ParameterRedef]</code></a>
 for product systems</li>
 </ul>
-</li>
-</ul>
-<h2 id="examples-5"><a class="header" href="#examples-5">Examples</a></h2>
+<h2 id="examples-6"><a class="header" href="#examples-6">Examples</a></h2>
 <h3 id="python-ipc-5"><a class="header" href="#python-ipc-5">Python IPC</a></h3>
 <pre><code class="language-py">import olca_ipc as ipc
 import olca_schema as schema
@@ -599,7 +1091,7 @@ to product inputs and waste outputs of other processes in a product system.</p>
 <tr><td>Return type:</td><td><a href="https://greendelta.github.io/olca-schema/classes/TechFlow.html"><code>List[TechFlow]</code></a></td></tr>
 </tbody></table>
 </div>
-<h2 id="examples-6"><a class="header" href="#examples-6">Examples</a></h2>
+<h2 id="examples-7"><a class="header" href="#examples-7">Examples</a></h2>
 <h3 id="python-ipc-6"><a class="header" href="#python-ipc-6">Python IPC</a></h3>
 <pre><code class="language-py">import olca_ipc as ipc
 import olca_schema as schema
@@ -651,7 +1143,7 @@ of other processes in a product system.</p>
 <tr><td>Return type:</td><td><a href="https://greendelta.github.io/olca-schema/classes/TechFlow.html"><code>List[TechFlow]</code></a></td></tr>
 </tbody></table>
 </div>
-<h2 id="examples-7"><a class="header" href="#examples-7">Examples</a></h2>
+<h2 id="examples-8"><a class="header" href="#examples-8">Examples</a></h2>
 <h3 id="python-ipc-7"><a class="header" href="#python-ipc-7">Python IPC</a></h3>
 <pre><code class="language-py">import olca_ipc as ipc
 import olca_schema as schema
@@ -712,7 +1204,7 @@ available when a server runs in read-only mode.</p>
 <tr><td>Return type:</td><td><a href="https://greendelta.github.io/olca-schema/classes/Ref.html"><code>Ref</code></a></td></tr>
 </tbody></table>
 </div>
-<h2 id="examples-8"><a class="header" href="#examples-8">Examples</a></h2>
+<h2 id="examples-9"><a class="header" href="#examples-9">Examples</a></h2>
 <h3 id="python-ipc-8"><a class="header" href="#python-ipc-8">Python IPC</a></h3>
 <pre><code class="language-py">import olca_ipc as ipc
 import olca_schema as schema
@@ -757,6 +1249,33 @@ which is available in modern web-browsers or platforms like
   //   }
   // }
 </code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="create-a-product-system"><a class="header" href="#create-a-product-system">Create a product system</a></h1>
+<p>This method creates a product system for a given process. It recursively links
+the processes of that system according to the given linking configuration.</p>
+<div class="table-wrapper"><table><thead><tr><th></th><th></th></tr></thead><tbody>
+<tr><td>Rest API</td><td><code>GET /data/{type}/all</code></td></tr>
+<tr><td>JSON-RPC</td><td><code>data/get/all</code></td></tr>
+<tr><td>Python IPC</td><td><code>Client.get_all</code></td></tr>
+<tr><td>Parameter</td><td><a href="https://greendelta.github.io/olca-schema/classes/Ref.html"><code>Ref[Process]</code></a></td></tr>
+<tr><td>Parameter</td><td><a href="https://greendelta.github.io/olca-schema/classes/LinkingConfig.html"><code>LinkingConfig</code></a></td></tr>
+<tr><td>Return type:</td><td><a href="https://greendelta.github.io/olca-schema/classes/Ref.html"><code>Ref[ProductSystem]</code></a></td></tr>
+</tbody></table>
+</div>
+<h2 id="examples-10"><a class="header" href="#examples-10">Examples</a></h2>
+<h3 id="python-ipc-9"><a class="header" href="#python-ipc-9">Python IPC</a></h3>
+<pre><code class="language-py">import olca_ipc as ipc
+import olca_schema as schema
+
+client = ipc.Client()
+process_ref = client.find(schema.Process, &quot;aluminium foil production&quot;)
+config = schema.LinkingConfig(
+    prefer_unit_processes=True,
+    provider_linking=schema.ProviderLinking.PREFER_DEFAULTS,
+)
+system_ref = client.create_product_system(process_ref, config)
+print(f&quot;created product system {system_ref.name}, id={system_ref.id}&quot;)
+# created product system aluminium foil production, id=fbc33e47-ee...
+</code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="delete-a-data-set"><a class="header" href="#delete-a-data-set">Delete a data set</a></h1>
 <p>Deletes the specified data set from the database. This method is not available
 when the server runs in read-only mode.</p>
@@ -767,8 +1286,8 @@ when the server runs in read-only mode.</p>
 <tr><td>Return type:</td><td><a href="https://greendelta.github.io/olca-schema/classes/Ref.html"><code>Ref</code></a></td></tr>
 </tbody></table>
 </div>
-<h2 id="examples-9"><a class="header" href="#examples-9">Examples</a></h2>
-<h3 id="python-ipc-9"><a class="header" href="#python-ipc-9">Python IPC</a></h3>
+<h2 id="examples-11"><a class="header" href="#examples-11">Examples</a></h2>
+<h3 id="python-ipc-10"><a class="header" href="#python-ipc-10">Python IPC</a></h3>
 <pre><code class="language-py">import olca_ipc as ipc
 import olca_schema as schema
 
@@ -812,7 +1331,18 @@ which is available in modern web-browsers or platforms like
 <p>When starting a calculation, it is first scheduled in a calculation queue. This
 is because multiple calculations could be started at the same time and
 calculations may need to wait for other calculations first to be finished. Thus,
-a calculation directly returns a <a href="http://greendelta.github.io/olca-schema/classes/ResultState.html">ResultState</a> object with a unique identifier. With this identifier, the state of the calculation can be retrieved from the server. It is then also the ID of the corresponding result when the calculation is finished. When a result is not needed anymore, the <code>dispose</code> method should be called so that the allocated resources of the result can be released.</p>
+a calculation directly returns a
+<a href="http://greendelta.github.io/olca-schema/classes/ResultState.html">ResultState</a>
+object with a unique identifier. With this identifier, the state of the
+calculation can be retrieved from the server. It is then also the ID of the
+corresponding result when the calculation is finished. When a result is not
+needed anymore, the <code>dispose</code> method should be called so that the allocated
+resources of the result can be released.</p>
+<p>The idea of the result interface is not to provide some ready-to-use charts and
+tables but to provide all possible building blocks with which such higher level
+result views can be created (charts, tables, upstream trees, Sankey diagrams).
+Thus, the result interface has many methods that often look quite similar but
+they have their purpose for efficiently creating higher level result views.</p>
 <h2 id="result-elements"><a class="header" href="#result-elements">Result elements</a></h2>
 <p>Depending on the calculation setup and the calculated model, results can be
 retrieved for different elements, these are:</p>
@@ -849,8 +1379,8 @@ the result state can be queried.</p>
 <tr><td>Parameter type</td><td><a href="http://greendelta.github.io/olca-schema/classes/CalculationSetup.html">CalculationSetup</a></td></tr>
 </tbody></table>
 </div>
-<h2 id="examples-10"><a class="header" href="#examples-10">Examples</a></h2>
-<h3 id="python-ipc-10"><a class="header" href="#python-ipc-10">Python IPC</a></h3>
+<h2 id="examples-12"><a class="header" href="#examples-12">Examples</a></h2>
+<h3 id="python-ipc-11"><a class="header" href="#python-ipc-11">Python IPC</a></h3>
 <pre><code class="language-py">import olca_ipc as ipc
 import olca_schema as schema
 import olca_schema.results as results
@@ -924,8 +1454,8 @@ results can be retrieved.</p>
 <tr><td>Return type</td><td><a href="http://greendelta.github.io/olca-schema/classes/ResultState.html"><code>ResultState</code></a></td></tr>
 </tbody></table>
 </div>
-<h2 id="examples-11"><a class="header" href="#examples-11">Examples</a></h2>
-<h3 id="python-ipc-11"><a class="header" href="#python-ipc-11">Python IPC</a></h3>
+<h2 id="examples-13"><a class="header" href="#examples-13">Examples</a></h2>
+<h3 id="python-ipc-12"><a class="header" href="#python-ipc-12">Python IPC</a></h3>
 <pre><code class="language-py">state = result.get_state()
 if state.error:
     print(f&quot;calculation failed: {state.error}&quot;)
@@ -981,8 +1511,8 @@ It disposes the result and releases allocated resources of that result.</p>
 <tr><td>Return type</td><td><a href="http://greendelta.github.io/olca-schema/classes/ResultState.html"><code>ResultState</code></a></td></tr>
 </tbody></table>
 </div>
-<h2 id="examples-12"><a class="header" href="#examples-12">Examples</a></h2>
-<h3 id="python-ipc-12"><a class="header" href="#python-ipc-12">Python IPC</a></h3>
+<h2 id="examples-14"><a class="header" href="#examples-14">Examples</a></h2>
+<h3 id="python-ipc-13"><a class="header" href="#python-ipc-13">Python IPC</a></h3>
 <pre><code class="language-py"># it is important to dispose a result when it is not needed anymore
 result.dispose()
 </code></pre>
@@ -1013,8 +1543,8 @@ which is available in modern web-browsers or platforms like
   //  }
 </code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="technosphere-flows"><a class="header" href="#technosphere-flows">Technosphere flows</a></h1>
-<p>This method returns the \(n\) technosphere flows of a result. These are the flows
-by which the processes of the calculated system are linked. Each
+<p>This method returns the \(n\) technosphere flows of a result. These are the
+flows by which the processes of the calculated system are linked. Each
 technosphere flow is a pair of a product or waste flow and a provider where the
 provider is typically a process but can also be a product system (a sub-system)
 or even another result. The technosphere matrix \(A\) is symmetrically indexed
@@ -1029,15 +1559,25 @@ $$</p>
 <tr><td>Return type</td><td><a href="http://greendelta.github.io/olca-schema/classes/TechFlow.html"><code>List[TechFlow]</code></a></td></tr>
 </tbody></table>
 </div>
-<h2 id="examples-13"><a class="header" href="#examples-13">Examples</a></h2>
-<h3 id="python-ipc-13"><a class="header" href="#python-ipc-13">Python IPC</a></h3>
+<h2 id="examples-15"><a class="header" href="#examples-15">Examples</a></h2>
+<h3 id="python-ipc-14"><a class="header" href="#python-ipc-14">Python IPC</a></h3>
 <pre><code class="language-py">tech_flows = result.get_tech_flows()
-print(f&quot;n = {len(tech_flows)} technosphere flows&quot;)
-tech_flow = random.choice(tech_flows)
 print(
-    f'selected: {tech_flow.provider.name}',
-    f'{{provider: {{&quot;@id&quot;: &quot;{tech_flow.provider.id}&quot;}},',
-    f'flow: {{&quot;@id&quot;: &quot;{tech_flow.flow.id}&quot;}}}}')
+    pd.DataFrame(
+        [
+            (tf.provider.name, tf.flow.name, tf.flow.ref_unit)
+            for tf in tech_flows
+        ],
+        columns=[&quot;Provider&quot;, &quot;Flow&quot;, &quot;Unit&quot;],
+    ).head()
+)
+#                               Provider                      Flow  Unit
+# 0  Fresh wheat, corn, rice, and oth...  Fresh wheat, corn, ric...  USD
+# 1       Synthetic dyes and pigments...       Synthetic dyes an...  USD
+# 2              Cardboard containers...              Cardboard ...  USD
+# 3  Synthetic rubber and artificial ...  Synthetic rubber and a...  USD
+# 4                  Packaged poultry...                  Packag...  USD
+
 </code></pre>
 <h3 id="json-rpc-via-fetch-api-13"><a class="header" href="#json-rpc-via-fetch-api-13">JSON-RPC via Fetch API</a></h3>
 <p>The example below shows the usage of this method using the JSON-RPC protocol via
@@ -1150,7 +1690,7 @@ $$</p>
 <tr><td>Parameter type</td><td><a href="http://greendelta.github.io/olca-schema/classes/TechFlow.html"><code>TechFlow</code></a></td></tr>
 </tbody></table>
 </div>
-<h2 id="examples-14"><a class="header" href="#examples-14">Examples</a></h2>
+<h2 id="examples-16"><a class="header" href="#examples-16">Examples</a></h2>
 <h3 id="json-rpc-via-fetch-api-15"><a class="header" href="#json-rpc-via-fetch-api-15">JSON-RPC via Fetch API</a></h3>
 <p>The example below shows the usage of this method using the JSON-RPC protocol via
 the <a href="https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API">Fetch API</a>
@@ -1199,7 +1739,7 @@ the technosphere flow \(j\) to which the other requirements are related. </p>
 <tr><td>Parameter type</td><td><a href="http://greendelta.github.io/olca-schema/classes/TechFlow.html"><code>TechFlow</code></a></td></tr>
 </tbody></table>
 </div>
-<h2 id="examples-15"><a class="header" href="#examples-15">Examples</a></h2>
+<h2 id="examples-17"><a class="header" href="#examples-17">Examples</a></h2>
 <h3 id="json-rpc-via-fetch-api-16"><a class="header" href="#json-rpc-via-fetch-api-16">JSON-RPC via Fetch API</a></h3>
 <p>The example below shows the usage of this method using the JSON-RPC protocol via
 the <a href="https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API">Fetch API</a>
@@ -1254,7 +1794,7 @@ $$</p>
 <tr><td>Return type</td><td><a href="http://greendelta.github.io/olca-schema/classes/TechFlowValue.html"><code>List[TechFlowValue]</code></a></td></tr>
 </tbody></table>
 </div>
-<h2 id="examples-16"><a class="header" href="#examples-16">Examples</a></h2>
+<h2 id="examples-18"><a class="header" href="#examples-18">Examples</a></h2>
 <h3 id="json-rpc-via-fetch-api-17"><a class="header" href="#json-rpc-via-fetch-api-17">JSON-RPC via Fetch API</a></h3>
 <p>The example below shows the usage of this method using the JSON-RPC protocol via
 the <a href="https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API">Fetch API</a>
@@ -1335,7 +1875,7 @@ $$</p>
 <tr><td>Parameter type</td><td><a href="http://greendelta.github.io/olca-schema/classes/TechFlow.html"><code>TechFlow</code></a></td></tr>
 </tbody></table>
 </div>
-<h2 id="examples-17"><a class="header" href="#examples-17">Examples</a></h2>
+<h2 id="examples-19"><a class="header" href="#examples-19">Examples</a></h2>
 <h3 id="json-rpc-via-fetch-api-18"><a class="header" href="#json-rpc-via-fetch-api-18">JSON-RPC via Fetch API</a></h3>
 <p>The example below shows the usage of this method using the JSON-RPC protocol via
 the <a href="https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API">Fetch API</a>
@@ -1377,7 +1917,7 @@ system (this is why the short name is <code>EnviFlow</code> in the API). In regi
 calculations these flows can be pairs of flows and locations, the same flow
 can occur in different locations (with possibly different characterisation
 factors). The rows of the intervention matrix are indexed by these \(m\)
-intervention flows (and the columns by the \(n\) technosphere flows): </p>
+intervention flows (and the columns by the \(n\) technosphere flows):</p>
 <p>$$
 B \in \mathbb{R}^{m \times n}
 $$</p>
@@ -1388,7 +1928,26 @@ $$</p>
 <tr><td>Return type</td><td><a href="http://greendelta.github.io/olca-schema/classes/EnviFlow.html"><code>List[EnviFlow]</code></a></td></tr>
 </tbody></table>
 </div>
-<h2 id="examples-18"><a class="header" href="#examples-18">Examples</a></h2>
+<h2 id="examples-20"><a class="header" href="#examples-20">Examples</a></h2>
+<h3 id="python-ipc-15"><a class="header" href="#python-ipc-15">Python IPC</a></h3>
+<pre><code class="language-py">envi_flows = result.get_envi_flows()
+print(
+    pd.DataFrame(
+        [
+            (ef.is_input, ef.flow.name, ef.flow.category, ef.flow.ref_unit)
+            for ef in envi_flows
+        ],
+        columns=[&quot;Is input?&quot;, &quot;Flow&quot;, &quot;Category&quot;, &quot;Unit&quot;],
+    ).head()
+)
+
+#    Is input?          Flow                                     Category Unit
+# 0      False   1,4-dioxane             Elementary Flows/air/unspecified   kg
+# 1      False      oryzalin            Elementary Flows/soil/groundwater   kg
+# 2      False    Sethoxydim            Elementary Flows/soil/groundwater   kg
+# 3      False  Chlorpyrifos  Elementary Flows/air/low population density   kg
+# 4      False          lead             Elementary Flows/air/unspecified   kg
+</code></pre>
 <h3 id="json-rpc-via-fetch-api-19"><a class="header" href="#json-rpc-via-fetch-api-19">JSON-RPC via Fetch API</a></h3>
 <p>The example below shows the usage of this method using the JSON-RPC protocol via
 the <a href="https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API">Fetch API</a>
@@ -1450,7 +2009,7 @@ $$</p>
 <tr><td>Parameter type</td><td><a href="http://greendelta.github.io/olca-schema/classes/EnviFlow.html"><code>EnviFlow</code></a></td></tr>
 </tbody></table>
 </div>
-<h2 id="examples-19"><a class="header" href="#examples-19">Examples</a></h2>
+<h2 id="examples-21"><a class="header" href="#examples-21">Examples</a></h2>
 <h3 id="json-rpc-via-fetch-api-20"><a class="header" href="#json-rpc-via-fetch-api-20">JSON-RPC via Fetch API</a></h3>
 <p>The example below shows the usage of this method using the JSON-RPC protocol via
 the <a href="https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API">Fetch API</a>
@@ -1493,7 +2052,7 @@ $$</p>
 <tr><td>Parameter type</td><td><a href="http://greendelta.github.io/olca-schema/classes/EnviFlow.html"><code>EnviFlow</code></a></td></tr>
 </tbody></table>
 </div>
-<h2 id="examples-20"><a class="header" href="#examples-20">Examples</a></h2>
+<h2 id="examples-22"><a class="header" href="#examples-22">Examples</a></h2>
 <h3 id="json-rpc-via-fetch-api-21"><a class="header" href="#json-rpc-via-fetch-api-21">JSON-RPC via Fetch API</a></h3>
 <p>The example below shows the usage of this method using the JSON-RPC protocol via
 the <a href="https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API">Fetch API</a>
@@ -1548,7 +2107,7 @@ $$</p>
 <tr><td>Parameter type</td><td><a href="http://greendelta.github.io/olca-schema/classes/EnviFlow.html"><code>EnviFlow</code></a></td></tr>
 </tbody></table>
 </div>
-<h2 id="examples-21"><a class="header" href="#examples-21">Examples</a></h2>
+<h2 id="examples-23"><a class="header" href="#examples-23">Examples</a></h2>
 <h3 id="json-rpc-via-fetch-api-22"><a class="header" href="#json-rpc-via-fetch-api-22">JSON-RPC via Fetch API</a></h3>
 <p>The example below shows the usage of this method using the JSON-RPC protocol via
 the <a href="https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API">Fetch API</a>
@@ -1612,7 +2171,7 @@ $$</p>
 <tr><td>Parameter type</td><td><a href="http://greendelta.github.io/olca-schema/classes/TechFlow.html"><code>TechFlow</code></a></td></tr>
 </tbody></table>
 </div>
-<h2 id="examples-22"><a class="header" href="#examples-22">Examples</a></h2>
+<h2 id="examples-24"><a class="header" href="#examples-24">Examples</a></h2>
 <h3 id="json-rpc-via-fetch-api-23"><a class="header" href="#json-rpc-via-fetch-api-23">JSON-RPC via Fetch API</a></h3>
 <p>The example below shows the usage of this method using the JSON-RPC protocol via
 the <a href="https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API">Fetch API</a>
@@ -1729,12 +2288,28 @@ $$</p>
 <tr><td>Return type</td><td><a href="http://greendelta.github.io/olca-schema/classes/Ref.html"><code>List[Ref[ImpactCategory]]</code></a></td></tr>
 </tbody></table>
 </div>
-<h2 id="examples-23"><a class="header" href="#examples-23">Examples</a></h2>
-<h3 id="python-ipc-14"><a class="header" href="#python-ipc-14">Python IPC</a></h3>
+<h2 id="examples-25"><a class="header" href="#examples-25">Examples</a></h2>
+<h3 id="python-ipc-16"><a class="header" href="#python-ipc-16">Python IPC</a></h3>
 <pre><code class="language-py">impact_categories = result.get_impact_categories()
-print(f&quot;k = {len(impact_categories)} impact categories&quot;)
-impact_category = random.choice(impact_categories)
-print(f'selected: {impact_category.name} {{&quot;@id&quot;: &quot;{impact_category.id}&quot;}}')
+print(
+    pd.DataFrame(
+        [(i.name, i.ref_unit) for i in impact_categories],
+        columns=[&quot;Impact category&quot;, &quot;Unit&quot;],
+    )
+)
+
+#   Impact category         Unit
+# 0            OZON  kg CFC11-eq
+# 1            EUTR      kg N eq
+# 2            SMOG     kg O3 eq
+# 3             HNC         CTUh
+# 4            ETOX         CTUe
+# 5              HC         CTUh
+# 6            HRSP  kg PM2.5 eq
+# 7             GCC    kg CO2 eq
+# 8            HTOX         CTUh
+# 9            ACID    kg SO2-eq
+
 </code></pre>
 <h3 id="json-rpc-via-fetch-api-24"><a class="header" href="#json-rpc-via-fetch-api-24">JSON-RPC via Fetch API</a></h3>
 <p>The example below shows the usage of this method using the JSON-RPC protocol via
@@ -1796,7 +2371,7 @@ $$</p>
 <tr><td>Parameter type</td><td><a href="http://greendelta.github.io/olca-schema/classes/Ref.html"><code>Ref[ImpactCategory]</code></a></td></tr>
 </tbody></table>
 </div>
-<h2 id="examples-24"><a class="header" href="#examples-24">Examples</a></h2>
+<h2 id="examples-26"><a class="header" href="#examples-26">Examples</a></h2>
 <h3 id="json-rpc-via-fetch-api-25"><a class="header" href="#json-rpc-via-fetch-api-25">JSON-RPC via Fetch API</a></h3>
 <p>The example below shows the usage of this method using the JSON-RPC protocol via
 the <a href="https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API">Fetch API</a>
@@ -1844,7 +2419,7 @@ $$</p>
 <tr><td>Return type</td><td><a href="http://greendelta.github.io/olca-schema/classes/ImpactValue.html"><code>List[ImpactValue]</code></a></td></tr>
 </tbody></table>
 </div>
-<h2 id="examples-25"><a class="header" href="#examples-25">Examples</a></h2>
+<h2 id="examples-27"><a class="header" href="#examples-27">Examples</a></h2>
 <h3 id="json-rpc-via-fetch-api-26"><a class="header" href="#json-rpc-via-fetch-api-26">JSON-RPC via Fetch API</a></h3>
 <p>The example below shows the usage of this method using the JSON-RPC protocol via
 the <a href="https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API">Fetch API</a>
@@ -1892,7 +2467,7 @@ $$</p>
 <tr><td>Return type</td><td><a href="http://greendelta.github.io/olca-schema/classes/ImpactValue.html"><code>List[ImpactValue]</code></a></td></tr>
 </tbody></table>
 </div>
-<h2 id="examples-26"><a class="header" href="#examples-26">Examples</a></h2>
+<h2 id="examples-28"><a class="header" href="#examples-28">Examples</a></h2>
 <h3 id="json-rpc-via-fetch-api-27"><a class="header" href="#json-rpc-via-fetch-api-27">JSON-RPC via Fetch API</a></h3>
 <p>The example below shows the usage of this method using the JSON-RPC protocol via
 the <a href="https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API">Fetch API</a>
@@ -1943,7 +2518,7 @@ $$</p>
 <tr><td>Parameter type</td><td><a href="http://greendelta.github.io/olca-schema/classes/Ref.html"><code>Ref[ImpactCategory]</code></a></td></tr>
 </tbody></table>
 </div>
-<h2 id="examples-27"><a class="header" href="#examples-27">Examples</a></h2>
+<h2 id="examples-29"><a class="header" href="#examples-29">Examples</a></h2>
 <h3 id="json-rpc-via-fetch-api-28"><a class="header" href="#json-rpc-via-fetch-api-28">JSON-RPC via Fetch API</a></h3>
 <p>The example below shows the usage of this method using the JSON-RPC protocol via
 the <a href="https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API">Fetch API</a>
@@ -2002,7 +2577,7 @@ impact category \(k\):</p>
 <tr><td>Parameter type</td><td><a href="http://greendelta.github.io/olca-schema/classes/TechFlow.html"><code>TechFlow</code></a></td></tr>
 </tbody></table>
 </div>
-<h2 id="examples-28"><a class="header" href="#examples-28">Examples</a></h2>
+<h2 id="examples-30"><a class="header" href="#examples-30">Examples</a></h2>
 <h3 id="json-rpc-via-fetch-api-29"><a class="header" href="#json-rpc-via-fetch-api-29">JSON-RPC via Fetch API</a></h3>
 <p>The example below shows the usage of this method using the JSON-RPC protocol via
 the <a href="https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API">Fetch API</a>
@@ -2066,7 +2641,7 @@ $$</p>
 <tr><td>Parameter type</td><td><a href="http://greendelta.github.io/olca-schema/classes/TechFlow.html"><code>TechFlow</code></a></td></tr>
 </tbody></table>
 </div>
-<h2 id="examples-29"><a class="header" href="#examples-29">Examples</a></h2>
+<h2 id="examples-31"><a class="header" href="#examples-31">Examples</a></h2>
 <h3 id="json-rpc-via-fetch-api-30"><a class="header" href="#json-rpc-via-fetch-api-30">JSON-RPC via Fetch API</a></h3>
 <p>The example below shows the usage of this method using the JSON-RPC protocol via
 the <a href="https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API">Fetch API</a>
@@ -2130,7 +2705,7 @@ $$</p>
 <tr><td>Parameter type</td><td><a href="http://greendelta.github.io/olca-schema/classes/TechFlow.html"><code>TechFlow</code></a></td></tr>
 </tbody></table>
 </div>
-<h2 id="examples-30"><a class="header" href="#examples-30">Examples</a></h2>
+<h2 id="examples-32"><a class="header" href="#examples-32">Examples</a></h2>
 <h3 id="json-rpc-via-fetch-api-31"><a class="header" href="#json-rpc-via-fetch-api-31">JSON-RPC via Fetch API</a></h3>
 <p>The example below shows the usage of this method using the JSON-RPC protocol via
 the <a href="https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API">Fetch API</a>
@@ -2178,8 +2753,8 @@ the reference currency of the underlying database.</p>
 <tr><td>Return type</td><td><a href="http://greendelta.github.io/olca-schema/classes/Ref.html"><code>Ref[Currency]</code></a></td></tr>
 </tbody></table>
 </div>
-<h2 id="examples-31"><a class="header" href="#examples-31">Examples</a></h2>
-<h3 id="python-ipc-15"><a class="header" href="#python-ipc-15">Python IPC</a></h3>
+<h2 id="examples-33"><a class="header" href="#examples-33">Examples</a></h2>
+<h3 id="python-ipc-17"><a class="header" href="#python-ipc-17">Python IPC</a></h3>
 <pre><code class="language-py"></code></pre>
 <h3 id="json-rpc-via-fetch-api-32"><a class="header" href="#json-rpc-via-fetch-api-32">JSON-RPC via Fetch API</a></h3>
 <p>The example below shows the usage of this method using the JSON-RPC protocol via
@@ -2238,33 +2813,44 @@ $$</p>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
+
+
                         <div style="clear: both"></div>
                     </nav>
                 </div>
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
+
             </nav>
 
         </div>
 
-        <script type="text/javascript">
+
+
+
+        <script>
             window.playground_copyable = true;
         </script>
-        <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
-        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
-        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
-        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
-        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
-        <script src="book.js" type="text/javascript" charset="utf-8"></script>
+
+
+        <script src="elasticlunr.min.js"></script>
+        <script src="mark.min.js"></script>
+        <script src="searcher.js"></script>
+
+        <script src="clipboard.min.js"></script>
+        <script src="highlight.js"></script>
+        <script src="book.js"></script>
 
         <!-- Custom JS scripts -->
-        <script type="text/javascript">
+
+        <script>
         window.addEventListener('load', function() {
             MathJax.Hub.Register.StartupHook('End', function() {
                 window.setTimeout(window.print, 100);
             });
         });
         </script>
+
     </body>
 </html>

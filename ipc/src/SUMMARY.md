@@ -2,6 +2,8 @@
 
 - [Introduction](./intro.md)
 - [Stand-alone servers](./servers.md)
+- [Examples](./examples/examples.md)
+  - [Python IPC: From scratch](./examples/pyipc_from_scratch.md)
 - [Data management](./data/data.md)
   - [Get descriptors](./data/get_descriptors.md)
   - [Get by ID](./data/get_by_id.md)
@@ -12,6 +14,7 @@
   - [Get providers](./data/get_providers.md)
   - [Get providers for flow](./data/get_providers_for_flow.md)
   - [Insert or update a data set](./data/put.md)
+  - [Create a product system](./data/create-system.md)
   - [Delete a data set](./data/delete.md)
 - [Calculation and results](./results/results.md)
   - [Calculate](./results/calculate.md)

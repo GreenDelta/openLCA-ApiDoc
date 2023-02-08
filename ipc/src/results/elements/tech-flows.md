@@ -1,7 +1,7 @@
 # Technosphere flows
 
-This method returns the \\(n\\) technosphere flows of a result. These are the flows
-by which the processes of the calculated system are linked. Each
+This method returns the \\(n\\) technosphere flows of a result. These are the
+flows by which the processes of the calculated system are linked. Each
 technosphere flow is a pair of a product or waste flow and a provider where the
 provider is typically a process but can also be a product system (a sub-system)
 or even another result. The technosphere matrix \\(A\\) is symmetrically indexed
@@ -24,7 +24,7 @@ $$
 ### Python IPC
 
 ```py
-{{#include ../results_ipc.py:tech-flows}}
+{{#include _elements.py:tech-flows}}
 ```
 
 ### JSON-RPC via Fetch API

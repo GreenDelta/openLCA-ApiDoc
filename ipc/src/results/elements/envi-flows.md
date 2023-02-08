@@ -6,7 +6,7 @@ system (this is why the short name is `EnviFlow` in the API). In regionalized
 calculations these flows can be pairs of flows and locations, the same flow
 can occur in different locations (with possibly different characterisation
 factors). The rows of the intervention matrix are indexed by these \\(m\\)
-intervention flows (and the columns by the \\(n\\) technosphere flows): 
+intervention flows (and the columns by the \\(n\\) technosphere flows):
 
 $$
 B \in \mathbb{R}^{m \times n}
@@ -20,6 +20,12 @@ $$
 | Return type | [`List[EnviFlow]`](http://greendelta.github.io/olca-schema/classes/EnviFlow.html) |
 
 ## Examples
+
+### Python IPC
+
+```py
+{{#include _elements.py:envi-flows}}
+```
 
 ### JSON-RPC via Fetch API
 
