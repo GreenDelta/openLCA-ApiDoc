@@ -20,6 +20,7 @@
   - [Calculate](./results/calculate.md)
   - [Get state](./results/get_state.md)
   - [Dispose result](./results/dispose.md)
+  - [Monte Carlo Simulations](./results/simulate.md)
   - [Technosphere flows](./results/elements/tech-flows.md)
     - [The final demand](./results/tech-flows/demand.md)
     - [Total requirements](./results/tech-flows/total-requirements.md)
