@@ -148,10 +148,10 @@
 <h2 id="examples"><a class="header" href="#examples">Examples</a></h2>
 <h3 id="python-ipc"><a class="header" href="#python-ipc">Python IPC</a></h3>
 <pre><code class="language-py">import olca_ipc as ipc
-import olca_schema as schema
+import olca_schema as o
 
 client = ipc.Client()
-mass_ref = client.get_descriptor(schema.FlowProperty, name=&quot;Mass&quot;)
+mass_ref = client.get_descriptor(o.FlowProperty, name=&quot;Mass&quot;)
 print(mass_ref)
 # Ref(
 #   id='93a60a56-a3c8-11da-a746-0800200b9a66',

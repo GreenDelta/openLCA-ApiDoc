@@ -149,17 +149,16 @@ when the server runs in read-only mode.</p>
 <h2 id="examples"><a class="header" href="#examples">Examples</a></h2>
 <h3 id="python-ipc"><a class="header" href="#python-ipc">Python IPC</a></h3>
 <pre><code class="language-py">import olca_ipc as ipc
-import olca_schema as schema
+import olca_schema as o
 
 client = ipc.Client()
 ref = client.delete(
-    schema.Ref(id=&quot;16cba9b2-2987-4735-9f3e-96fedf8449dd&quot;, model_type=&quot;Source&quot;)
+    o.Ref(ref_type=o.RefType.Source, id=&quot;16cba9b2-2987-4735-9f3e-96fedf8449dd&quot;)
 )
 print(ref)
 # Ref(
 #     id=&quot;16cba9b2-2987-4735-9f3e-96fedf8449dd&quot;,
 #     name=&quot;Inter-process communication with openLCA&quot;,
-#     model_type=&quot;Source&quot;,
 # ...
 </code></pre>
 <h3 id="json-rpc-via-fetch-api"><a class="header" href="#json-rpc-via-fetch-api">JSON-RPC via Fetch API</a></h3>

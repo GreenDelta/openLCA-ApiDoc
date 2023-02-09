@@ -151,20 +151,16 @@ the result state can be queried.</p>
 <h2 id="examples"><a class="header" href="#examples">Examples</a></h2>
 <h3 id="python-ipc"><a class="header" href="#python-ipc">Python IPC</a></h3>
 <pre><code class="language-py">import olca_ipc as ipc
-import olca_schema as schema
-import olca_schema.results as results
+import olca_schema as o
 
 # create a calculation setup
-setup = results.CalculationSetup(
-    target=schema.Ref(
-        model_type=&quot;ProductSystem&quot;, id=&quot;0db1eda6-a34e-4c82-b06b-19f27c92495a&quot;
+setup = o.CalculationSetup(
+    target=o.Ref(
+        ref_type=o.RefType.ProductSystem,
+        id=&quot;0db1eda6-a34e-4c82-b06b-19f27c92495a&quot;,
     ),
-    impact_method=schema.Ref(
-        model_type=&quot;ImpactMethod&quot;, id=&quot;b4571628-4b7b-3e4f-81b1-9a8cca6cb3f8&quot;
-    ),
-    nw_set=schema.Ref(
-        model_type=&quot;NwSet&quot;, id=&quot;867fe119-0b5c-38a0-a3e6-1d845ffaedd5&quot;,
-    )
+    impact_method=o.Ref(id=&quot;b4571628-4b7b-3e4f-81b1-9a8cca6cb3f8&quot;),
+    nw_set=o.Ref(id=&quot;867fe119-0b5c-38a0-a3e6-1d845ffaedd5&quot;),
 )
 
 # run a calculation

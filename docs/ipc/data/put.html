@@ -150,16 +150,15 @@ available when a server runs in read-only mode.</p>
 <h2 id="examples"><a class="header" href="#examples">Examples</a></h2>
 <h3 id="python-ipc"><a class="header" href="#python-ipc">Python IPC</a></h3>
 <pre><code class="language-py">import olca_ipc as ipc
-import olca_schema as schema
+import olca_schema as o
 
 client = ipc.Client()
-ref = client.put(schema.Source(name=&quot;Inter-process communication with openLCA&quot;))
+ref = client.put(o.Source(name=&quot;Inter-process communication with openLCA&quot;))
 print(ref)
 # Ref(
-#     id=&quot;16cba9b2-2987-4735-9f3e-96fedf8449dd&quot;,
-#     name=&quot;Inter-process communication with openLCA&quot;,
-#     model_type=&quot;Source&quot;,
-# )
+#  id=&quot;16cba9b2-2987-4735-9f3e-96fedf8449dd&quot;,
+#  name=&quot;Inter-process communication with openLCA&quot;,
+# ...
 </code></pre>
 <h3 id="json-rpc-via-fetch-api"><a class="header" href="#json-rpc-via-fetch-api">JSON-RPC via Fetch API</a></h3>
 <p>The example below shows the usage of this method using the JSON-RPC protocol via

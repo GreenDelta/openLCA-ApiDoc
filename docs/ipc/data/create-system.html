@@ -151,13 +151,13 @@ the processes of that system according to the given linking configuration.</p>
 <h2 id="examples"><a class="header" href="#examples">Examples</a></h2>
 <h3 id="python-ipc"><a class="header" href="#python-ipc">Python IPC</a></h3>
 <pre><code class="language-py">import olca_ipc as ipc
-import olca_schema as schema
+import olca_schema as o
 
 client = ipc.Client()
-process_ref = client.find(schema.Process, &quot;aluminium foil production&quot;)
-config = schema.LinkingConfig(
+process_ref = client.find(o.Process, &quot;aluminium foil production&quot;)
+config = o.LinkingConfig(
     prefer_unit_processes=True,
-    provider_linking=schema.ProviderLinking.PREFER_DEFAULTS,
+    provider_linking=o.ProviderLinking.PREFER_DEFAULTS,
 )
 system_ref = client.create_product_system(process_ref, config)
 print(f&quot;created product system {system_ref.name}, id={system_ref.id}&quot;)

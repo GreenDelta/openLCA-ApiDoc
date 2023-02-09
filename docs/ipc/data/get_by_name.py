@@ -1,8 +1,8 @@
 import olca_ipc as ipc
-import olca_schema as schema
+import olca_schema as o
 
 client = ipc.Client()
-mass = client.get(schema.FlowProperty, name="Mass")
+mass = client.get(o.FlowProperty, name="Mass")
 print(mass)
 # FlowProperty(
 #   name='Mass',

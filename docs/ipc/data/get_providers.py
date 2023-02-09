@@ -1,5 +1,4 @@
 import olca_ipc as ipc
-import olca_schema as schema
 
 client = ipc.Client()
 for p in client.get_providers()[:5]:

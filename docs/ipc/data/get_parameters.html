@@ -157,11 +157,11 @@ for product systems</li>
 <h2 id="examples"><a class="header" href="#examples">Examples</a></h2>
 <h3 id="python-ipc"><a class="header" href="#python-ipc">Python IPC</a></h3>
 <pre><code class="language-py">import olca_ipc as ipc
-import olca_schema as schema
+import olca_schema as o
 
 client = ipc.Client()
 params = client.get_parameters(
-    schema.ProductSystem, &quot;0db1eda6-a34e-4c82-b06b-19f27c92495a&quot;
+    o.ProductSystem, &quot;0db1eda6-a34e-4c82-b06b-19f27c92495a&quot;
 )
 for p in params:
     print(f&quot;{p.name}: {p.value}&quot;)

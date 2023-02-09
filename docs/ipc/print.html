@@ -235,8 +235,7 @@ utility methods. We will use Pandas for formatting our data output and NumPy,
 which is a dependency of Pandas, for checking the calculation. Also, we will
 add type annotations in our code, compatible with Python 3.11.</p>
 <pre><code class="language-py">import olca_ipc as ipc
-import olca_schema as schema
-import olca_schema.results as results
+import olca_schema as o
 import pandas as pd
 import numpy as np
 
@@ -333,12 +332,12 @@ client that holds our connection data:</p>
 </code></pre>
 <p>As we have nothing in our database, we first need to create the units and flow
 properties (quantity kinds) in which the flows of the examples are measured:</p>
-<pre><code class="language-py">mass_units = schema.new_unit_group(&quot;Mass units&quot;, &quot;kg&quot;)
-energy_units = schema.new_unit_group(&quot;Energy units&quot;, &quot;MJ&quot;)
-counting_units = schema.new_unit_group(&quot;Counting units&quot;, &quot;Item(s)&quot;)
-mass = schema.new_flow_property(&quot;Mass&quot;, mass_units)
-energy = schema.new_flow_property(&quot;Energy&quot;, energy_units)
-count = schema.new_flow_property(&quot;Number of items&quot;, counting_units)
+<pre><code class="language-py">mass_units = o.new_unit_group(&quot;Mass units&quot;, &quot;kg&quot;)
+energy_units = o.new_unit_group(&quot;Energy units&quot;, &quot;MJ&quot;)
+counting_units = o.new_unit_group(&quot;Counting units&quot;, &quot;Item(s)&quot;)
+mass = o.new_flow_property(&quot;Mass&quot;, mass_units)
+energy = o.new_flow_property(&quot;Energy&quot;, energy_units)
+count = o.new_flow_property(&quot;Number of items&quot;, counting_units)
 
 client.put_all(
     mass_units,
@@ -356,7 +355,7 @@ navigation, you will see the newly created unit groups and flow properties:</p>
 <p>However, typically you will not create units and flow properties but use the
 reference data from openLCA. For example, we can get the flow property <code>Mass</code>
 by its name:</p>
-<pre><code class="language-py">print(client.get(schema.FlowProperty, name=&quot;Mass&quot;).to_json())
+<pre><code class="language-py">print(client.get(o.FlowProperty, name=&quot;Mass&quot;).to_json())
 </code></pre>
 <p>This will print the JSON serialization of that flow property which is the
 internal communication format of the IPC interface (and also the standard
@@ -379,8 +378,8 @@ over the rows of the data frames and creates a product or elementary flow for
 each row, extracting the unit from the row label and mapping the corresponding
 flow property:</p>
 <pre><code class="language-py">def create_flow(
-    row_label: str, fn: Callable[[str, schema.FlowProperty], schema.Flow]
-) -&gt; schema.Flow:
+    row_label: str, fn: Callable[[str, o.FlowProperty], o.Flow]
+) -&gt; o.Flow:
     parts = row_label.split(&quot;[&quot;)
     name = parts[0].strip()
     unit = parts[1][0:-1].strip()
@@ -396,12 +395,9 @@ flow property:</p>
     return flow
 
 
-tech_flows = [
-    create_flow(label, schema.new_product) for label in technosphere.index
-]
+tech_flows = [create_flow(label, o.new_product) for label in technosphere.index]
 envi_flows = [
-    create_flow(label, schema.new_elementary_flow)
-    for label in interventions.index
+    create_flow(label, o.new_elementary_flow) for label in interventions.index
 ]
 </code></pre>
 <p>Then we iterate over the columns of the data frames and create the corrsponding
@@ -409,16 +405,16 @@ processes with their inputs and outputs of the flows we just created. One the
 diagonal of the technosphere matrix, the reference products of the respective
 processes are located and we set the these exchanges as the quantitative
 reference of the corresponding process:</p>
-<pre><code class="language-py">def create_process(index: int, name: str) -&gt; schema.Process:
-    process = schema.new_process(name)
+<pre><code class="language-py">def create_process(index: int, name: str) -&gt; o.Process:
+    process = o.new_process(name)
 
-    def exchange(flow: schema.Flow, value: float) -&gt; schema.Exchange | None:
+    def exchange(flow: o.Flow, value: float) -&gt; o.Exchange | None:
         if value == 0:
             return None
         if value &lt; 0:
-            return schema.new_input(process, flow, abs(value))
+            return o.new_input(process, flow, abs(value))
         else:
-            return schema.new_output(process, flow, value)
+            return o.new_output(process, flow, value)
 
     for (i, tech_flow) in enumerate(tech_flows):
         value = technosphere.iat[i, index]
@@ -450,8 +446,8 @@ the process by default, but we need to set the amount as we want the result for
 calculation immediately returns a result object but this is maybe not ready yet,
 so we wait for the calculation to be finished via the <code>wait_until_ready</code>
 method:</p>
-<pre><code class="language-py">setup = results.CalculationSetup(
-    target=schema.Ref(model_type=&quot;Process&quot;, id=processes[3].id),
+<pre><code class="language-py">setup = o.CalculationSetup(
+    target=o.Ref(ref_type=o.RefType.Process, id=processes[3].id),
     unit=count.unit_group.ref_unit,  # &quot;Item(s)&quot;
     amount=10,
 )
@@ -471,7 +467,7 @@ print(
             )
             for i in inventory
         ],
-        columns=[&quot;Flow&quot;, &quot;Is input?&quot;, &quot;Amount&quot;, &quot;Unit&quot;]
+        columns=[&quot;Flow&quot;, &quot;Is input?&quot;, &quot;Amount&quot;, &quot;Unit&quot;],
     )
 )
 </code></pre>
@@ -492,8 +488,7 @@ cell, in VS Code:</p>
 <pre><code class="language-py"># %%
 # ANCHOR: imports
 import olca_ipc as ipc
-import olca_schema as schema
-import olca_schema.results as results
+import olca_schema as o
 import pandas as pd
 import numpy as np
 
@@ -571,12 +566,12 @@ client = ipc.Client(8080)
 
 # %%
 # ANCHOR: units
-mass_units = schema.new_unit_group(&quot;Mass units&quot;, &quot;kg&quot;)
-energy_units = schema.new_unit_group(&quot;Energy units&quot;, &quot;MJ&quot;)
-counting_units = schema.new_unit_group(&quot;Counting units&quot;, &quot;Item(s)&quot;)
-mass = schema.new_flow_property(&quot;Mass&quot;, mass_units)
-energy = schema.new_flow_property(&quot;Energy&quot;, energy_units)
-count = schema.new_flow_property(&quot;Number of items&quot;, counting_units)
+mass_units = o.new_unit_group(&quot;Mass units&quot;, &quot;kg&quot;)
+energy_units = o.new_unit_group(&quot;Energy units&quot;, &quot;MJ&quot;)
+counting_units = o.new_unit_group(&quot;Counting units&quot;, &quot;Item(s)&quot;)
+mass = o.new_flow_property(&quot;Mass&quot;, mass_units)
+energy = o.new_flow_property(&quot;Energy&quot;, energy_units)
+count = o.new_flow_property(&quot;Number of items&quot;, counting_units)
 
 client.put_all(
     mass_units,
@@ -591,15 +586,15 @@ client.put_all(
 
 # %%
 # ANCHOR: mass
-print(client.get(schema.FlowProperty, name=&quot;Mass&quot;).to_json())
+print(client.get(o.FlowProperty, name=&quot;Mass&quot;).to_json())
 # ANCHOR_END: mass
 
 
 # %%
 # ANCHOR: flows
 def create_flow(
-    row_label: str, fn: Callable[[str, schema.FlowProperty], schema.Flow]
-) -&gt; schema.Flow:
+    row_label: str, fn: Callable[[str, o.FlowProperty], o.Flow]
+) -&gt; o.Flow:
     parts = row_label.split(&quot;[&quot;)
     name = parts[0].strip()
     unit = parts[1][0:-1].strip()
@@ -615,28 +610,25 @@ def create_flow(
     return flow
 
 
-tech_flows = [
-    create_flow(label, schema.new_product) for label in technosphere.index
-]
+tech_flows = [create_flow(label, o.new_product) for label in technosphere.index]
 envi_flows = [
-    create_flow(label, schema.new_elementary_flow)
-    for label in interventions.index
+    create_flow(label, o.new_elementary_flow) for label in interventions.index
 ]
 # ANCHOR_END: flows
 
 
 # %%
 # ANCHOR: processes
-def create_process(index: int, name: str) -&gt; schema.Process:
-    process = schema.new_process(name)
+def create_process(index: int, name: str) -&gt; o.Process:
+    process = o.new_process(name)
 
-    def exchange(flow: schema.Flow, value: float) -&gt; schema.Exchange | None:
+    def exchange(flow: o.Flow, value: float) -&gt; o.Exchange | None:
         if value == 0:
             return None
         if value &lt; 0:
-            return schema.new_input(process, flow, abs(value))
+            return o.new_input(process, flow, abs(value))
         else:
-            return schema.new_output(process, flow, value)
+            return o.new_output(process, flow, value)
 
     for (i, tech_flow) in enumerate(tech_flows):
         value = technosphere.iat[i, index]
@@ -661,8 +653,8 @@ processes = [
 
 # %%
 # ANCHOR: calc
-setup = results.CalculationSetup(
-    target=schema.Ref(model_type=&quot;Process&quot;, id=processes[3].id),
+setup = o.CalculationSetup(
+    target=o.Ref(ref_type=o.RefType.Process, id=processes[3].id),
     unit=count.unit_group.ref_unit,  # &quot;Item(s)&quot;
     amount=10,
 )
@@ -685,7 +677,7 @@ print(
             )
             for i in inventory
         ],
-        columns=[&quot;Flow&quot;, &quot;Is input?&quot;, &quot;Amount&quot;, &quot;Unit&quot;]
+        columns=[&quot;Flow&quot;, &quot;Is input?&quot;, &quot;Amount&quot;, &quot;Unit&quot;],
     )
 )
 # ANCHOR_END: inventory
@@ -761,10 +753,10 @@ as calculation target in a calculation setup).</p>
 <h2 id="examples-1"><a class="header" href="#examples-1">Examples</a></h2>
 <h3 id="python-ipc"><a class="header" href="#python-ipc">Python IPC</a></h3>
 <pre><code class="language-py">import olca_ipc as ipc
-import olca_schema as schema
+import olca_schema as o
 
 client = ipc.Client()
-refs = client.get_descriptors(schema.FlowProperty)
+refs = client.get_descriptors(o.FlowProperty)
 for ref in refs:
     print(ref.name)
 # Area
@@ -814,10 +806,10 @@ which is available in modern web-browsers or platforms like
 <h2 id="examples-2"><a class="header" href="#examples-2">Examples</a></h2>
 <h3 id="python-ipc-1"><a class="header" href="#python-ipc-1">Python IPC</a></h3>
 <pre><code class="language-py">import olca_ipc as ipc
-import olca_schema as schema
+import olca_schema as o
 
 client = ipc.Client()
-process = client.get(schema.Process, &quot;eacc4872-6f4e-4ff1-946e-c1bddeda24be&quot;)
+process = client.get(o.Process, &quot;eacc4872-6f4e-4ff1-946e-c1bddeda24be&quot;)
 print(process)
 # Process(
 #   id='eacc4872-6f4e-4ff1-946e-c1bddeda24be',
@@ -873,10 +865,10 @@ will just return the first entity from the database with the given name.</p>
 <h2 id="examples-3"><a class="header" href="#examples-3">Examples</a></h2>
 <h3 id="python-ipc-2"><a class="header" href="#python-ipc-2">Python IPC</a></h3>
 <pre><code class="language-py">import olca_ipc as ipc
-import olca_schema as schema
+import olca_schema as o
 
 client = ipc.Client()
-mass = client.get(schema.FlowProperty, name=&quot;Mass&quot;)
+mass = client.get(o.FlowProperty, name=&quot;Mass&quot;)
 print(mass)
 # FlowProperty(
 #   name='Mass',
@@ -924,10 +916,10 @@ which is available in modern web-browsers or platforms like
 <h2 id="examples-4"><a class="header" href="#examples-4">Examples</a></h2>
 <h3 id="python-ipc-3"><a class="header" href="#python-ipc-3">Python IPC</a></h3>
 <pre><code class="language-py">import olca_ipc as ipc
-import olca_schema as schema
+import olca_schema as o
 
 client = ipc.Client()
-mass_ref = client.get_descriptor(schema.FlowProperty, name=&quot;Mass&quot;)
+mass_ref = client.get_descriptor(o.FlowProperty, name=&quot;Mass&quot;)
 print(mass_ref)
 # Ref(
 #   id='93a60a56-a3c8-11da-a746-0800200b9a66',
@@ -982,10 +974,10 @@ just want to query all descriptors of a data set type.</p>
 <h2 id="examples-5"><a class="header" href="#examples-5">Examples</a></h2>
 <h3 id="python-ipc-4"><a class="header" href="#python-ipc-4">Python IPC</a></h3>
 <pre><code class="language-py">import olca_ipc as ipc
-import olca_schema as schema
+import olca_schema as o
 
 client = ipc.Client()
-for group in client.get_all(schema.UnitGroup):
+for group in client.get_all(o.UnitGroup):
     print(group.name)
 # Units of area
 # Units of energy
@@ -1043,11 +1035,11 @@ for product systems</li>
 <h2 id="examples-6"><a class="header" href="#examples-6">Examples</a></h2>
 <h3 id="python-ipc-5"><a class="header" href="#python-ipc-5">Python IPC</a></h3>
 <pre><code class="language-py">import olca_ipc as ipc
-import olca_schema as schema
+import olca_schema as o
 
 client = ipc.Client()
 params = client.get_parameters(
-    schema.ProductSystem, &quot;0db1eda6-a34e-4c82-b06b-19f27c92495a&quot;
+    o.ProductSystem, &quot;0db1eda6-a34e-4c82-b06b-19f27c92495a&quot;
 )
 for p in params:
     print(f&quot;{p.name}: {p.value}&quot;)
@@ -1097,7 +1089,6 @@ to product inputs and waste outputs of other processes in a product system.</p>
 <h2 id="examples-7"><a class="header" href="#examples-7">Examples</a></h2>
 <h3 id="python-ipc-6"><a class="header" href="#python-ipc-6">Python IPC</a></h3>
 <pre><code class="language-py">import olca_ipc as ipc
-import olca_schema as schema
 
 client = ipc.Client()
 for p in client.get_providers()[:5]:
@@ -1149,13 +1140,11 @@ of other processes in a product system.</p>
 <h2 id="examples-8"><a class="header" href="#examples-8">Examples</a></h2>
 <h3 id="python-ipc-7"><a class="header" href="#python-ipc-7">Python IPC</a></h3>
 <pre><code class="language-py">import olca_ipc as ipc
-import olca_schema as schema
+import olca_schema as o
 
 client = ipc.Client()
 providers = client.get_providers(
-    flow=schema.Ref(
-        model_type=&quot;Flow&quot;, id=&quot;7f6bb533-2d3c-43a6-ac60-6eef299d7c52&quot;
-    )
+    flow=o.Ref(id=&quot;7f6bb533-2d3c-43a6-ac60-6eef299d7c52&quot;)
 )
 for p in providers:
     print(p)
@@ -1210,16 +1199,15 @@ available when a server runs in read-only mode.</p>
 <h2 id="examples-9"><a class="header" href="#examples-9">Examples</a></h2>
 <h3 id="python-ipc-8"><a class="header" href="#python-ipc-8">Python IPC</a></h3>
 <pre><code class="language-py">import olca_ipc as ipc
-import olca_schema as schema
+import olca_schema as o
 
 client = ipc.Client()
-ref = client.put(schema.Source(name=&quot;Inter-process communication with openLCA&quot;))
+ref = client.put(o.Source(name=&quot;Inter-process communication with openLCA&quot;))
 print(ref)
 # Ref(
-#     id=&quot;16cba9b2-2987-4735-9f3e-96fedf8449dd&quot;,
-#     name=&quot;Inter-process communication with openLCA&quot;,
-#     model_type=&quot;Source&quot;,
-# )
+#  id=&quot;16cba9b2-2987-4735-9f3e-96fedf8449dd&quot;,
+#  name=&quot;Inter-process communication with openLCA&quot;,
+# ...
 </code></pre>
 <h3 id="json-rpc-via-fetch-api-8"><a class="header" href="#json-rpc-via-fetch-api-8">JSON-RPC via Fetch API</a></h3>
 <p>The example below shows the usage of this method using the JSON-RPC protocol via
@@ -1267,13 +1255,13 @@ the processes of that system according to the given linking configuration.</p>
 <h2 id="examples-10"><a class="header" href="#examples-10">Examples</a></h2>
 <h3 id="python-ipc-9"><a class="header" href="#python-ipc-9">Python IPC</a></h3>
 <pre><code class="language-py">import olca_ipc as ipc
-import olca_schema as schema
+import olca_schema as o
 
 client = ipc.Client()
-process_ref = client.find(schema.Process, &quot;aluminium foil production&quot;)
-config = schema.LinkingConfig(
+process_ref = client.find(o.Process, &quot;aluminium foil production&quot;)
+config = o.LinkingConfig(
     prefer_unit_processes=True,
-    provider_linking=schema.ProviderLinking.PREFER_DEFAULTS,
+    provider_linking=o.ProviderLinking.PREFER_DEFAULTS,
 )
 system_ref = client.create_product_system(process_ref, config)
 print(f&quot;created product system {system_ref.name}, id={system_ref.id}&quot;)
@@ -1292,17 +1280,16 @@ when the server runs in read-only mode.</p>
 <h2 id="examples-11"><a class="header" href="#examples-11">Examples</a></h2>
 <h3 id="python-ipc-10"><a class="header" href="#python-ipc-10">Python IPC</a></h3>
 <pre><code class="language-py">import olca_ipc as ipc
-import olca_schema as schema
+import olca_schema as o
 
 client = ipc.Client()
 ref = client.delete(
-    schema.Ref(id=&quot;16cba9b2-2987-4735-9f3e-96fedf8449dd&quot;, model_type=&quot;Source&quot;)
+    o.Ref(ref_type=o.RefType.Source, id=&quot;16cba9b2-2987-4735-9f3e-96fedf8449dd&quot;)
 )
 print(ref)
 # Ref(
 #     id=&quot;16cba9b2-2987-4735-9f3e-96fedf8449dd&quot;,
 #     name=&quot;Inter-process communication with openLCA&quot;,
-#     model_type=&quot;Source&quot;,
 # ...
 </code></pre>
 <h3 id="json-rpc-via-fetch-api-9"><a class="header" href="#json-rpc-via-fetch-api-9">JSON-RPC via Fetch API</a></h3>
@@ -1385,20 +1372,16 @@ the result state can be queried.</p>
 <h2 id="examples-12"><a class="header" href="#examples-12">Examples</a></h2>
 <h3 id="python-ipc-11"><a class="header" href="#python-ipc-11">Python IPC</a></h3>
 <pre><code class="language-py">import olca_ipc as ipc
-import olca_schema as schema
-import olca_schema.results as results
+import olca_schema as o
 
 # create a calculation setup
-setup = results.CalculationSetup(
-    target=schema.Ref(
-        model_type=&quot;ProductSystem&quot;, id=&quot;0db1eda6-a34e-4c82-b06b-19f27c92495a&quot;
+setup = o.CalculationSetup(
+    target=o.Ref(
+        ref_type=o.RefType.ProductSystem,
+        id=&quot;0db1eda6-a34e-4c82-b06b-19f27c92495a&quot;,
     ),
-    impact_method=schema.Ref(
-        model_type=&quot;ImpactMethod&quot;, id=&quot;b4571628-4b7b-3e4f-81b1-9a8cca6cb3f8&quot;
-    ),
-    nw_set=schema.Ref(
-        model_type=&quot;NwSet&quot;, id=&quot;867fe119-0b5c-38a0-a3e6-1d845ffaedd5&quot;,
-    )
+    impact_method=o.Ref(id=&quot;b4571628-4b7b-3e4f-81b1-9a8cca6cb3f8&quot;),
+    nw_set=o.Ref(id=&quot;867fe119-0b5c-38a0-a3e6-1d845ffaedd5&quot;),
 )
 
 # run a calculation
@@ -1579,16 +1562,15 @@ import statistics as stats
 
 import olca_ipc as ipc
 import olca_schema as o
-import olca_schema.results as r
 
 client = ipc.Client()
 
 # schedule a first iteration
 print(&quot;run iteration 1&quot;)
 result = client.simulate(
-    r.CalculationSetup(
+    o.CalculationSetup(
         target=o.Ref(
-            model_type=&quot;ProductSystem&quot;,
+            ref_type=o.RefType.ProductSystem,
             id=&quot;7d1cbce0-b5b3-47ba-95b5-014ab3c7f569&quot;,
         ),
         impact_method=o.Ref(id=&quot;99b9d86b-ec6f-4610-ba9f-68ebfe5691dd&quot;),

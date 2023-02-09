@@ -3,16 +3,15 @@ import statistics as stats
 
 import olca_ipc as ipc
 import olca_schema as o
-import olca_schema.results as r
 
 client = ipc.Client()
 
 # schedule a first iteration
 print("run iteration 1")
 result = client.simulate(
-    r.CalculationSetup(
+    o.CalculationSetup(
         target=o.Ref(
-            model_type="ProductSystem",
+            ref_type=o.RefType.ProductSystem,
             id="7d1cbce0-b5b3-47ba-95b5-014ab3c7f569",
         ),
         impact_method=o.Ref(id="99b9d86b-ec6f-4610-ba9f-68ebfe5691dd"),
