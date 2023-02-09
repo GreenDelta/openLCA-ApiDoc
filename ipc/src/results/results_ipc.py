@@ -4,20 +4,16 @@ import random
 # %%
 # ANCHOR: calculate
 import olca_ipc as ipc
-import olca_schema as schema
-import olca_schema.results as results
+import olca_schema as o
 
 # create a calculation setup
-setup = results.CalculationSetup(
-    target=schema.Ref(
-        model_type="ProductSystem", id="0db1eda6-a34e-4c82-b06b-19f27c92495a"
+setup = o.CalculationSetup(
+    target=o.Ref(
+        ref_type=o.RefType.ProductSystem,
+        id="0db1eda6-a34e-4c82-b06b-19f27c92495a",
     ),
-    impact_method=schema.Ref(
-        model_type="ImpactMethod", id="b4571628-4b7b-3e4f-81b1-9a8cca6cb3f8"
-    ),
-    nw_set=schema.Ref(
-        model_type="NwSet", id="867fe119-0b5c-38a0-a3e6-1d845ffaedd5",
-    )
+    impact_method=o.Ref(id="b4571628-4b7b-3e4f-81b1-9a8cca6cb3f8"),
+    nw_set=o.Ref(id="867fe119-0b5c-38a0-a3e6-1d845ffaedd5"),
 )
 
 # run a calculation
@@ -52,9 +48,10 @@ tech_flows = result.get_tech_flows()
 print(f"n = {len(tech_flows)} technosphere flows")
 tech_flow = random.choice(tech_flows)
 print(
-    f'selected: {tech_flow.provider.name}',
+    f"selected: {tech_flow.provider.name}",
     f'{{provider: {{"@id": "{tech_flow.provider.id}"}},',
-    f'flow: {{"@id": "{tech_flow.flow.id}"}}}}')
+    f'flow: {{"@id": "{tech_flow.flow.id}"}}}}',
+)
 # ANCHOR_END: tech-flows
 
 

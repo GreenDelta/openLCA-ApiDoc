@@ -1,8 +1,7 @@
 # %%
 # ANCHOR: imports
 import olca_ipc as ipc
-import olca_schema as schema
-import olca_schema.results as results
+import olca_schema as o
 import pandas as pd
 import numpy as np
 
@@ -80,12 +79,12 @@ client = ipc.Client(8080)
 
 # %%
 # ANCHOR: units
-mass_units = schema.new_unit_group("Mass units", "kg")
-energy_units = schema.new_unit_group("Energy units", "MJ")
-counting_units = schema.new_unit_group("Counting units", "Item(s)")
-mass = schema.new_flow_property("Mass", mass_units)
-energy = schema.new_flow_property("Energy", energy_units)
-count = schema.new_flow_property("Number of items", counting_units)
+mass_units = o.new_unit_group("Mass units", "kg")
+energy_units = o.new_unit_group("Energy units", "MJ")
+counting_units = o.new_unit_group("Counting units", "Item(s)")
+mass = o.new_flow_property("Mass", mass_units)
+energy = o.new_flow_property("Energy", energy_units)
+count = o.new_flow_property("Number of items", counting_units)
 
 client.put_all(
     mass_units,
@@ -100,15 +99,15 @@ client.put_all(
 
 # %%
 # ANCHOR: mass
-print(client.get(schema.FlowProperty, name="Mass").to_json())
+print(client.get(o.FlowProperty, name="Mass").to_json())
 # ANCHOR_END: mass
 
 
 # %%
 # ANCHOR: flows
 def create_flow(
-    row_label: str, fn: Callable[[str, schema.FlowProperty], schema.Flow]
-) -> schema.Flow:
+    row_label: str, fn: Callable[[str, o.FlowProperty], o.Flow]
+) -> o.Flow:
     parts = row_label.split("[")
     name = parts[0].strip()
     unit = parts[1][0:-1].strip()
@@ -124,28 +123,25 @@ def create_flow(
     return flow
 
 
-tech_flows = [
-    create_flow(label, schema.new_product) for label in technosphere.index
-]
+tech_flows = [create_flow(label, o.new_product) for label in technosphere.index]
 envi_flows = [
-    create_flow(label, schema.new_elementary_flow)
-    for label in interventions.index
+    create_flow(label, o.new_elementary_flow) for label in interventions.index
 ]
 # ANCHOR_END: flows
 
 
 # %%
 # ANCHOR: processes
-def create_process(index: int, name: str) -> schema.Process:
-    process = schema.new_process(name)
+def create_process(index: int, name: str) -> o.Process:
+    process = o.new_process(name)
 
-    def exchange(flow: schema.Flow, value: float) -> schema.Exchange | None:
+    def exchange(flow: o.Flow, value: float) -> o.Exchange | None:
         if value == 0:
             return None
         if value < 0:
-            return schema.new_input(process, flow, abs(value))
+            return o.new_input(process, flow, abs(value))
         else:
-            return schema.new_output(process, flow, value)
+            return o.new_output(process, flow, value)
 
     for (i, tech_flow) in enumerate(tech_flows):
         value = technosphere.iat[i, index]
@@ -170,8 +166,8 @@ processes = [
 
 # %%
 # ANCHOR: calc
-setup = results.CalculationSetup(
-    target=schema.Ref(model_type="Process", id=processes[3].id),
+setup = o.CalculationSetup(
+    target=o.Ref(ref_type=o.RefType.Process, id=processes[3].id),
     unit=count.unit_group.ref_unit,  # "Item(s)"
     amount=10,
 )
@@ -194,7 +190,7 @@ print(
             )
             for i in inventory
         ],
-        columns=["Flow", "Is input?", "Amount", "Unit"]
+        columns=["Flow", "Is input?", "Amount", "Unit"],
     )
 )
 # ANCHOR_END: inventory

@@ -1,16 +1,15 @@
 # %%
 import olca_ipc as ipc
-import olca_schema as schema
-import olca_schema.results as results
+import olca_schema as o
 import pandas as pd
 
-setup = results.CalculationSetup(
-    target=schema.Ref(
-        model_type="Process",
+setup = o.CalculationSetup(
+    target=o.Ref(
+        ref_type=o.RefType.Process,
         id="b97a8cbf-d849-3b91-883c-38456009c61d",
         name="Fresh wheat, corn, rice, and other grains; at farm",
     ),
-    impact_method=schema.Ref(
+    impact_method=o.Ref(
         id="1d6a5f29-21e6-305a-9173-ec8598e26a70",
         name="Impact potential",
     ),
