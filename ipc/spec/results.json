@@ -4,19 +4,23 @@
     "methods": [
       {
         "method": "demand",
-        "params": []
+        "params": [],
+        "result": "TechFlowValue"
       },
       {
         "method": "tech-flows",
-        "params": []
+        "params": [],
+        "result": "List[TechFlow]"
       },
       {
         "method": "envi-flows",
-        "params": []
+        "params": [],
+        "result": "List[EnviFlow]"
       },
       {
         "method": "impact-categories",
-        "params": []
+        "params": [],
+        "result": "List[Ref[ImpactCategory]]"
       }
     ]
   },
@@ -25,29 +29,34 @@
     "methods": [
       {
         "method": "scaling-factors",
-        "params": []
+        "params": [],
+        "result": "List[TechFlowValue]"
       },
       {
         "method": "total-requirements",
-        "params": []
+        "params": [],
+        "result": "List[TechFlowValue]"
       },
       {
         "method": "total-requirements-of",
         "params": [
           "TechFlow"
-        ]
+        ],
+        "result": "TechFlowValue"
       },
       {
         "method": "scaled-tech-flows-of",
         "params": [
           "TechFlow"
-        ]
+        ],
+        "result": "List[TechFlowValue]"
       },
       {
         "method": "unscaled-tech-flows-of",
         "params": [
           "TechFlow"
-        ]
+        ],
+        "result": "List[TechFlowValue]"
       }
     ]
   },
@@ -56,58 +65,67 @@
     "methods": [
       {
         "method": "total-flows",
-        "params": []
+        "params": [],
+        "result": "List[EnviFlowValue]"
       },
       {
         "method": "total-flow-value-of",
         "params": [
           "EnviFlow"
-        ]
+        ],
+        "result": "List[EnviFlowValue]"
       },
       {
         "method": "flow-contributions-of",
         "params": [
           "EnviFlow"
-        ]
+        ],
+        "result": "List[TechFlowValue]"
       },
       {
         "method": "direct-interventions-of",
         "params": [
           "TechFlow"
-        ]
+        ],
+        "result": "List[EnviFlowValue]"
       },
       {
         "method": "direct-intervention-of",
         "params": [
           "EnviFlow",
           "TechFlow"
-        ]
+        ],
+        "result": "EnviFlowValue"
       },
       {
         "method": "flow-intensities-of",
         "params": [
           "TechFlow"
-        ]
+        ],
+        "result": "List[EnviFlowValue]"
       },
       {
         "method": "flow-intensity-of",
         "params": [
           "EnviFlow",
           "TechFlow"
-        ]
+        ],
+        "result": "EnviFlowValue"
       },
       {
         "method": "total-interventions-of",
         "params": [
           "TechFlow"
-        ]
+        ],
+        "result": "List[EnviFlowValue]"
       },
       {
         "method": "total-intervention-of",
         "params": [
           "EnviFlow",
           "TechFlow"
-        ]
+        ],
+        "result": "EnviFlowValue"
       }
     ]
   },
@@ -116,92 +134,107 @@
     "methods": [
       {
         "method": "total-impacts",
-        "params": []
+        "params": [],
+        "result": "List[ImpactValue]"
       },
       {
         "method": "total-impacts/normalized",
-        "params": []
+        "params": [],
+        "result": "List[ImpactValue]"
       },
       {
         "method": "total-impacts/weighted",
-        "params": []
+        "params": [],
+        "result": "List[ImpactValue]"
       },
       {
         "method": "total-impact-value-of",
         "params": [
           "Ref[ImpactCategory]"
-        ]
+        ],
+        "result": "ImpactValue"
       },
       {
         "method": "impact-contributions-of",
         "params": [
           "Ref[ImpactCategory]"
-        ]
+        ],
+        "result": "List[TechFlowValue]"
       },
       {
         "method": "direct-impacts-of",
         "params": [
           "TechFlow"
-        ]
+        ],
+        "result": "List[ImpactValue]"
       },
       {
         "method": "direct-impact-of",
         "params": [
           "Ref[ImpactCategory]",
           "TechFlow"
-        ]
+        ],
+        "result": "ImpactValue"
       },
       {
         "method": "impact-intensities-of",
         "params": [
           "TechFlow"
-        ]
+        ],
+        "result": "List[ImpactValue]"
       },
       {
         "method": "impact-intensity-of",
         "params": [
           "Ref[ImpactCategory]",
           "TechFlow"
-        ]
+        ],
+        "result": "ImpactValue"
       },
       {
         "method": "total-impacts-of",
         "params": [
           "TechFlow"
-        ]
+        ],
+        "result": "List[ImpactValue]"
       },
       {
         "method": "total-impact-of",
         "params": [
           "Ref[ImpactCategory]",
           "TechFlow"
-        ]
+        ],
+        "result": "ImpactValue"
       },
       {
         "method": "impact-factors-of",
         "params": [
           "Ref[ImpactCategory]"
-        ]
+        ],
+        "result": "List[EnviFlowValue]"
       },
       {
         "method": "impact-factor-of",
         "params": [
           "Ref[ImpactCategory]",
           "EnviFlow"
-        ]
+        ],
+        "result": "ImpactValue"
       },
       {
         "method": "flow-impacts-of",
         "params": [
           "Ref[ImpactCategory]"
-        ]
+        ],
+        "result": "List[EnviFlowValue]"
       },
       {
         "method": "flow-impact-of",
         "params": [
           "Ref[ImpactCategory]",
           "EnviFlow"
-        ]
+        ],
+        "result": "ImpactValue"
       }
     ]
   },
@@ -210,29 +243,34 @@
     "methods": [
       {
         "method": "total-costs",
-        "params": []
+        "params": [],
+        "result": "CostValue"
       },
       {
         "method": "cost-contributions",
-        "params": []
+        "params": [],
+        "result": "List[TechFlowValue]"
       },
       {
         "method": "direct-costs-of",
         "params": [
           "TechFlow"
-        ]
+        ],
+        "result": "CostValue"
       },
       {
         "method": "cost-intensities-of",
         "params": [
           "TechFlow"
-        ]
+        ],
+        "result": "CostValue"
       },
       {
         "method": "total-costs-of",
         "params": [
           "TechFlow"
-        ]
+        ],
+        "result": "CostValue"
       }
     ]
   }
