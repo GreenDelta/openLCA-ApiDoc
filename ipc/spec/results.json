@@ -4,22 +4,18 @@
     "methods": [
       {
         "method": "demand",
-        "params": [],
         "result": "TechFlowValue"
       },
       {
         "method": "tech-flows",
-        "params": [],
         "result": "List[TechFlow]"
       },
       {
         "method": "envi-flows",
-        "params": [],
         "result": "List[EnviFlow]"
       },
       {
         "method": "impact-categories",
-        "params": [],
         "result": "List[Ref[ImpactCategory]]"
       }
     ]
@@ -29,12 +25,10 @@
     "methods": [
       {
         "method": "scaling-factors",
-        "params": [],
         "result": "List[TechFlowValue]"
       },
       {
         "method": "total-requirements",
-        "params": [],
         "result": "List[TechFlowValue]"
       },
       {
@@ -65,7 +59,6 @@
     "methods": [
       {
         "method": "total-flows",
-        "params": [],
         "result": "List[EnviFlowValue]"
       },
       {
@@ -134,17 +127,14 @@
     "methods": [
       {
         "method": "total-impacts",
-        "params": [],
         "result": "List[ImpactValue]"
       },
       {
         "method": "total-impacts/normalized",
-        "params": [],
         "result": "List[ImpactValue]"
       },
       {
         "method": "total-impacts/weighted",
-        "params": [],
         "result": "List[ImpactValue]"
       },
       {
@@ -243,12 +233,10 @@
     "methods": [
       {
         "method": "total-costs",
-        "params": [],
         "result": "CostValue"
       },
       {
         "method": "cost-contributions",
-        "params": [],
         "result": "List[TechFlowValue]"
       },
       {
