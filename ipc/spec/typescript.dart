@@ -20,30 +20,79 @@ class Type {
   String variable() {
     return schema.camelCaseVariable();
   }
-}
 
-writeProtocol(Spec spec) {
-  print("// protocol\n");
-  for (var section in spec.sections) {
-    print("  // #region: ${section.id}\n");
-    for (var m in section.methods) {
-      var sig = "  ${m.camelCaseName()}(";
-      for (int i = 0; i < m.params.length; i++) {
-        var type = Type(m.params[i]);
-        if (i > 0) {
-          sig += ",";
-        }
-        sig += "${type.variable()}: ${type.name()}";
-      }
-      var result = m.result != null ? Type(m.result!).name() : "void";
-      sig += "): Promise<${result}>;";
-      print(sig + "\n");
-    }
-    print("  // #endregion\n");
+  bool get isList => schema.isList;
+
+  Type unpackList() {
+    return isList ? Type(schema.unpackList()) : this;
   }
 }
 
+writeProtocol(Spec spec) {
+  print("  // protocol\n");
+  for (var section in spec.sections) {
+    print("  //#region ${section.id}\n");
+    for (var m in section.methods) {
+      print("  ${signatureOf(m)};\n");
+    }
+    print("  //#endregion\n");
+  }
+}
+
+writeIpcStubs(Spec spec) {
+  for (var section in spec.sections) {
+    print("  //#region ${section.id}\n");
+    for (var m in section.methods) {
+      print("  async ${signatureOf(m)} {\n${ipcBodyOf(m)}  }\n");
+    }
+    print("  //#endregion\n");
+  }
+}
+
+String signatureOf(Method m) {
+  var sig = "${m.camelCaseName()}(";
+  for (int i = 0; i < m.params.length; i++) {
+    var type = Type(m.params[i]);
+    if (i > 0) {
+      sig += ",";
+    }
+    sig += "${type.variable()}: ${type.name()}";
+  }
+  var result = m.result != null ? Type(m.result!).name() : "void";
+  sig += "): Promise<${result}>";
+  return sig;
+}
+
+String ipcBodyOf(Method m) {
+  if (m.result == null) {
+    return '    await this._call("result/${m.id}", ${ipcParamsOf(m)}, (x) => x)';
+  }
+  var res = Type(m.result!);
+  String callFn, type, alt;
+  if (res.isList) {
+    callFn = "this.client._callEach";
+    type = res.unpackList().name();
+    alt = "[]";
+  } else {
+    callFn = "this.client._call";
+    type = res.name();
+    alt = "$type.of({ amount: 0 })";
+  }
+  var call = '$callFn("result/${m.id}", ${ipcParamsOf(m)}, $type.fromDict)';
+  return "    const resp = await $call;\n    return resp.orElse($alt);\n";
+}
+
+String ipcParamsOf(Method m) {
+  var params = '{ "@id": this.id';
+  for (var param in m.params) {
+    var type = Type(param);
+    params += ', "${type.variable()}": ${type.variable()}.toDict()';
+  }
+  params += ' }';
+  return params;
+}
+
 main() {
-  var spec = Spec.readFrom(File("results.json"));
-  writeProtocol(spec);
+  var spec = Spec.readFrom(File("ipc/spec/results.json"));
+  writeIpcStubs(spec);
 }

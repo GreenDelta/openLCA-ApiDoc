@@ -1,3 +1,4 @@
+import 'dart:collection';
 import 'dart:io';
 import 'dart:convert';
 
@@ -121,9 +122,11 @@ class Method {
       method.result = SchemaType(result);
     }
     var params = dict["params"];
-    if (params is List<String>) {
+    if (params is List) {
       for (var param in params) {
-        method.params.add(SchemaType(param));
+        if (param is String) {
+          method.params.add(SchemaType(param));
+        }
       }
     }
     return method;
