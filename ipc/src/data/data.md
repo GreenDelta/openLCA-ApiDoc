@@ -19,24 +19,24 @@ The table below shows the root entity types and their parameter value in the
 Rest API (multiple values can map to the same type for convenience):
 
 
-| Root entity type                                                                         | Rest parameter                                                |
-|------------------------------------------------------------------------------------------|---------------------------------------------------------------|
-| [Actor](https://greendelta.github.io/olca-schema/classes/Actor.html)                     | `actor `,  `actors `                                          |
-| [Category](https://greendelta.github.io/olca-schema/classes/Category.html)               | `category `,  `categories `                                   |
-| [Currency](https://greendelta.github.io/olca-schema/classes/Currency.html)               | `currency `,  `currencies `                                   |
-| [DQSystem](https://greendelta.github.io/olca-schema/classes/DQSystem.html)               | `dq-system `,  `dq-systems `                                  |
-| [Epd](https://greendelta.github.io/olca-schema/classes/Epd.html)                         | `epd `,  `epds `                                              |
-| [Flow](https://greendelta.github.io/olca-schema/classes/Flow.html)                       | `flow `,  `flows `                                            |
-| [FlowProperty](https://greendelta.github.io/olca-schema/classes/FlowProperty.html)       | `flow-property `,  `flow-properties `                         |
-| [ImpactCategory](https://greendelta.github.io/olca-schema/classes/ImpactCategory.html)   | `impact-category `,  `impact-categories `                     |
-| [ImpactMethod](https://greendelta.github.io/olca-schema/classes/ImpactMethod.html)       | `impact-method `,  `method `,  `impact-methods `,  `methods ` |
-| [Location](https://greendelta.github.io/olca-schema/classes/Location.html)               | `location `,  `locations `                                    |
-| [Parameter](https://greendelta.github.io/olca-schema/classes/Parameter.html)             | `parameter `,  `parameters `                                  |
-| [Process](https://greendelta.github.io/olca-schema/classes/Process.html)                 | `process `,  `processes `                                     |
-| [ProductSystem](https://greendelta.github.io/olca-schema/classes/ProductSystem.html)     | `product-system `,  `model `,                                 |
-| [Project](https://greendelta.github.io/olca-schema/classes/Project.html)                 | `project `,  `projects `                                      |
-| [Result](https://greendelta.github.io/olca-schema/classes/Result.html)                   | `result `,  `results `                                        |
-| [SocialIndicator](https://greendelta.github.io/olca-schema/classes/SocialIndicator.html) | `social-indicator `,  `social-indicators `                    |
-| [Source](https://greendelta.github.io/olca-schema/classes/Source.html)                   | `source `,  `sources `                                        |
-| [UnitGroup](https://greendelta.github.io/olca-schema/classes/UnitGroup.html)             | `unit-group `,  `unit-groups `                                |
+| Root entity type                                                                         | Rest parameter                                            |
+| ---------------------------------------------------------------------------------------- | --------------------------------------------------------- |
+| [Actor](https://greendelta.github.io/olca-schema/classes/Actor.html)                     | `actor`,  `actors`                                        |
+| [Category](https://greendelta.github.io/olca-schema/classes/Category.html)               | `category`,  `categories`                                 |
+| [Currency](https://greendelta.github.io/olca-schema/classes/Currency.html)               | `currency`,  `currencies`                                 |
+| [DQSystem](https://greendelta.github.io/olca-schema/classes/DQSystem.html)               | `dq-system`,  `dq-systems`                                |
+| [Epd](https://greendelta.github.io/olca-schema/classes/Epd.html)                         | `epd`,  `epds`                                            |
+| [Flow](https://greendelta.github.io/olca-schema/classes/Flow.html)                       | `flow`,  `flows`                                          |
+| [FlowProperty](https://greendelta.github.io/olca-schema/classes/FlowProperty.html)       | `flow-property`,  `flow-properties`                       |
+| [ImpactCategory](https://greendelta.github.io/olca-schema/classes/ImpactCategory.html)   | `impact-category`,  `impact-categories`                   |
+| [ImpactMethod](https://greendelta.github.io/olca-schema/classes/ImpactMethod.html)       | `impact-method`,  `method`,  `impact-methods`,  `methods` |
+| [Location](https://greendelta.github.io/olca-schema/classes/Location.html)               | `location`,  `locations`                                  |
+| [Parameter](https://greendelta.github.io/olca-schema/classes/Parameter.html)             | `parameter`,  `parameters`                                |
+| [Process](https://greendelta.github.io/olca-schema/classes/Process.html)                 | `process`,  `processes`                                   |
+| [ProductSystem](https://greendelta.github.io/olca-schema/classes/ProductSystem.html)     | `product-system`, `product-systems`, `model`, `models`    |
+| [Project](https://greendelta.github.io/olca-schema/classes/Project.html)                 | `project`,  `projects`                                    |
+| [Result](https://greendelta.github.io/olca-schema/classes/Result.html)                   | `result`,  `results`                                      |
+| [SocialIndicator](https://greendelta.github.io/olca-schema/classes/SocialIndicator.html) | `social-indicator`,  `social-indicators`                  |
+| [Source](https://greendelta.github.io/olca-schema/classes/Source.html)                   | `source`,  `sources`                                      |
+| [UnitGroup](https://greendelta.github.io/olca-schema/classes/UnitGroup.html)             | `unit-group`,  `unit-groups`                              |
 

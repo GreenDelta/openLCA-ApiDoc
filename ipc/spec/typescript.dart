@@ -26,6 +26,17 @@ class Type {
   Type unpackList() {
     return isList ? Type(schema.unpackList()) : this;
   }
+
+  String restPathId() {
+    switch (schema.signature) {
+      case "TechFlow":
+        return "techIdOf(${variable()})";
+      case "EnviFlow":
+        return "enviIdOf(${variable()})";
+      default:
+        return "${variable()}.id!";
+    }
+  }
 }
 
 writeProtocol(Spec spec) {
@@ -40,10 +51,18 @@ writeProtocol(Spec spec) {
 }
 
 writeIpcStubs(Spec spec) {
+  writeStubs(spec, ipcBodyOf);
+}
+
+writeRestStubs(Spec spec) {
+  writeStubs(spec, restBodyOf);
+}
+
+writeStubs(Spec spec, String Function(Method) fn) {
   for (var section in spec.sections) {
     print("  //#region ${section.id}\n");
     for (var m in section.methods) {
-      print("  async ${signatureOf(m)} {\n${ipcBodyOf(m)}  }\n");
+      print("  async ${signatureOf(m)} {\n${fn(m)}  }\n");
     }
     print("  //#endregion\n");
   }
@@ -82,6 +101,36 @@ String ipcBodyOf(Method m) {
   return "    const resp = await $call;\n    return resp.orElse($alt);\n";
 }
 
+String restBodyOf(Method m) {
+  String path;
+  if (m.params.isEmpty) {
+    path = 'this.path("${m.id}")';
+  } else {
+    path = 'this.path(["${m.id}"';
+    for (var param in m.params) {
+      path += ', ${Type(param).restPathId()}';
+    }
+    path += "])";
+  }
+
+  if (m.result == null) {
+    return '    await this.call(${path}, (x) => x)';
+  }
+  var res = Type(m.result!);
+  String callFn, type, alt;
+  if (res.isList) {
+    callFn = "this.client._callEach";
+    type = res.unpackList().name();
+    alt = "[]";
+  } else {
+    callFn = "this.client._call";
+    type = res.name();
+    alt = "$type.of({ amount: 0 })";
+  }
+  var call = '$callFn($path, $type.fromDict)';
+  return "    const resp = await $call;\n    return resp.orElse($alt);\n";
+}
+
 String ipcParamsOf(Method m) {
   var params = '{ "@id": this.id';
   for (var param in m.params) {
@@ -94,5 +143,5 @@ String ipcParamsOf(Method m) {
 
 main() {
   var spec = Spec.readFrom(File("ipc/spec/results.json"));
-  writeIpcStubs(spec);
+  writeRestStubs(spec);
 }
