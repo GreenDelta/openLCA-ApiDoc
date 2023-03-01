@@ -4,6 +4,7 @@
 - [Stand-alone servers](./servers.md)
 - [Examples](./examples/examples.md)
   - [Python IPC: From scratch](./examples/pyipc_from_scratch.md)
+  - [Calculation parameters](./examples/parameters.md)
 - [Data management](./data/data.md)
   - [Get descriptors](./data/get_descriptors.md)
   - [Get by ID](./data/get_by_id.md)
