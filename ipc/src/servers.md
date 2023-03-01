@@ -9,6 +9,37 @@ __This section is currently under development__
 
 ## Running with Docker
 
+With an [gdt-server](https://github.com/GreenDelta/gdt-server) image you can run
+an openLCA Rest service as a Docker container. There are two types of such
+images: images with packaged LCA models (_model images_) and images without a
+model (_service images_).
+
+### Model images
+A model image is an easy way to distribute and share one or more computable LCA
+models. Such models are often parameterized and can be calculated for a given
+set of parameter values on demand. Model images are typically shared as tar
+archives which can be loaded into the local image repository via the `load`
+command:
+
+```bash
+docker load -i gdt-server-{identifier}.tar
+```
+
+With `docker image ls` you should then see the image. A model image typically
+does not need any configuration (timeouts, number of threads etc.), you just
+run it and map the `8080` port of openLCA service in the container (note that
+`-d` runs the container in detached mode, `--rm` will delete it when it is
+stopped):
+
+```bash
+docker run -p 3000:8080 -d --rm gdt-server-{identifier}
+```
+
+In the example above it maps the port `8080` in the container to the port
+`3000`, this `http://localhost:3000/api/version` should then respond with the
+API version of the gdt-server.
+
+### Service images
 ...
 
 ## Configuration
