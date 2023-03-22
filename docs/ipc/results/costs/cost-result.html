@@ -147,10 +147,25 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="life-cycle-costing-result"><a class="header" href="#life-cycle-costing-result">Life cycle costing result</a></h1>
+<p>This method retursn the total life cycle costing (LCC) result.</p>
 <p>$$
 q^T * s
 $$</p>
-<p>Rest: <code>/total-costs</code></p>
+<div class="table-wrapper"><table><thead><tr><th></th><th></th></tr></thead><tbody>
+<tr><td>Rest API</td><td><code>GET result/{result-id}/total-costs</code></td></tr>
+<tr><td>JSON-RPC</td><td><code>result/total-costs</code></td></tr>
+<tr><td>Snake case</td><td><code>result.get_total_costs</code></td></tr>
+<tr><td>Camel case</td><td><code>result.getTotalCosts</code></td></tr>
+<tr><td>Return type</td><td><a href="http://greendelta.github.io/olca-schema/classes/CostValue.html"><code>CostValue</code></a></td></tr>
+</tbody></table>
+</div>
+<h2 id="examples"><a class="header" href="#examples">Examples</a></h2>
+<h3 id="typescript-ipc"><a class="header" href="#typescript-ipc">TypeScript IPC</a></h3>
+<pre><code class="language-ts">  const totals = await result.getTotalCosts();
+  const code = totals.currency?.refUnit;
+  console.log(`total costs: ${totals.amount} ${code}`);
+  // total costs: 60 USD
+</code></pre>
 
                     </main>
 

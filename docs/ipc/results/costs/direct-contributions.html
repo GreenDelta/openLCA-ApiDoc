@@ -147,14 +147,28 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="direct-contributions"><a class="header" href="#direct-contributions">Direct contributions</a></h1>
-<p>$$
-q^T[j] * s[j]
-$$</p>
-<p>Rest: <code>/direct-costs-of/{tech-flow}</code></p>
-<p>Rest: <code>/direct-cost-values</code></p>
+<p>This method returns the direct contribution of each process in the system to the
+total cost result.</p>
 <p>$$
 q^T * diagm(s)
 $$</p>
+<div class="table-wrapper"><table><thead><tr><th></th><th></th></tr></thead><tbody>
+<tr><td>Rest API</td><td><code>GET result/{result-id}/cost-contributions</code></td></tr>
+<tr><td>JSON-RPC</td><td><code>result/cost-contributions</code></td></tr>
+<tr><td>Snake case</td><td><code>result.get_cost_contributions</code></td></tr>
+<tr><td>Camel case</td><td><code>result.getCostContributions</code></td></tr>
+<tr><td>Return type</td><td><a href="http://greendelta.github.io/olca-schema/classes/TechFlowValue.html"><code>List[TechFlowValue]</code></a></td></tr>
+</tbody></table>
+</div>
+<h2 id="examples"><a class="header" href="#examples">Examples</a></h2>
+<h3 id="typescript-ipc"><a class="header" href="#typescript-ipc">TypeScript IPC</a></h3>
+<pre><code class="language-ts">  const contributions = await result.getCostContributions();
+  for (const c of contributions) {
+    console.log(`${c.techFlow?.provider?.name}: ${c.amount} ${code}`);
+  }
+  // Q: 15 USD
+  // P: 45 USD
+</code></pre>
 
                     </main>
 
