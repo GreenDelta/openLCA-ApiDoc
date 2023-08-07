@@ -5,10 +5,8 @@
         <meta charset="UTF-8">
         <title>Inter-process communication with openLCA</title>
         <meta name="robots" content="noindex" />
-
-
         <!-- Custom HTML head -->
-        
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="theme-color" content="#ffffff" />
@@ -19,31 +17,27 @@
         <link rel="stylesheet" href="css/general.css">
         <link rel="stylesheet" href="css/chrome.css">
         <link rel="stylesheet" href="css/print.css" media="print">
-
         <!-- Fonts -->
         <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
         <link rel="stylesheet" href="fonts/fonts.css">
-
         <!-- Highlight.js Stylesheets -->
         <link rel="stylesheet" href="highlight.css">
         <link rel="stylesheet" href="tomorrow-night.css">
         <link rel="stylesheet" href="ayu-highlight.css">
 
         <!-- Custom theme stylesheets -->
-
         <!-- MathJax -->
-        <script async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script async type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     </head>
     <body>
-    <div id="body-container">
         <!-- Provide site root to javascript -->
-        <script>
+        <script type="text/javascript">
             var path_to_root = "";
             var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
         </script>
 
         <!-- Work around some values being stored in localStorage wrapped in quotes -->
-        <script>
+        <script type="text/javascript">
             try {
                 var theme = localStorage.getItem('mdbook-theme');
                 var sidebar = localStorage.getItem('mdbook-sidebar');
@@ -59,7 +53,7 @@
         </script>
 
         <!-- Set the theme before any content is loaded, prevents flash -->
-        <script>
+        <script type="text/javascript">
             var theme;
             try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
             if (theme === null || theme === undefined) { theme = default_theme; }
@@ -71,14 +65,12 @@
         </script>
 
         <!-- Hide / unhide sidebar before it is displayed -->
-        <script>
+        <script type="text/javascript">
             var html = document.querySelector('html');
-            var sidebar = null;
+            var sidebar = 'hidden';
             if (document.body.clientWidth >= 1080) {
                 try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
                 sidebar = sidebar || 'visible';
-            } else {
-                sidebar = 'hidden';
             }
             html.classList.remove('sidebar-visible');
             html.classList.add("sidebar-" + sidebar);
@@ -86,7 +78,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="intro.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li class="chapter-item expanded "><a href="servers.html"><strong aria-hidden="true">2.</strong> Stand-alone servers</a></li><li class="chapter-item expanded "><a href="examples/examples.html"><strong aria-hidden="true">3.</strong> Examples</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="examples/pyipc_from_scratch.html"><strong aria-hidden="true">3.1.</strong> Python IPC: From scratch</a></li><li class="chapter-item expanded "><a href="examples/parameters.html"><strong aria-hidden="true">3.2.</strong> Calculation parameters</a></li></ol></li><li class="chapter-item expanded "><a href="data/data.html"><strong aria-hidden="true">4.</strong> Data management</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="data/get_descriptors.html"><strong aria-hidden="true">4.1.</strong> Get descriptors</a></li><li class="chapter-item expanded "><a href="data/get_by_id.html"><strong aria-hidden="true">4.2.</strong> Get by ID</a></li><li class="chapter-item expanded "><a href="data/get_by_name.html"><strong aria-hidden="true">4.3.</strong> Get by name</a></li><li class="chapter-item expanded "><a href="data/get_descriptor.html"><strong aria-hidden="true">4.4.</strong> Get descriptor</a></li><li class="chapter-item expanded "><a href="data/get_all.html"><strong aria-hidden="true">4.5.</strong> Get all</a></li><li class="chapter-item expanded "><a href="data/get_parameters.html"><strong aria-hidden="true">4.6.</strong> Get parameters</a></li><li class="chapter-item expanded "><a href="data/get_providers.html"><strong aria-hidden="true">4.7.</strong> Get providers</a></li><li class="chapter-item expanded "><a href="data/get_providers_for_flow.html"><strong aria-hidden="true">4.8.</strong> Get providers for flow</a></li><li class="chapter-item expanded "><a href="data/put.html"><strong aria-hidden="true">4.9.</strong> Insert or update a data set</a></li><li class="chapter-item expanded "><a href="data/create-system.html"><strong aria-hidden="true">4.10.</strong> Create a product system</a></li><li class="chapter-item expanded "><a href="data/delete.html"><strong aria-hidden="true">4.11.</strong> Delete a data set</a></li></ol></li><li class="chapter-item expanded "><a href="results/results.html"><strong aria-hidden="true">5.</strong> Calculation and results</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="results/calculate.html"><strong aria-hidden="true">5.1.</strong> Calculate</a></li><li class="chapter-item expanded "><a href="results/get_state.html"><strong aria-hidden="true">5.2.</strong> Get state</a></li><li class="chapter-item expanded "><a href="results/dispose.html"><strong aria-hidden="true">5.3.</strong> Dispose result</a></li><li class="chapter-item expanded "><a href="results/simulate.html"><strong aria-hidden="true">5.4.</strong> Monte Carlo Simulations</a></li><li class="chapter-item expanded "><a href="results/elements/tech-flows.html"><strong aria-hidden="true">5.5.</strong> Technosphere flows</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="results/tech-flows/demand.html"><strong aria-hidden="true">5.5.1.</strong> The final demand</a></li><li class="chapter-item expanded "><a href="results/tech-flows/total-requirements.html"><strong aria-hidden="true">5.5.2.</strong> Total requirements</a></li><li class="chapter-item expanded "><a href="results/tech-flows/direct-requirements.html"><strong aria-hidden="true">5.5.3.</strong> Direct requirements</a></li><li class="chapter-item expanded "><a href="results/tech-flows/scaling-vector.html"><strong aria-hidden="true">5.5.4.</strong> Scaling factors</a></li><li class="chapter-item expanded "><a href="results/tech-flows/totality-factors.html"><strong aria-hidden="true">5.5.5.</strong> Totality factors</a></li><li class="chapter-item expanded "><a href="results/tech-flows/unscaled-requirements.html"><strong aria-hidden="true">5.5.6.</strong> Unscaled requirements</a></li></ol></li><li class="chapter-item expanded "><a href="results/elements/envi-flows.html"><strong aria-hidden="true">5.6.</strong> Intervention flows</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="results/envi-flows/inventory-result.html"><strong aria-hidden="true">5.6.1.</strong> Inventory result</a></li><li class="chapter-item expanded "><a href="results/envi-flows/direct-contributions.html"><strong aria-hidden="true">5.6.2.</strong> Direct contributions</a></li><li class="chapter-item expanded "><a href="results/envi-flows/total-values.html"><strong aria-hidden="true">5.6.3.</strong> Total values</a></li><li class="chapter-item expanded "><a href="results/envi-flows/direct-results.html"><strong aria-hidden="true">5.6.4.</strong> Direct process result</a></li><li class="chapter-item expanded "><a href="results/envi-flows/total-results.html"><strong aria-hidden="true">5.6.5.</strong> Total process result</a></li><li class="chapter-item expanded "><a href="results/envi-flows/intensities.html"><strong aria-hidden="true">5.6.6.</strong> Intensities</a></li><li class="chapter-item expanded "><a href="results/envi-flows/unscaled.html"><strong aria-hidden="true">5.6.7.</strong> Unscaled flows</a></li></ol></li><li class="chapter-item expanded "><a href="results/elements/impact-categories.html"><strong aria-hidden="true">5.7.</strong> Impact categories</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="results/impacts/impact-result.html"><strong aria-hidden="true">5.7.1.</strong> Impact assessment result</a></li><li class="chapter-item expanded "><a href="results/impacts/normalized.html"><strong aria-hidden="true">5.7.2.</strong> Normalized results</a></li><li class="chapter-item expanded "><a href="results/impacts/weighted.html"><strong aria-hidden="true">5.7.3.</strong> Weighted results</a></li><li class="chapter-item expanded "><a href="results/impacts/direct-contributions.html"><strong aria-hidden="true">5.7.4.</strong> Direct contributions</a></li><li class="chapter-item expanded "><a href="results/impacts/direct-results.html"><strong aria-hidden="true">5.7.5.</strong> Direct process result</a></li><li class="chapter-item expanded "><a href="results/impacts/total-results.html"><strong aria-hidden="true">5.7.6.</strong> Total process result</a></li><li class="chapter-item expanded "><a href="results/impacts/intensities.html"><strong aria-hidden="true">5.7.7.</strong> Intensities</a></li></ol></li><li class="chapter-item expanded "><a href="results/elements/costs.html"><strong aria-hidden="true">5.8.</strong> Costs</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="results/costs/cost-result.html"><strong aria-hidden="true">5.8.1.</strong> Life cycle costing result</a></li><li class="chapter-item expanded "><a href="results/costs/direct-contributions.html"><strong aria-hidden="true">5.8.2.</strong> Direct contributions</a></li><li class="chapter-item expanded "><a href="results/costs/total-values.html"><strong aria-hidden="true">5.8.3.</strong> Total values</a></li><li class="chapter-item expanded "><a href="results/costs/intensities.html"><strong aria-hidden="true">5.8.4.</strong> Intensities</a></li><li class="chapter-item expanded "><a href="results/costs/unscaled.html"><strong aria-hidden="true">5.8.5.</strong> Unscaled costs</a></li></ol></li></ol></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="intro.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li class="chapter-item expanded "><a href="servers.html"><strong aria-hidden="true">2.</strong> Stand-alone servers</a></li><li class="chapter-item expanded "><a href="examples/examples.html"><strong aria-hidden="true">3.</strong> Examples</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="examples/pyipc_from_scratch.html"><strong aria-hidden="true">3.1.</strong> Python IPC: From scratch</a></li><li class="chapter-item expanded "><a href="examples/parameters.html"><strong aria-hidden="true">3.2.</strong> Calculation parameters</a></li></ol></li><li class="chapter-item expanded "><a href="data/data.html"><strong aria-hidden="true">4.</strong> Data management</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="data/get_descriptors.html"><strong aria-hidden="true">4.1.</strong> Get descriptors</a></li><li class="chapter-item expanded "><a href="data/get_by_id.html"><strong aria-hidden="true">4.2.</strong> Get by ID</a></li><li class="chapter-item expanded "><a href="data/get_by_name.html"><strong aria-hidden="true">4.3.</strong> Get by name</a></li><li class="chapter-item expanded "><a href="data/get_descriptor.html"><strong aria-hidden="true">4.4.</strong> Get descriptor</a></li><li class="chapter-item expanded "><a href="data/get_all.html"><strong aria-hidden="true">4.5.</strong> Get all</a></li><li class="chapter-item expanded "><a href="data/get_parameters.html"><strong aria-hidden="true">4.6.</strong> Get parameters</a></li><li class="chapter-item expanded "><a href="data/get_providers.html"><strong aria-hidden="true">4.7.</strong> Get providers</a></li><li class="chapter-item expanded "><a href="data/get_providers_for_flow.html"><strong aria-hidden="true">4.8.</strong> Get providers for flow</a></li><li class="chapter-item expanded "><a href="data/put.html"><strong aria-hidden="true">4.9.</strong> Insert or update a data set</a></li><li class="chapter-item expanded "><a href="data/create-system.html"><strong aria-hidden="true">4.10.</strong> Create a product system</a></li><li class="chapter-item expanded "><a href="data/delete.html"><strong aria-hidden="true">4.11.</strong> Delete a data set</a></li></ol></li><li class="chapter-item expanded "><a href="results/results.html"><strong aria-hidden="true">5.</strong> Calculation and results</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="results/calculate.html"><strong aria-hidden="true">5.1.</strong> Calculate</a></li><li class="chapter-item expanded "><a href="results/get_state.html"><strong aria-hidden="true">5.2.</strong> Get state</a></li><li class="chapter-item expanded "><a href="results/dispose.html"><strong aria-hidden="true">5.3.</strong> Dispose result</a></li><li class="chapter-item expanded "><a href="results/simulate.html"><strong aria-hidden="true">5.4.</strong> Monte Carlo Simulations</a></li><li class="chapter-item expanded "><a href="results/elements/tech-flows.html"><strong aria-hidden="true">5.5.</strong> Technosphere flows</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="results/tech-flows/demand.html"><strong aria-hidden="true">5.5.1.</strong> The final demand</a></li><li class="chapter-item expanded "><a href="results/tech-flows/total-requirements.html"><strong aria-hidden="true">5.5.2.</strong> Total requirements</a></li><li class="chapter-item expanded "><a href="results/tech-flows/direct-requirements.html"><strong aria-hidden="true">5.5.3.</strong> Direct requirements</a></li><li class="chapter-item expanded "><a href="results/tech-flows/scaling-vector.html"><strong aria-hidden="true">5.5.4.</strong> Scaling factors</a></li><li class="chapter-item expanded "><a href="results/tech-flows/totality-factors.html"><strong aria-hidden="true">5.5.5.</strong> Totality factors</a></li><li class="chapter-item expanded "><a href="results/tech-flows/unscaled-requirements.html"><strong aria-hidden="true">5.5.6.</strong> Unscaled requirements</a></li></ol></li><li class="chapter-item expanded "><a href="results/elements/envi-flows.html"><strong aria-hidden="true">5.6.</strong> Intervention flows</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="results/envi-flows/inventory-result.html"><strong aria-hidden="true">5.6.1.</strong> Inventory result</a></li><li class="chapter-item expanded "><a href="results/envi-flows/direct-contributions.html"><strong aria-hidden="true">5.6.2.</strong> Direct contributions</a></li><li class="chapter-item expanded "><a href="results/envi-flows/total-values.html"><strong aria-hidden="true">5.6.3.</strong> Total values</a></li><li class="chapter-item expanded "><a href="results/envi-flows/direct-results.html"><strong aria-hidden="true">5.6.4.</strong> Direct process result</a></li><li class="chapter-item expanded "><a href="results/envi-flows/total-results.html"><strong aria-hidden="true">5.6.5.</strong> Total process result</a></li><li class="chapter-item expanded "><a href="results/envi-flows/intensities.html"><strong aria-hidden="true">5.6.6.</strong> Intensities</a></li><li class="chapter-item expanded "><a href="results/envi-flows/unscaled.html"><strong aria-hidden="true">5.6.7.</strong> Unscaled flows</a></li><li class="chapter-item expanded "><a href="results/envi-flows/upstream.html"><strong aria-hidden="true">5.6.8.</strong> Upstream results</a></li><li class="chapter-item expanded "><a href="results/envi-flows/upstream_trees.html"><strong aria-hidden="true">5.6.9.</strong> Upstream trees</a></li></ol></li><li class="chapter-item expanded "><a href="results/elements/impact-categories.html"><strong aria-hidden="true">5.7.</strong> Impact categories</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="results/impacts/impact-result.html"><strong aria-hidden="true">5.7.1.</strong> Impact assessment result</a></li><li class="chapter-item expanded "><a href="results/impacts/normalized.html"><strong aria-hidden="true">5.7.2.</strong> Normalized results</a></li><li class="chapter-item expanded "><a href="results/impacts/weighted.html"><strong aria-hidden="true">5.7.3.</strong> Weighted results</a></li><li class="chapter-item expanded "><a href="results/impacts/direct-contributions.html"><strong aria-hidden="true">5.7.4.</strong> Direct contributions</a></li><li class="chapter-item expanded "><a href="results/impacts/direct-results.html"><strong aria-hidden="true">5.7.5.</strong> Direct process result</a></li><li class="chapter-item expanded "><a href="results/impacts/total-results.html"><strong aria-hidden="true">5.7.6.</strong> Total process result</a></li><li class="chapter-item expanded "><a href="results/impacts/intensities.html"><strong aria-hidden="true">5.7.7.</strong> Intensities</a></li><li class="chapter-item expanded "><a href="results/impacts/upstream.html"><strong aria-hidden="true">5.7.8.</strong> Upstream results</a></li><li class="chapter-item expanded "><a href="results/impacts/upstream_trees.html"><strong aria-hidden="true">5.7.9.</strong> Upstream trees</a></li></ol></li><li class="chapter-item expanded "><a href="results/elements/costs.html"><strong aria-hidden="true">5.8.</strong> Costs</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="results/costs/cost-result.html"><strong aria-hidden="true">5.8.1.</strong> Life cycle costing result</a></li><li class="chapter-item expanded "><a href="results/costs/direct-contributions.html"><strong aria-hidden="true">5.8.2.</strong> Direct contributions</a></li><li class="chapter-item expanded "><a href="results/costs/total-values.html"><strong aria-hidden="true">5.8.3.</strong> Total values</a></li><li class="chapter-item expanded "><a href="results/costs/intensities.html"><strong aria-hidden="true">5.8.4.</strong> Intensities</a></li><li class="chapter-item expanded "><a href="results/costs/unscaled.html"><strong aria-hidden="true">5.8.5.</strong> Unscaled costs</a></li><li class="chapter-item expanded "><a href="results/costs/upstream.html"><strong aria-hidden="true">5.8.6.</strong> Upstream results</a></li><li class="chapter-item expanded "><a href="results/costs/upstream_trees.html"><strong aria-hidden="true">5.8.7.</strong> Upstream trees</a></li></ol></li></ol></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -94,7 +86,7 @@
         <div id="page-wrapper" class="page-wrapper">
 
             <div class="page">
-                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar-hover-placeholder"></div>
                 <div id="menu-bar" class="menu-bar sticky bordered">
                     <div class="left-buttons">
                         <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
@@ -104,7 +96,7 @@
                             <i class="fa fa-paint-brush"></i>
                         </button>
                         <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
-                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
@@ -121,7 +113,6 @@
                         <a href="print.html" title="Print this book" aria-label="Print this book">
                             <i id="print-button" class="fa fa-print"></i>
                         </a>
-
                     </div>
                 </div>
 
@@ -135,9 +126,8 @@
                         </ul>
                     </div>
                 </div>
-
                 <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
-                <script>
+                <script type="text/javascript">
                     document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
                     document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
                     Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
@@ -2592,7 +2582,99 @@ $$</p>
 <tr><td>Return type</td><td><a href="http://greendelta.github.io/olca-schema/classes/EnviFlowValue.html"><code>List[EnviFlowValue]</code></a></td></tr>
 <tr><td>Parameter type</td><td><a href="http://greendelta.github.io/olca-schema/classes/TechFlow.html"><code>TechFlow</code></a></td></tr>
 </tbody></table>
-</div><div style="break-before: page; page-break-before: always;"></div><h1 id="impact-categories"><a class="header" href="#impact-categories">Impact categories</a></h1>
+</div><div style="break-before: page; page-break-before: always;"></div><h1 id="upstream-results"><a class="header" href="#upstream-results">Upstream results</a></h1>
+<p>This method returns the upstream results for a given path in an upstream contribution tree related to an intervention flow. If the path is empty, the root of that tree is returned.</p>
+<div class="table-wrapper"><table><thead><tr><th></th><th></th></tr></thead><tbody>
+<tr><td>REST</td><td><code>POST result/{result-id}/upstream-interventions-of/{envi-flow}</code></td></tr>
+<tr><td>IPC</td><td><code>result/upstream-interventions-of</code></td></tr>
+<tr><td>Python IPC</td><td><code>Result.get_upstream_interventions_of</code></td></tr>
+<tr><td>Return type</td><td><a href="http://greendelta.github.io/olca-schema/classes/UpstreamNode.html"><code>List[UpstreamNode]</code></a></td></tr>
+<tr><td>Parameter</td><td><a href="http://greendelta.github.io/olca-schema/classes/EnviFlow.html"><code>EnviFlow</code></a></td></tr>
+<tr><td>Parameter</td><td>the upstream path encoded as string</td></tr>
+</tbody></table>
+</div><div style="break-before: page; page-break-before: always;"></div><h1 id="upstream-trees"><a class="header" href="#upstream-trees">Upstream trees</a></h1>
+<p>This method returns the result nodes of a given intervention flow for a given
+path in an upstream contribution tree. The path is a sequence of
+technosphere-flows that describe the path to the parent node of the returned
+nodes. If the path is empty, the root of the tree is returned. Note that such
+an upstream tree can be infinitely deep when the calculated system has cycles.</p>
+<div class="table-wrapper"><table><thead><tr><th></th><th></th></tr></thead><tbody>
+<tr><td>Rest API</td><td><code>POST result/{result-id}/upstream-interventions-of/{envi-flow}</code></td></tr>
+<tr><td>JSON-RPC</td><td><code>result/upstream-interventions-of</code></td></tr>
+<tr><td>Snake case</td><td><code>result.get_upstream_interventions_of</code></td></tr>
+<tr><td>Camel case</td><td><code>result.getUpstreamInterventionsOf</code></td></tr>
+<tr><td>Return type</td><td><a href="http://greendelta.github.io/olca-schema/classes/UpstreamNode.html"><code>List[UpstreamNode]</code></a></td></tr>
+<tr><td>Parameter 1</td><td><a href="http://greendelta.github.io/olca-schema/classes/EnviFlow.html"><code>EnviFlow</code></a></td></tr>
+<tr><td>Parameter 2</td><td><a href="http://greendelta.github.io/olca-schema/classes/TechFlow.html"><code>List[TechFlow]</code></a></td></tr>
+</tbody></table>
+</div>
+<h2 id="examples-26"><a class="header" href="#examples-26">Examples</a></h2>
+<h3 id="olca-ipcts"><a class="header" href="#olca-ipcts">olca-ipc.ts</a></h3>
+<p>The TypeScript example below uses the
+<a href="https://github.com/GreenDelta/olca-ipc.ts">olca-ipc.ts</a> client API:</p>
+<pre><code class="language-ts">async function main() {
+
+  // connect to a local server running on port 8080
+  const client = o.IpcClient.on(8080);
+  const setup = o.CalculationSetup.of({
+    target: o.Ref.of({
+      id: &quot;d3a9a9b2-ec3e-4811-8617-ae853573b50b&quot;,
+      refType: o.RefType.ProductSystem,
+    }),
+  });
+  const result = await client.calculate(setup);
+  await result.untilReady();
+
+  // select the first best inventory flow and expand a tree for it
+  const flow = (await result.getEnviFlows())[0];
+  console.log(`upstream tree for ${flow.flow?.name} (${flow.flow?.category})`);
+  await expand(result, flow, []);
+
+  // as always, dispose the result
+  result.dispose();
+}
+
+async function expand(r: o.IpcResult, flow: o.EnviFlow, path: o.TechFlow[]) {
+  const level = path.length;
+  const indent = &quot;  &quot;.repeat(level);
+  const unit = flow.flow?.refUnit;
+  const nodes = await r.getUpstreamInterventionsOf(flow, path);
+  for (const node of nodes) {
+    if (node.result === 0) {
+      continue;
+    }
+    const name = node.techFlow?.provider?.name;
+    const value = node.result?.toExponential(2);
+    console.log(`${indent}- ${value} ${unit} :: ${name}`);
+
+    // we stop the expansion after 3 levels; you can set other cut-offs like
+    // result contributions etc.
+    if (level &lt; 3) {
+      const next = path.slice();
+      next.push(node.techFlow!);
+      await expand(r, flow, next);
+    }
+  }
+}
+
+main();
+
+/*
+upstream tree for COD, Chemical Oxygen Demand (Elementary flows/Emission to water/ground water)
+- 1.73e-9 t :: ...
+  - 1.73e-9 t :: ...
+    - 7.21e-10 t :: ...
+      - 3.45e-10 t :: ...
+      - 2.04e-10 t :: ...
+      - ...
+    - 5.77e-10 t :: ...
+      - 4.40e-10 t :: ...
+      - 7.53e-11 t :: ...
+      - 3.21e-11 t :: ...
+      - ...
+*/
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="impact-categories"><a class="header" href="#impact-categories">Impact categories</a></h1>
 <p>This method returns the \(l\) impact categories of a result.
 The rows of the impact matrix \(C\) are indexed by these
 impact categories and the columns by the \(m\) intervention
@@ -2608,7 +2690,7 @@ $$</p>
 <tr><td>Return type</td><td><a href="http://greendelta.github.io/olca-schema/classes/Ref.html"><code>List[Ref[ImpactCategory]]</code></a></td></tr>
 </tbody></table>
 </div>
-<h2 id="examples-26"><a class="header" href="#examples-26">Examples</a></h2>
+<h2 id="examples-27"><a class="header" href="#examples-27">Examples</a></h2>
 <h3 id="python-ipc-17"><a class="header" href="#python-ipc-17">Python IPC</a></h3>
 <pre><code class="language-py">impact_categories = result.get_impact_categories()
 print(
@@ -2691,7 +2773,7 @@ $$</p>
 <tr><td>Parameter type</td><td><a href="http://greendelta.github.io/olca-schema/classes/Ref.html"><code>Ref[ImpactCategory]</code></a></td></tr>
 </tbody></table>
 </div>
-<h2 id="examples-27"><a class="header" href="#examples-27">Examples</a></h2>
+<h2 id="examples-28"><a class="header" href="#examples-28">Examples</a></h2>
 <h3 id="json-rpc-via-fetch-api-25"><a class="header" href="#json-rpc-via-fetch-api-25">JSON-RPC via Fetch API</a></h3>
 <p>The example below shows the usage of this method using the JSON-RPC protocol via
 the <a href="https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API">Fetch API</a>
@@ -2739,7 +2821,7 @@ $$</p>
 <tr><td>Return type</td><td><a href="http://greendelta.github.io/olca-schema/classes/ImpactValue.html"><code>List[ImpactValue]</code></a></td></tr>
 </tbody></table>
 </div>
-<h2 id="examples-28"><a class="header" href="#examples-28">Examples</a></h2>
+<h2 id="examples-29"><a class="header" href="#examples-29">Examples</a></h2>
 <h3 id="json-rpc-via-fetch-api-26"><a class="header" href="#json-rpc-via-fetch-api-26">JSON-RPC via Fetch API</a></h3>
 <p>The example below shows the usage of this method using the JSON-RPC protocol via
 the <a href="https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API">Fetch API</a>
@@ -2787,7 +2869,7 @@ $$</p>
 <tr><td>Return type</td><td><a href="http://greendelta.github.io/olca-schema/classes/ImpactValue.html"><code>List[ImpactValue]</code></a></td></tr>
 </tbody></table>
 </div>
-<h2 id="examples-29"><a class="header" href="#examples-29">Examples</a></h2>
+<h2 id="examples-30"><a class="header" href="#examples-30">Examples</a></h2>
 <h3 id="json-rpc-via-fetch-api-27"><a class="header" href="#json-rpc-via-fetch-api-27">JSON-RPC via Fetch API</a></h3>
 <p>The example below shows the usage of this method using the JSON-RPC protocol via
 the <a href="https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API">Fetch API</a>
@@ -2838,7 +2920,7 @@ $$</p>
 <tr><td>Parameter type</td><td><a href="http://greendelta.github.io/olca-schema/classes/Ref.html"><code>Ref[ImpactCategory]</code></a></td></tr>
 </tbody></table>
 </div>
-<h2 id="examples-30"><a class="header" href="#examples-30">Examples</a></h2>
+<h2 id="examples-31"><a class="header" href="#examples-31">Examples</a></h2>
 <h3 id="json-rpc-via-fetch-api-28"><a class="header" href="#json-rpc-via-fetch-api-28">JSON-RPC via Fetch API</a></h3>
 <p>The example below shows the usage of this method using the JSON-RPC protocol via
 the <a href="https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API">Fetch API</a>
@@ -2897,7 +2979,7 @@ impact category \(k\):</p>
 <tr><td>Parameter type</td><td><a href="http://greendelta.github.io/olca-schema/classes/TechFlow.html"><code>TechFlow</code></a></td></tr>
 </tbody></table>
 </div>
-<h2 id="examples-31"><a class="header" href="#examples-31">Examples</a></h2>
+<h2 id="examples-32"><a class="header" href="#examples-32">Examples</a></h2>
 <h3 id="json-rpc-via-fetch-api-29"><a class="header" href="#json-rpc-via-fetch-api-29">JSON-RPC via Fetch API</a></h3>
 <p>The example below shows the usage of this method using the JSON-RPC protocol via
 the <a href="https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API">Fetch API</a>
@@ -2961,7 +3043,7 @@ $$</p>
 <tr><td>Parameter type</td><td><a href="http://greendelta.github.io/olca-schema/classes/TechFlow.html"><code>TechFlow</code></a></td></tr>
 </tbody></table>
 </div>
-<h2 id="examples-32"><a class="header" href="#examples-32">Examples</a></h2>
+<h2 id="examples-33"><a class="header" href="#examples-33">Examples</a></h2>
 <h3 id="json-rpc-via-fetch-api-30"><a class="header" href="#json-rpc-via-fetch-api-30">JSON-RPC via Fetch API</a></h3>
 <p>The example below shows the usage of this method using the JSON-RPC protocol via
 the <a href="https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API">Fetch API</a>
@@ -3025,7 +3107,7 @@ $$</p>
 <tr><td>Parameter type</td><td><a href="http://greendelta.github.io/olca-schema/classes/TechFlow.html"><code>TechFlow</code></a></td></tr>
 </tbody></table>
 </div>
-<h2 id="examples-33"><a class="header" href="#examples-33">Examples</a></h2>
+<h2 id="examples-34"><a class="header" href="#examples-34">Examples</a></h2>
 <h3 id="json-rpc-via-fetch-api-31"><a class="header" href="#json-rpc-via-fetch-api-31">JSON-RPC via Fetch API</a></h3>
 <p>The example below shows the usage of this method using the JSON-RPC protocol via
 the <a href="https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API">Fetch API</a>
@@ -3063,6 +3145,17 @@ which is available in modern web-browsers or platforms like
   //     },
   // ...
 </code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="upstream-results-1"><a class="header" href="#upstream-results-1">Upstream results</a></h1>
+<p>This method returns the upstream results for a given path in an upstream contribution tree related to an impact category. If the path is empty, the root of that tree is returned.</p>
+<div class="table-wrapper"><table><thead><tr><th></th><th></th></tr></thead><tbody>
+<tr><td>REST</td><td><code>POST result/{result-id}/upstream-impacts-of/{impact-category}</code></td></tr>
+<tr><td>IPC</td><td><code>result/upstream-impacts-of</code></td></tr>
+<tr><td>Python IPC</td><td><code>Result.get_upstream_impacts_of</code></td></tr>
+<tr><td>Return type</td><td><a href="http://greendelta.github.io/olca-schema/classes/UpstreamNode.html"><code>List[UpstreamNode]</code></a></td></tr>
+<tr><td>Parameter</td><td><a href="http://greendelta.github.io/olca-schema/classes/Ref.html"><code>Ref[ImpactCategory]</code></a></td></tr>
+<tr><td>Parameter</td><td>the upstream path encoded as string</td></tr>
+</tbody></table>
+</div><div style="break-before: page; page-break-before: always;"></div><h1 id="upstream-trees-1"><a class="header" href="#upstream-trees-1">Upstream trees</a></h1>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="the-currency-of-cost-results"><a class="header" href="#the-currency-of-cost-results">The currency of cost results</a></h1>
 <p>This method returns the currency of cost results if available. This is typically
 the reference currency of the underlying database.</p>
@@ -3073,7 +3166,7 @@ the reference currency of the underlying database.</p>
 <tr><td>Return type</td><td><a href="http://greendelta.github.io/olca-schema/classes/Ref.html"><code>Ref[Currency]</code></a></td></tr>
 </tbody></table>
 </div>
-<h2 id="examples-34"><a class="header" href="#examples-34">Examples</a></h2>
+<h2 id="examples-35"><a class="header" href="#examples-35">Examples</a></h2>
 <h3 id="python-ipc-18"><a class="header" href="#python-ipc-18">Python IPC</a></h3>
 <pre><code class="language-py"></code></pre>
 <h3 id="json-rpc-via-fetch-api-32"><a class="header" href="#json-rpc-via-fetch-api-32">JSON-RPC via Fetch API</a></h3>
@@ -3108,7 +3201,7 @@ $$</p>
 <tr><td>Return type</td><td><a href="http://greendelta.github.io/olca-schema/classes/CostValue.html"><code>CostValue</code></a></td></tr>
 </tbody></table>
 </div>
-<h2 id="examples-35"><a class="header" href="#examples-35">Examples</a></h2>
+<h2 id="examples-36"><a class="header" href="#examples-36">Examples</a></h2>
 <h3 id="typescript-ipc"><a class="header" href="#typescript-ipc">TypeScript IPC</a></h3>
 <pre><code class="language-ts">  const totals = await result.getTotalCosts();
   const code = totals.currency?.refUnit;
@@ -3129,7 +3222,7 @@ $$</p>
 <tr><td>Return type</td><td><a href="http://greendelta.github.io/olca-schema/classes/TechFlowValue.html"><code>List[TechFlowValue]</code></a></td></tr>
 </tbody></table>
 </div>
-<h2 id="examples-36"><a class="header" href="#examples-36">Examples</a></h2>
+<h2 id="examples-37"><a class="header" href="#examples-37">Examples</a></h2>
 <h3 id="typescript-ipc-1"><a class="header" href="#typescript-ipc-1">TypeScript IPC</a></h3>
 <pre><code class="language-ts">  const contributions = await result.getCostContributions();
   for (const c of contributions) {
@@ -3157,50 +3250,48 @@ $$</p>
 q^T
 $$</p>
 <p>Rest: <code>/unscaled-costs</code></p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="upstream-results-2"><a class="header" href="#upstream-results-2">Upstream results</a></h1>
+<p>This method returns the upstream cost results for a given path in an upstream contribution tree. If the path is empty, the root of that tree is returned.</p>
+<div class="table-wrapper"><table><thead><tr><th></th><th></th></tr></thead><tbody>
+<tr><td>REST</td><td><code>POST result/{result-id}/upstream-costs-of</code></td></tr>
+<tr><td>IPC</td><td><code>result/upstream-costs-of</code></td></tr>
+<tr><td>Python IPC</td><td><code>Result.get_upstream_costs_of</code></td></tr>
+<tr><td>Return type</td><td><a href="http://greendelta.github.io/olca-schema/classes/UpstreamNode.html"><code>List[UpstreamNode]</code></a></td></tr>
+<tr><td>Parameter</td><td>the upstream path encoded as string</td></tr>
+</tbody></table>
+</div><div style="break-before: page; page-break-before: always;"></div><h1 id="upstream-trees-2"><a class="header" href="#upstream-trees-2">Upstream trees</a></h1>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
-
-
                         <div style="clear: both"></div>
                     </nav>
                 </div>
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
-
             </nav>
 
         </div>
 
-
-
-
-        <script>
+        <script type="text/javascript">
             window.playground_copyable = true;
         </script>
-
-
-        <script src="elasticlunr.min.js"></script>
-        <script src="mark.min.js"></script>
-        <script src="searcher.js"></script>
-
-        <script src="clipboard.min.js"></script>
-        <script src="highlight.js"></script>
-        <script src="book.js"></script>
+        <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
+        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="book.js" type="text/javascript" charset="utf-8"></script>
 
         <!-- Custom JS scripts -->
-
-        <script>
+        <script type="text/javascript">
         window.addEventListener('load', function() {
             MathJax.Hub.Register.StartupHook('End', function() {
                 window.setTimeout(window.print, 100);
             });
         });
         </script>
-
-    </div>
     </body>
 </html>

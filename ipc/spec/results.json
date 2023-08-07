@@ -119,6 +119,14 @@
           "TechFlow"
         ],
         "result": "EnviFlowValue"
+      },
+      {
+        "method": "upstream-interventions-of",
+        "params": [
+          "EnviFlow",
+          "List[TechFlow]"
+        ],
+        "result": "List[UpstreamNode]"
       }
     ]
   },
