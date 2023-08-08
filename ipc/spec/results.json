@@ -233,6 +233,14 @@
           "EnviFlow"
         ],
         "result": "ImpactValue"
+      },
+      {
+        "method": "upstream-impacts-of",
+        "params": [
+          "Ref[ImpactCategory]",
+          "List[TechFlow]"
+        ],
+        "result": "List[UpstreamNode]"
       }
     ]
   },
