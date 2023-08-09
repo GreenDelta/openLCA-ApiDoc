@@ -2674,6 +2674,57 @@ upstream tree for COD, Chemical Oxygen Demand (Elementary flows/Emission to wate
       - ...
 */
 </code></pre>
+<h3 id="olca-ipcpy"><a class="header" href="#olca-ipcpy">olca-ipc.py</a></h3>
+<p>The Python example below uses the
+<a href="https://github.com/GreenDelta/olca-ipc.py">olca-ipc.py</a> client API:</p>
+<pre><code class="language-py">import olca_ipc as ipc
+import olca_schema as o
+
+
+def main():
+
+    # calculate a result
+    client = ipc.Client(8080)
+    setup = o.CalculationSetup(
+        target=o.Ref(
+            id=&quot;d3a9a9b2-ec3e-4811-8617-ae853573b50b&quot;,
+            ref_type=o.RefType.ProductSystem,
+        )
+    )
+    result = client.calculate(setup)
+    result.wait_until_ready()
+
+    # select the first best inventory flow and expand a tree for it
+    flow = result.get_envi_flows()[0]
+    print(f&quot;upstream tree for {flow.flow.name} ({flow.flow.category})&quot;)
+    expand(result, flow, [])
+
+    # as always, dispose the result
+    result.dispose()
+
+
+def expand(r: ipc.IpcResult, flow: o.EnviFlow, path: list[o.TechFlow]):
+    level = len(path)
+    indent = &quot;  &quot; * level
+    unit = flow.flow.ref_unit
+    nodes = r.get_upstream_interventions_of(flow, path)
+    for node in nodes:
+        if node.result == 0 or not node.tech_flow:
+            continue
+        name = node.tech_flow.provider.name
+        value = node.result
+        print(f&quot;{indent}- {value:.2E} {unit} :: {name}&quot;)
+
+        # we stop the expansion after 3 levels; you can set other cut-offs like
+        # result contributions etc.
+        if level &lt; 3:
+            expand(r, flow, path + [node.tech_flow])
+    pass
+
+
+if __name__ == &quot;__main__&quot;:
+    main()
+</code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="impact-categories"><a class="header" href="#impact-categories">Impact categories</a></h1>
 <p>This method returns the \(l\) impact categories of a result.
 The rows of the impact matrix \(C\) are indexed by these
@@ -3239,6 +3290,58 @@ upstream tree for Photochemical ozone formation
       - 4.18e-3 kg NMVOC eq ...
       - 1.01e-4 kg NMVOC eq ...
 */
+</code></pre>
+<h3 id="olca-ipcpy-1"><a class="header" href="#olca-ipcpy-1">olca-ipc.py</a></h3>
+<p>The Python example below uses the
+<a href="https://github.com/GreenDelta/olca-ipc.py">olca-ipc.py</a> client API:</p>
+<pre><code class="language-py">import olca_ipc as ipc
+import olca_schema as o
+
+
+def main():
+
+    # calculate a result
+    client = ipc.Client(8080)
+    setup = o.CalculationSetup(
+        target=o.Ref(
+            id=&quot;d3a9a9b2-ec3e-4811-8617-ae853573b50b&quot;,
+            ref_type=o.RefType.ProductSystem,
+        ),
+        impact_method=o.Ref(id=&quot;07370e48-dde9-4248-9a9b-7255f701da89&quot;),
+    )
+    result = client.calculate(setup)
+    result.wait_until_ready()
+
+    # select the first best impact category and expand a tree for it
+    indicator = result.get_impact_categories()[0]
+    print(f&quot;upstream tree for {indicator.name}&quot;)
+    expand(result, indicator, [])
+
+    # as always, dispose the result
+    result.dispose()
+
+
+def expand(r: ipc.IpcResult, indicator: o.Ref, path: list[o.TechFlow]):
+    level = len(path)
+    indent = &quot;  &quot; * level
+    unit = indicator.ref_unit
+    nodes = r.get_upstream_impacts_of(indicator, path)
+    for node in nodes:
+        if node.result == 0 or not node.tech_flow:
+            continue
+        name = node.tech_flow.provider.name
+        value = node.result
+        print(f&quot;{indent}- {value:.2E} {unit} :: {name}&quot;)
+
+        # we stop the expansion after 3 levels; you can set other cut-offs like
+        # result contributions etc.
+        if level &lt; 3:
+            expand(r, indicator, path + [node.tech_flow])
+    pass
+
+
+if __name__ == &quot;__main__&quot;:
+    main()
 </code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="the-currency-of-cost-results"><a class="header" href="#the-currency-of-cost-results">The currency of cost results</a></h1>
 <p>This method returns the currency of cost results if available. This is typically

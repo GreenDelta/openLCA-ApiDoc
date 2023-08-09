@@ -27,3 +27,12 @@ The TypeScript example below uses the
 ```ts
 {{#include upstream_trees.ts:body}}
 ```
+
+### olca-ipc.py
+
+The Python example below uses the
+[olca-ipc.py](https://github.com/GreenDelta/olca-ipc.py) client API:
+
+```py
+{{#include upstream_trees.py}}
+```

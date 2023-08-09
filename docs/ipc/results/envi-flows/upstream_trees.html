@@ -218,6 +218,57 @@ upstream tree for COD, Chemical Oxygen Demand (Elementary flows/Emission to wate
       - ...
 */
 </code></pre>
+<h3 id="olca-ipcpy"><a class="header" href="#olca-ipcpy">olca-ipc.py</a></h3>
+<p>The Python example below uses the
+<a href="https://github.com/GreenDelta/olca-ipc.py">olca-ipc.py</a> client API:</p>
+<pre><code class="language-py">import olca_ipc as ipc
+import olca_schema as o
+
+
+def main():
+
+    # calculate a result
+    client = ipc.Client(8080)
+    setup = o.CalculationSetup(
+        target=o.Ref(
+            id=&quot;d3a9a9b2-ec3e-4811-8617-ae853573b50b&quot;,
+            ref_type=o.RefType.ProductSystem,
+        )
+    )
+    result = client.calculate(setup)
+    result.wait_until_ready()
+
+    # select the first best inventory flow and expand a tree for it
+    flow = result.get_envi_flows()[0]
+    print(f&quot;upstream tree for {flow.flow.name} ({flow.flow.category})&quot;)
+    expand(result, flow, [])
+
+    # as always, dispose the result
+    result.dispose()
+
+
+def expand(r: ipc.IpcResult, flow: o.EnviFlow, path: list[o.TechFlow]):
+    level = len(path)
+    indent = &quot;  &quot; * level
+    unit = flow.flow.ref_unit
+    nodes = r.get_upstream_interventions_of(flow, path)
+    for node in nodes:
+        if node.result == 0 or not node.tech_flow:
+            continue
+        name = node.tech_flow.provider.name
+        value = node.result
+        print(f&quot;{indent}- {value:.2E} {unit} :: {name}&quot;)
+
+        # we stop the expansion after 3 levels; you can set other cut-offs like
+        # result contributions etc.
+        if level &lt; 3:
+            expand(r, flow, path + [node.tech_flow])
+    pass
+
+
+if __name__ == &quot;__main__&quot;:
+    main()
+</code></pre>
 
                     </main>
 
