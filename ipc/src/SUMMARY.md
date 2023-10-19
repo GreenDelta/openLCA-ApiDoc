@@ -57,3 +57,4 @@
     - [Unscaled costs](./results/costs/unscaled.md)
     - [Upstream results](./results/costs/upstream.md)
     - [Upstream trees](./results/costs/upstream_trees.md)
+  - [Sankey graphs](./results/sankey.md)
