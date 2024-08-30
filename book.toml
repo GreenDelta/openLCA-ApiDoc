@@ -1,0 +1,12 @@
+[book]
+authors = ["msrocka"]
+language = "en"
+multilingual = false
+src = "src"
+title = "Inter-process communication with openLCA"
+
+[build]
+build-dir = "./build"
+
+[output.html]
+mathjax-support = true
