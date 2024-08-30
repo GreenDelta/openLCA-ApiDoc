@@ -28,3 +28,11 @@ which is available in modern web-browsers or platforms like
 {{#include normalized.ts:body}}
 ```
 
+### olca-ipc.py
+
+The example below shows how to get normalized impact assessment results using
+olca-ipc.py:
+
+```py
+{{#include normalized.py}}
+```

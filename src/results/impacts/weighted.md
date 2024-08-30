@@ -29,3 +29,12 @@ which is available in modern web-browsers or platforms like
 ```ts
 {{#include weighted.ts:body}}
 ```
+
+### olca-ipc.py
+
+The example below shows how to get weighted impact assessment results using
+olca-ipc.py:
+
+```py
+{{#include weighted.py}}
+```
