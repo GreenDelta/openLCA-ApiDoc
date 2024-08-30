@@ -30,9 +30,9 @@ The TypeScript example below uses the
 
 ### olca-ipc.py
 
-The Python example below uses the
-[olca-ipc.py](https://github.com/GreenDelta/olca-ipc.py) client API:
+The Python example below uses the `utree` module of the olca-ipc.py API which
+makes working with upstream trees a bit more convenient:
 
 ```py
-{{#include upstream_trees.py}}
+{{#include upstream_trees_utree.py}}
 ```
