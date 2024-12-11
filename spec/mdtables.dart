@@ -49,6 +49,6 @@ String typeLinkOf(SchemaType? type) {
 }
 
 main() {
-  var spec = Spec.readFrom(File("ipc/spec/results.json"));
+  var spec = Spec.readFrom(File("spec/results.json"));
   writeTables(spec);
 }

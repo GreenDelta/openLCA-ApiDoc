@@ -127,6 +127,13 @@
           "List[TechFlow]"
         ],
         "result": "List[UpstreamNode]"
+      },
+      {
+        "method": "grouped-flow-results-of",
+        "params": [
+          "EnviFlow"
+        ],
+        "result": "List[GroupValue]"
       }
     ]
   },
@@ -241,6 +248,13 @@
           "List[TechFlow]"
         ],
         "result": "List[UpstreamNode]"
+      },
+      {
+        "method": "grouped-impact-results-of",
+        "params": [
+          "Ref[ImpactCategory]"
+        ],
+        "result": "List[GroupValue]"
       }
     ]
   },
@@ -275,6 +289,11 @@
           "TechFlow"
         ],
         "result": "CostValue"
+      },
+      {
+        "method": "grouped-cost-results",
+        "params": [],
+        "result": "List[GroupValue]"
       }
     ]
   }
