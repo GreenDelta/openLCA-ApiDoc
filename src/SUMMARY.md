@@ -12,6 +12,7 @@
   - [Get descriptor](data/get_descriptor.md)
   - [Get all](data/get_all.md)
   - [Get parameters](data/get_parameters.md)
+  - [Get usage](data/get_usage.md)
   - [Get providers](data/get_providers.md)
   - [Get providers for flow](data/get_providers_for_flow.md)
   - [Insert or update a data set](data/put.md)
