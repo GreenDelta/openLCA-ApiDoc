@@ -30,6 +30,6 @@ the [Fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API)
 which is available in modern web-browsers or platforms like
 [Deno](https://deno.land/).
 
-```ts
-{{#include get_usage.ts}}
+```js,run
+{{#include get_usage.js:2:24}}
 ```

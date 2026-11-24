@@ -1,29 +1,25 @@
-import * as o from "https://raw.githubusercontent.com/GreenDelta/olca-ipc.ts/main/mod.ts";
+const o = await import("https://cdn.jsdelivr.net/npm/olca-ipc@2.6.2/+esm");
 
-// ANCHOR: body
-async function main() {
+// connect to a local server running on port 8080
+const client = o.IpcClient.on(8080);
+const setup = o.CalculationSetup.of({
+  target: o.Ref.of({
+    id: "d3a9a9b2-ec3e-4811-8617-ae853573b50b",
+    refType: o.RefType.ProductSystem,
+  }),
+});
+const result = await client.calculate(setup);
+await result.untilReady();
 
-  // connect to a local server running on port 8080
-  const client = o.IpcClient.on(8080);
-  const setup = o.CalculationSetup.of({
-    target: o.Ref.of({
-      id: "d3a9a9b2-ec3e-4811-8617-ae853573b50b",
-      refType: o.RefType.ProductSystem,
-    }),
-  });
-  const result = await client.calculate(setup);
-  await result.untilReady();
+// select the first best inventory flow and expand a tree for it
+const flow = (await result.getEnviFlows())[0];
+console.log(`upstream tree for ${flow.flow?.name} (${flow.flow?.category})`);
+await expand(result, flow, []);
 
-  // select the first best inventory flow and expand a tree for it
-  const flow = (await result.getEnviFlows())[0];
-  console.log(`upstream tree for ${flow.flow?.name} (${flow.flow?.category})`);
-  await expand(result, flow, []);
+// as always, dispose the result
+result.dispose();
 
-  // as always, dispose the result
-  result.dispose();
-}
-
-async function expand(r: o.IpcResult, flow: o.EnviFlow, path: o.TechFlow[]) {
+async function expand(r, flow, path) {
   const level = path.length;
   const indent = "  ".repeat(level);
   const unit = flow.flow?.refUnit;
@@ -40,13 +36,11 @@ async function expand(r: o.IpcResult, flow: o.EnviFlow, path: o.TechFlow[]) {
     // result contributions etc.
     if (level < 3) {
       const next = path.slice();
-      next.push(node.techFlow!);
+      next.push(node.techFlow);
       await expand(r, flow, next);
     }
   }
 }
-
-main();
 
 /*
 upstream tree for COD, Chemical Oxygen Demand (Elementary flows/Emission to water/ground water)
@@ -62,4 +56,3 @@ upstream tree for COD, Chemical Oxygen Demand (Elementary flows/Emission to wate
       - 3.21e-11 t :: ...
       - ...
 */
-// ANCHOR_END: body

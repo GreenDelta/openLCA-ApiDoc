@@ -29,6 +29,6 @@ the [Fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API)
 which is available in modern web-browsers or platforms like
 [Deno](https://deno.land/).
 
-```ts
-{{#include get_providers_for_flow.ts:2:28}}
+```js,run
+{{#include get_providers_for_flow.js:2:28}}
 ```

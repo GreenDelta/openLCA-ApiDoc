@@ -17,8 +17,8 @@ $$
 
 ## Examples
 
-### TypeScript IPC
+### JavaScript IPC
 
-```ts
-{{#include _costs.ts:total-costs}}
+```js,run
+{{#include total-costs.js}}
 ```

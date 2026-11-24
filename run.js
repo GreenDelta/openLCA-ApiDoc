@@ -1,5 +1,22 @@
 const AsyncFunction = Object.getPrototypeOf(async function () {}).constructor;
 
+// Shared button styles: a fixed height keeps both buttons equally tall, even
+// when the browser picks different fallback fonts for the ▶ and ↺ symbols
+const style = document.createElement("style");
+style.textContent = `
+  .run-buttons { margin: 0.5em 0; }
+  .run-buttons button {
+    font: inherit;
+    font-size: 0.9em;
+    line-height: 1;
+    height: 2em;
+    padding: 0 0.75em;
+    margin-right: 0.5em;
+    cursor: pointer;
+  }
+`;
+document.head.append(style);
+
 function highlight(code) {
   if (!window.hljs) return;
   if (hljs.highlightElement) hljs.highlightElement(code);
@@ -9,38 +26,42 @@ function highlight(code) {
 document.querySelectorAll("pre > code.language-js.run").forEach((code) => {
   const original = code.innerText;
 
-  // Block bearbeitbar machen
+  // Make the block editable
   code.contentEditable = "plaintext-only";
   code.spellcheck = false;
   code.style.outline = "none";
 
   code.addEventListener("keydown", (e) => {
-    // Wichtig: mdBook blättert sonst mit ← / → das Kapitel um
-    // und öffnet bei "s" die Suche
+    // Important: otherwise mdBook switches chapters on ← / →
+    // and opens the search on "s"
     e.stopPropagation();
 
-    // Tab rückt ein, statt den Fokus zu wechseln
+    // Tab indents instead of moving the focus
     if (e.key === "Tab") {
       e.preventDefault();
       document.execCommand("insertText", false, "  ");
     }
-    // Strg/Cmd + Enter führt den Code aus
+    // Ctrl/Cmd + Enter runs the code
     if (e.key === "Enter" && (e.ctrlKey || e.metaKey)) {
       e.preventDefault();
       runBtn.click();
     }
   });
 
-  // Syntax-Highlighting nach dem Bearbeiten neu anwenden
+  // Re-apply syntax highlighting after editing
   code.addEventListener("blur", () => {
     code.textContent = code.innerText;
     highlight(code);
   });
 
+  // \uFE0E requests the text (non-emoji) presentation of the symbols
   const runBtn = document.createElement("button");
-  runBtn.textContent = "▶ Ausführen";
+  runBtn.textContent = "\u25B6\uFE0E Run";
   const resetBtn = document.createElement("button");
-  resetBtn.textContent = "↺ Zurücksetzen";
+  resetBtn.textContent = "\u21BA\uFE0E Reset";
+  const buttons = document.createElement("div");
+  buttons.className = "run-buttons";
+  buttons.append(runBtn, resetBtn);
   const out = document.createElement("pre");
   out.hidden = true;
 
@@ -50,7 +71,7 @@ document.querySelectorAll("pre > code.language-js.run").forEach((code) => {
     const fmt = (a) => (typeof a === "string" ? a : JSON.stringify(a, null, 2));
     const con = {
       log: (...a) => (out.textContent += a.map(fmt).join(" ") + "\n"),
-      error: (...a) => (out.textContent += "Fehler: " + a.map(fmt).join(" ") + "\n"),
+      error: (...a) => (out.textContent += "Error: " + a.map(fmt).join(" ") + "\n"),
     };
     try {
       await new AsyncFunction("console", code.innerText)(con);
@@ -65,5 +86,5 @@ document.querySelectorAll("pre > code.language-js.run").forEach((code) => {
     out.hidden = true;
   });
 
-  code.parentElement.after(runBtn, resetBtn, out);
+  code.parentElement.after(buttons, out);
 });

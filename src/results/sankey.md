@@ -19,8 +19,8 @@ This method returns a graph data structure with which Sankey diagrams can be con
 {{#include sankey.py}}
 ```
 
-### TypeScript IPC
+### JavaScript IPC
 
-```ts
-{{#include sankey.ts}}
+```js,run
+{{#include sankey.js}}
 ```

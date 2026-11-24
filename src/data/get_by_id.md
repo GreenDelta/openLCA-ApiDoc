@@ -26,7 +26,7 @@ which is available in modern web-browsers or platforms like
 [Deno](https://deno.land/).
 
 ```js,run
-{{#include get_by_id.ts:2:22}}
+{{#include get_by_id.js:2:22}}
 ```
 
 ### Curl

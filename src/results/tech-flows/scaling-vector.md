@@ -27,6 +27,6 @@ the [Fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API)
 which is available in modern web-browsers or platforms like
 [Deno](https://deno.land/).
 
-```ts
-{{#include scaling-vector.ts:2:23}}
+```js,run
+{{#include scaling-vector.js:2:22}}
 ```

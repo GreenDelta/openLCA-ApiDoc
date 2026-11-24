@@ -21,11 +21,11 @@ an upstream tree can be infinitely deep when the calculated system has cycles.
 
 ### olca-ipc.ts
 
-The TypeScript example below uses the
+The JavaScript example below uses the
 [olca-ipc.ts](https://github.com/GreenDelta/olca-ipc.ts) client API:
 
-```ts
-{{#include upstream_trees.ts:body}}
+```js,run
+{{#include upstream_trees.js}}
 ```
 
 ### olca-ipc.py

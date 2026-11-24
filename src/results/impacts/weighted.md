@@ -26,8 +26,8 @@ the [Fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API)
 which is available in modern web-browsers or platforms like
 [Deno](https://deno.land/).
 
-```ts
-{{#include weighted.ts:body}}
+```js,run
+{{#include weighted.js:body}}
 ```
 
 ### olca-ipc.py
