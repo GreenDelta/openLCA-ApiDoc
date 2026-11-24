@@ -9,3 +9,4 @@ build-dir = "./build"
 
 [output.html]
 mathjax-support = true
+additional-js = ["run.js"]
