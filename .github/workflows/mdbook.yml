@@ -1,17 +1,17 @@
-name: Deploy mdBook site
+name: Deploy Site to GitHub Pages
 
 on:
-  push:
-    branches: ["main"]
-  # allows to run this workflow manually
+  # Allows you to run this workflow manually from the GitHub actions tab
   workflow_dispatch:
 
-# Sets permissions of the GITHUB_TOKEN
+# Sets permissions to allow deployment to GitHub Pages
 permissions:
   contents: read
   pages: write
   id-token: write
 
+# Allow only one concurrent deployment, skipping runs queued between the run in-progress and latest queued.
+# However, do NOT cancel in-progress runs as we want to allow these production deployments to complete.
 concurrency:
   group: "pages"
   cancel-in-progress: false
@@ -20,24 +20,28 @@ jobs:
   # Build job
   build:
     runs-on: ubuntu-latest
+    env:
+      MDBOOK_VERSION: 0.5.4
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
-      - name: Setup mdBook
-        uses: peaceiris/actions-mdbook@v2
+      # installs pre-built binaries from the GitHub releases
+      - name: Install mdBook
+        uses: taiki-e/install-action@v2
         with:
-          mdbook-version: 'latest'
+          tool: mdbook@${{ env.MDBOOK_VERSION }}
 
       - name: Setup Pages
         id: pages
-        uses: actions/configure-pages@v5
+        uses: actions/configure-pages@v6
 
-      - name: Build mdBook
+      - name: Build with mdBook
         run: mdbook build
 
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
+        uses: actions/upload-pages-artifact@v5
         with:
+          # build-dir from book.toml
           path: ./build
 
   # Deployment job
@@ -50,4 +54,4 @@ jobs:
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@v5
