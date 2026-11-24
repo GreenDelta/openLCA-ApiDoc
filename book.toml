@@ -10,3 +10,18 @@ build-dir = "./build"
 [output.html]
 mathjax-support = true
 additional-js = ["run.js"]
+
+# old URLs from before the data pages were moved into sub-folders
+[output.html.redirect]
+"/data/create-system.html" = "create-system/create-system.html"
+"/data/delete.html" = "delete/delete.html"
+"/data/get_all.html" = "get_all/get_all.html"
+"/data/get_by_id.html" = "get_by_id/get_by_id.html"
+"/data/get_by_name.html" = "get_by_name/get_by_name.html"
+"/data/get_descriptor.html" = "get_descriptor/get_descriptor.html"
+"/data/get_descriptors.html" = "get_descriptors/get_descriptors.html"
+"/data/get_parameters.html" = "get_parameters/get_parameters.html"
+"/data/get_providers.html" = "get_providers/get_providers.html"
+"/data/get_providers_for_flow.html" = "get_providers_for_flow/get_providers_for_flow.html"
+"/data/get_usage.html" = "get_usage/get_usage.html"
+"/data/put.html" = "put/put.html"
