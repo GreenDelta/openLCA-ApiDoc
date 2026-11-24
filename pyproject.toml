@@ -1,0 +1,21 @@
+# Environment for running the Python examples of this documentation, e.g.:
+#
+#   uv run src/data/get_by_id/get_by_id.py
+#
+# The examples need a running openLCA IPC server on port 8080.
+
+[project]
+name = "openlca-apidoc-examples"
+version = "1.0.0"
+description = "Python examples of the openLCA IPC documentation"
+requires-python = ">=3.12"
+dependencies = [
+    "olca-ipc>=2.7.0",
+    "olca-schema>=2.7.0",
+    "numpy>=2.0",
+    "pandas>=2.2",
+]
+
+[tool.uv]
+# this is not a Python package, just an environment for the example scripts
+package = false
