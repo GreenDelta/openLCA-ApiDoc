@@ -1,7 +1,6 @@
 # Summary
 
 - [Introduction](intro.md)
-- [Stand-alone servers](servers.md)
 - [Examples](examples/examples.md)
   - [Python IPC: From scratch](examples/pyipc_from_scratch.md)
   - [Calculation parameters](examples/parameters.md)
@@ -37,4 +36,5 @@
 
 ---
 
+[Stand-alone servers](appendix/servers.md)
 [REST API reference](appendix/rest-api.md)

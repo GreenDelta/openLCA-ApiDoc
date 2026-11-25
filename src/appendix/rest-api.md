@@ -1,10 +1,10 @@
 # REST API reference
 
 This page lists all endpoints of the REST API of the openLCA IPC protocol, as
-provided by the [gdt-server](https://github.com/GreenDelta/gdt-server) (see the
-routes in its
-[Server.java](https://github.com/GreenDelta/gdt-server/blob/main/src/main/java/org/openlca/gdt/server/Server.java)). The
-paths are relative to the base URL of the server, e.g.
+provided by the [gdt-server](https://github.com/GreenDelta/gdt-server) (see
+[stand-alone servers](servers.md) and the routes in its
+[Server.java](https://github.com/GreenDelta/gdt-server/blob/main/src/main/java/org/openlca/gdt/server/Server.java)).
+The paths are relative to the base URL of the server, e.g.
 `http://localhost:8080/`. Request and response bodies are JSON documents
 following the [openLCA schema](https://greendelta.github.io/olca-schema/).
 

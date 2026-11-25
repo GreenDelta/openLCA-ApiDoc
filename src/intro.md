@@ -35,7 +35,8 @@ server:
 
 ![Starting an IPC server in openLCA](images/start-ipc-server.png)
 
-For headless stand-alone servers, please see the next chapter.
+For headless stand-alone servers, please see the appendix [stand-alone
+servers](appendix/servers.md).
 
 
 ## Available protocols
