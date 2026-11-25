@@ -34,3 +34,7 @@
   - [Grouped results](results/grouped/grouped.md)
   - [Tag results](results/tags/tags.md)
   - [Sankey graphs](results/sankey/sankey.md)
+
+---
+
+[REST API reference](appendix/rest-api.md)

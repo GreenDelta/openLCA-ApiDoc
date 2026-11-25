@@ -5,6 +5,19 @@ product system: the final demand, the scaling factors, the total requirements,
 the totality factors, and the scaled or unscaled inputs and outputs of the
 technosphere flows of a single process.
 
+| Method                   | Parameters | Returns                                                                                      | Formula                      |
+| ------------------------ | ---------- | -------------------------------------------------------------------------------------------- | ---------------------------- |
+| `demand`                 |            | [`TechFlowValue`](https://greendelta.github.io/olca-schema/classes/TechFlowValue.html)       | \\(f\\)                      |
+| `scaling-factors`        |            | [`List[TechFlowValue]`](https://greendelta.github.io/olca-schema/classes/TechFlowValue.html) | \\(s\\)                      |
+| `total-requirements`     |            | [`List[TechFlowValue]`](https://greendelta.github.io/olca-schema/classes/TechFlowValue.html) | \\(t\\)                      |
+| `total-requirements-of`  | `techFlow` | [`TechFlowValue`](https://greendelta.github.io/olca-schema/classes/TechFlowValue.html)       | \\(t_j\\)                    |
+| `totality-factors`¹      |            | [`List[TechFlowValue]`](https://greendelta.github.io/olca-schema/classes/TechFlowValue.html) | \\(tf\\)                     |
+| `totality-factor-of`¹    | `techFlow` | [`TechFlowValue`](https://greendelta.github.io/olca-schema/classes/TechFlowValue.html)       | \\(tf_j\\)                   |
+| `scaled-tech-flows-of`   | `techFlow` | [`List[TechFlowValue]`](https://greendelta.github.io/olca-schema/classes/TechFlowValue.html) | \\(s_j A[:, j]\\)            |
+| `unscaled-tech-flows-of` | `techFlow` | [`List[TechFlowValue]`](https://greendelta.github.io/olca-schema/classes/TechFlowValue.html) | \\(A[:, j]\\)                |
+
+¹ only available via JSON-RPC
+
 ## Final demand
 
 In openLCA, a product system is calculated for a single demand value for a
@@ -20,13 +33,6 @@ the final demand:
 $$
 f = \sum_j{A[:, j] \ s_j} = A s
 $$
-
-|             |                                                                                          |
-| ----------- | ---------------------------------------------------------------------------------------- |
-| REST        | `GET result/{result-id}/demand`                                                          |
-| JSON-RPC    | `result/demand`                                                                          |
-| Python IPC  | `Result.get_demand`                                                                      |
-| Return type | [`TechFlowValue`](https://greendelta.github.io/olca-schema/classes/TechFlowValue.html)   |
 
 ### Examples
 
@@ -48,13 +54,6 @@ $$
 A s = f
 $$
 
-|             |                                                                                              |
-| ----------- | -------------------------------------------------------------------------------------------- |
-| REST        | `GET result/{result-id}/scaling-factors`                                                     |
-| JSON-RPC    | `result/scaling-factors`                                                                     |
-| Python IPC  | `Result.get_scaling_factors`                                                                 |
-| Return type | [`List[TechFlowValue]`](https://greendelta.github.io/olca-schema/classes/TechFlowValue.html) |
-
 ### Examples
 
 #### JSON-RPC via Fetch API
@@ -65,7 +64,7 @@ $$
 
 ## Total requirements
 
-This method returns the total requirements of technosphere flows that are
+The total requirements of the technosphere flows are the amounts that are
 needed to fulfill the demand of the calculated product system. Mathematically,
 this is the diagonal of the technology matrix \\(A\\) scaled by the scaling
 vector \\(s\\):
@@ -74,27 +73,9 @@ $$
 t = diag(s) \ diag(A)
 $$
 
-|             |                                                                                              |
-| ----------- | -------------------------------------------------------------------------------------------- |
-| REST        | `GET result/{result-id}/total-requirements`                                                  |
-| JSON-RPC    | `result/total-requirements`                                                                  |
-| Python IPC  | `Result.get_total_requirements`                                                              |
-| Return type | [`List[TechFlowValue]`](https://greendelta.github.io/olca-schema/classes/TechFlowValue.html) |
-
-It is also possible to get just the total requirements value of a single
-technosphere flow \\(j\\):
-
-$$
-t_j = s_j \ A[j, j]
-$$
-
-|             |                                                                                         |
-| ----------- | --------------------------------------------------------------------------------------- |
-| REST        | `GET result/{result-id}/total-requirements-of/{tech-flow}`                              |
-| JSON-RPC    | `result/total-requirements-of`                                                          |
-| Python IPC  | `Result.get_total_requirements_of`                                                      |
-| Parameter   | [`TechFlow`](https://greendelta.github.io/olca-schema/classes/TechFlow.html)            |
-| Return type | [`TechFlowValue`](https://greendelta.github.io/olca-schema/classes/TechFlowValue.html)  |
+The method `total-requirements` returns the total requirements of all
+technosphere flows and `total-requirements-of` the total requirements
+\\(t_j = s_j \ A[j, j]\\) of a single technosphere flow \\(j\\).
 
 ### Examples
 
@@ -130,31 +111,17 @@ $$
 \lambda_j = \frac{1}{A[j, j] \ A^{-1}[j, j]}
 $$
 
-|             |                                                                                              |
-| ----------- | -------------------------------------------------------------------------------------------- |
-| REST        | –                                                                                            |
-| JSON-RPC    | `result/totality-factors`                                                                    |
-| Python IPC  | –                                                                                            |
-| Return type | [`List[TechFlowValue]`](https://greendelta.github.io/olca-schema/classes/TechFlowValue.html) |
-
 As the calculation of a totality factor \\(tf_j\\) requires to solve the
 complete system for one unit of technosphere flow \\(j\\), it is almost always a
-better idea to only query the API for totality factors that are really needed:
-
-|             |                                                                                         |
-| ----------- | --------------------------------------------------------------------------------------- |
-| REST        | –                                                                                       |
-| JSON-RPC    | `result/totality-factor-of`                                                             |
-| Python IPC  | –                                                                                       |
-| Parameter   | [`TechFlow`](https://greendelta.github.io/olca-schema/classes/TechFlow.html)            |
-| Return type | [`TechFlowValue`](https://greendelta.github.io/olca-schema/classes/TechFlowValue.html)  |
+better idea to only query the totality factors that are really needed via
+`totality-factor-of` instead of `totality-factors`.
 
 ## Scaled technosphere flows
 
-This method returns the scaled inputs and outputs of the linked product and
-waste flows of a process \\(j\\) related to the final demand of the product
-system. Mathematically, it is the scaled column \\(j\\) of the technology matrix
-\\(A\\):
+The method `scaled-tech-flows-of` returns the scaled inputs and outputs of the
+linked product and waste flows of a process \\(j\\) related to the final demand
+of the product system. Mathematically, it is the scaled column \\(j\\) of the
+technology matrix \\(A\\):
 
 $$
 s_j \ A[:,j]
@@ -163,14 +130,6 @@ $$
 The returned values are negative for inputs and positive for outputs of the
 respective flows. Also, the returned values contain the total requirements of
 the technosphere flow \\(j\\) to which the other requirements are related.
-
-|             |                                                                                              |
-| ----------- | -------------------------------------------------------------------------------------------- |
-| REST        | `GET result/{result-id}/scaled-tech-flows-of/{tech-flow}`                                    |
-| JSON-RPC    | `result/scaled-tech-flows-of`                                                                |
-| Python IPC  | `Result.get_scaled_tech_flows_of`                                                            |
-| Parameter   | [`TechFlow`](https://greendelta.github.io/olca-schema/classes/TechFlow.html)                 |
-| Return type | [`List[TechFlowValue]`](https://greendelta.github.io/olca-schema/classes/TechFlowValue.html) |
 
 ### Examples
 
@@ -182,22 +141,14 @@ the technosphere flow \\(j\\) to which the other requirements are related.
 
 ## Unscaled technosphere flows
 
-This method returns the inputs and outputs of the linked product and waste flows
-of a process \\(j\\) related to the quantitative reference of that process,
-without applying a scaling factor. Mathematically, it is just the column \\(j\\)
-of the technology matrix \\(A\\):
+The method `unscaled-tech-flows-of` returns the inputs and outputs of the linked
+product and waste flows of a process \\(j\\) related to the quantitative
+reference of that process, without applying a scaling factor. Mathematically, it
+is just the column \\(j\\) of the technology matrix \\(A\\):
 
 $$
 A[:, j]
 $$
-
-|             |                                                                                              |
-| ----------- | -------------------------------------------------------------------------------------------- |
-| REST        | `GET result/{result-id}/unscaled-tech-flows-of/{tech-flow}`                                  |
-| JSON-RPC    | `result/unscaled-tech-flows-of`                                                              |
-| Python IPC  | `Result.get_unscaled_tech_flows_of`                                                          |
-| Parameter   | [`TechFlow`](https://greendelta.github.io/olca-schema/classes/TechFlow.html)                 |
-| Return type | [`List[TechFlowValue]`](https://greendelta.github.io/olca-schema/classes/TechFlowValue.html) |
 
 ### Examples
 

@@ -4,13 +4,9 @@ This method returns a full data set for the given type and name. Note that the
 name does not have to be unique in an openLCA database, and in this case, it
 will just return the first entity from the database with the given name.
 
-|              |                                                                                      |
-| ------------ | ------------------------------------------------------------------------------------ |
-| Rest API     | `GET /data/{type}/name/{name}`                                                       |
-| JSON-RPC     | `data/get`                                                                           |
-| Python/IPC   | `Client.get`                                                                         |
-| Return type: | [`E > RootEntity`](https://greendelta.github.io/olca-schema/classes/RootEntity.html) |
-
+| JSON-RPC | REST | Parameters | Returns |
+| -------- | ---- | ---------- | ------- |
+| `data/get` | `GET data/{type}/name/{name}` | `@type`, `name` | [`E > RootEntity`](https://greendelta.github.io/olca-schema/classes/RootEntity.html) |
 
 ## Examples
 

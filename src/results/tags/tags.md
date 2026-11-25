@@ -3,31 +3,25 @@
 These methods return the results aggregated by the tags of the processes in the
 calculated product system.
 
+| Method                  | Parameters       | Returns                                                                            |
+| ----------------------- | ---------------- | ---------------------------------------------------------------------------------- |
+| `tag-results-of-flow`   | `enviFlow`       | [`List[TagValue]`](https://greendelta.github.io/olca-schema/classes/TagValue.html) |
+| `tag-results-of-impact` | `impactCategory` | [`List[TagValue]`](https://greendelta.github.io/olca-schema/classes/TagValue.html) |
+| `tag-results-of-costs`  |                  | [`List[TagValue]`](https://greendelta.github.io/olca-schema/classes/TagValue.html) |
+
+These methods are only available via JSON-RPC.
+
 ## Intervention flows
 
-|             |                                                                                    |
-| ----------- | ---------------------------------------------------------------------------------- |
-| REST        | `GET result/{result-id}/tag-results-of-flow/{envi-flow}`                           |
-| JSON-RPC    | `result/tag-results-of-flow`                                                       |
-| Python IPC  | `Result.get_tag_results_of_flow`                                                   |
-| Parameter   | [`EnviFlow`](https://greendelta.github.io/olca-schema/classes/EnviFlow.html)       |
-| Return type | [`List[TagValue]`](https://greendelta.github.io/olca-schema/classes/TagValue.html) |
+The method `tag-results-of-flow` returns the tag results of an intervention
+flow.
 
 ## Impact categories
 
-|             |                                                                                    |
-| ----------- | ---------------------------------------------------------------------------------- |
-| REST        | `GET result/{result-id}/tag-results-of-impact/{impact-category}`                   |
-| JSON-RPC    | `result/tag-results-of-impact`                                                     |
-| Python IPC  | `Result.get_tag_results_of_impact`                                                 |
-| Parameter   | [`Ref[ImpactCategory]`](https://greendelta.github.io/olca-schema/classes/Ref.html) |
-| Return type | [`List[TagValue]`](https://greendelta.github.io/olca-schema/classes/TagValue.html) |
+The method `tag-results-of-impact` returns the tag results of an impact
+category.
 
 ## Costs
 
-|             |                                                                                    |
-| ----------- | ---------------------------------------------------------------------------------- |
-| REST        | `GET result/{result-id}/tag-results-of-costs`                                      |
-| JSON-RPC    | `result/tag-results-of-costs`                                                      |
-| Python IPC  | `Result.get_tag_results_of_costs`                                                  |
-| Return type | [`List[TagValue]`](https://greendelta.github.io/olca-schema/classes/TagValue.html) |
+The method `tag-results-of-costs` returns the tag results of the life cycle
+costs.

@@ -1,24 +1,16 @@
 # Introduction
 
-openLCA provides an API for inter-process communication (IPC) that can be used
-by any application written in any programming language (e.g. Python,
-JavaScript/TypeScript, .Net, Go, etc.)[^java_note]. This IPC protocol is
-provided by an openLCA server which can be a running instance of the openLCA
-desktop application or a web-server with an openLCA back-end that exposes this
-protocol. An application can connect to such an IPC server to call functions in
-openLCA:
+With the openLCA API, you can automate workflows, read and write data, run
+calculations, analyse results, or even build your own user interface on top of
+openLCA. To enable this, openLCA exposes an inter-process communication (IPC)
+protocol that works with any programming language (including Python, JavaScript,
+.NET, Go, or Java[^java_note]) and can be served either directly by the desktop
+application or by a server running only the openLCA back-end.
 
-```
-
-        +--------+                  +--------------------+
-        | Client | <--------------> | openLCA IPC Server |
-        +--------+                  +--------------------+
-                    IPC - Protocol
-                    * data management
-                    * calculations
-                    * result details
-                    * ...
-```
+This documentation covers the available API methods in detail with many
+examples. You can **modify and try** the interactive JavaScript examples right
+inside this manual. Simply start the IPC server in openLCA (see below) and click
+the `Run` button beneath an example:
 
 
 ## Starting an IPC server

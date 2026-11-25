@@ -6,12 +6,12 @@ a unique ID (field `@id`) of the result. Only when the state of a result is `rea
 results can be retrieved.
 
 
-| API         | Method                                                                          |
-|-------------|---------------------------------------------------------------------------------|
-| REST        | `GET result/{result-id}/state`                                                  |
-| JSON-RPC         | `result/state`                                                                  |
-| Python IPC  | `Result.get_state`                                                              |
-| Return type | [`ResultState`](http://greendelta.github.io/olca-schema/classes/ResultState.html) |
+| Method  | Parameters | Returns |
+| ------- | ---------- | ------- |
+| `state` |            | [`ResultState`](https://greendelta.github.io/olca-schema/classes/ResultState.html) |
+
+In Python, the method is `Result.get_state`. There is also the method
+`Result.wait_until_ready` which polls the state until the result is ready.
 
 ## Examples
 

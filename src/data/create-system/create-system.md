@@ -5,14 +5,9 @@ the processes of that system according to the given linking configuration. The
 process must have a quantitative reference. The method returns a reference to
 the new product system, which is stored in the database.
 
-|                    |                                                                                                   |
-| ------------------ | ------------------------------------------------------------------------------------------------- |
-| Rest API           | `POST /data/create-system`                                                                        |
-| JSON-RPC           | `data/create/system`                                                                              |
-| Python IPC         | `Client.create_product_system`                                                                    |
-| Parameter `process`| [`Ref[Process]`](https://greendelta.github.io/olca-schema/classes/Ref.html)                       |
-| Parameter `config` | [`LinkingConfig`](https://greendelta.github.io/olca-schema/classes/LinkingConfig.html) (optional) |
-| Return type        | [`Ref[ProductSystem]`](https://greendelta.github.io/olca-schema/classes/Ref.html)                 |
+| JSON-RPC | REST | Parameters | Returns |
+| -------- | ---- | ---------- | ------- |
+| `data/create/system` | `POST data/create-system` | `process`: [`Ref[Process]`](https://greendelta.github.io/olca-schema/classes/Ref.html), `config`: [`LinkingConfig`](https://greendelta.github.io/olca-schema/classes/LinkingConfig.html) (optional) | [`Ref[ProductSystem]`](https://greendelta.github.io/olca-schema/classes/Ref.html) |
 
 The linking configuration defines how the processes are linked:
 
@@ -24,7 +19,6 @@ The linking configuration defines how the processes are linked:
 * `cutoff`: an optional cutoff value; product inputs or waste outputs with a
   demand below this value, relative to one unit of the reference product of the
   system, are not linked further.
-
 
 ## Examples
 

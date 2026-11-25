@@ -7,13 +7,9 @@ For a process, these are the product systems that contain the process, and so
 on. If the data set is not used anywhere, an empty list is returned. This is
 the same search that openLCA runs before a data set is deleted.
 
-|             |                               |
-| ----------- | ----------------------------- |
-| Rest API    | `GET /data/{type}/{id}/usage` |
-| JSON-RPC    | `data/get/usage`              |
-| Python/IPC  | `Client.get_usage`            |
-| Return type | [`List[Ref]`](https://greendelta.github.io/olca-schema/classes/Ref.html) |
-
+| JSON-RPC | REST | Parameters | Returns |
+| -------- | ---- | ---------- | ------- |
+| `data/get/usage` | – | `@type`, `@id` | [`List[Ref]`](https://greendelta.github.io/olca-schema/classes/Ref.html) |
 
 ## Examples
 

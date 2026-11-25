@@ -2,13 +2,9 @@
 
 This method returns the full data set of a given type and ID.
 
-|             |                                                                                      |
-| ----------- | ------------------------------------------------------------------------------------ |
-| Rest API    | `GET /data/{type}/{id}`                                                              |
-| JSON-RPC    | `data/get`                                                                           |
-| Python/IPC  | `Client.get`                                                                         |
-| Return type | [`E > RootEntity`](https://greendelta.github.io/olca-schema/classes/RootEntity.html) |
-
+| JSON-RPC | REST | Parameters | Returns |
+| -------- | ---- | ---------- | ------- |
+| `data/get` | `GET data/{type}/{id}` | `@type`, `@id` | [`E > RootEntity`](https://greendelta.github.io/olca-schema/classes/RootEntity.html) |
 
 ## Examples
 

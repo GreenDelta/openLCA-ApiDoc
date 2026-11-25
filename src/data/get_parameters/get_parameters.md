@@ -4,19 +4,9 @@ Returns the (local) parameters of the specified data set. In case of processes
 and impact categories, a list of parameters is returned. For product systems,
 the respective parameter redefinitions are returned.
 
-|             |                                    |
-| ----------- | ---------------------------------- |
-| Rest API    | `GET /data/{type}/{id}/parameters` |
-| JSON-RPC    | `data/get/parameters`              |
-| Python/IPC  | `Client.get_parameters`            |
-| Return type | *                                  |
-
-*Return type:
-  * [`List[Parameter]`](https://greendelta.github.io/olca-schema/classes/Parameter.html)
-    for processes and impact categories
-  * [`List[ParameterRedef]`](https://greendelta.github.io/olca-schema/classes/ParameterRedef.html)
-    for product systems
-
+| JSON-RPC | REST | Parameters | Returns |
+| -------- | ---- | ---------- | ------- |
+| `data/get/parameters` | `GET data/{type}/{id}/parameters` | `@type`, `@id` | [`List[Parameter]`](https://greendelta.github.io/olca-schema/classes/Parameter.html) or [`List[ParameterRedef]`](https://greendelta.github.io/olca-schema/classes/ParameterRedef.html) |
 
 ## Examples
 

@@ -8,13 +8,9 @@ references](https://greendelta.github.io/olca-schema/classes/Ref.html); they can
 be used to reference a data set in a given context (e.g. referencing a process
 as calculation target in a calculation setup).
 
-|             |                                                                          |
-| ----------- | ------------------------------------------------------------------------ |
-| Rest API    | `GET /data/{type}`                                                       |
-| JSON-RPC    | `data/get/descriptors`                                                   |
-| Python/IPC  | `Client.get_descriptors`                                                 |
-| Return type | [`List[Ref]`](https://greendelta.github.io/olca-schema/classes/Ref.html) |
-
+| JSON-RPC | REST | Parameters | Returns |
+| -------- | ---- | ---------- | ------- |
+| `data/get/descriptors` | `GET data/{type}` | `@type` | [`List[Ref]`](https://greendelta.github.io/olca-schema/classes/Ref.html) |
 
 ## Examples
 

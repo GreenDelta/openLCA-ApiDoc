@@ -2,13 +2,13 @@
 
 This method returns a graph data structure with which Sankey diagrams can be constructed.
 
-|                |                                                                                       |
-|----------------|---------------------------------------------------------------------------------------|
-| REST           | `POST result/{result-id}/sankey`                                                      |
-| JSON-RPC            | `result/sankey`                                                                       |
-| Python IPC     | `Result.get_sankey_graph`                                                             |
-| Parameter type | [`SankeyRequest`](http://greendelta.github.io/olca-schema/classes/SankeyRequest.html) |
-| Return type    | [`SankeyGraph`](http://greendelta.github.io/olca-schema/classes/SankeyGraph.html)     |
+| Method   | Parameters | Returns |
+| -------- | ---------- | ------- |
+| `sankey` | `config`: [`SankeyRequest`](https://greendelta.github.io/olca-schema/classes/SankeyRequest.html) | [`SankeyGraph`](https://greendelta.github.io/olca-schema/classes/SankeyGraph.html) |
+
+Via REST, it is a `POST` request with the Sankey request as body:
+`POST result/{result-id}/sankey`. In Python, the method is
+`Result.get_sankey_graph`.
 
 
 ## Examples

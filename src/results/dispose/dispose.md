@@ -3,12 +3,11 @@
 This method should be always called when a result is not needed anymore.
 It disposes the result and releases allocated resources of that result.
 
-| API         | Method                            |
-|-------------|-----------------------------------|
-| REST        | `POST result/{result-id}/dispose` |
-| JSON-RPC         | `result/dispose`                  |
-| Python IPC  | `Result.dispose`                  |
-| Return type | [`ResultState`](http://greendelta.github.io/olca-schema/classes/ResultState.html) |
+| Method    | Parameters | Returns |
+| --------- | ---------- | ------- |
+| `dispose` |            | [`ResultState`](https://greendelta.github.io/olca-schema/classes/ResultState.html) |
+
+Via REST, it is a `POST` request: `POST result/{result-id}/dispose`.
 
 
 ## Examples

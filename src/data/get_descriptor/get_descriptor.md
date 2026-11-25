@@ -1,13 +1,12 @@
 # Get the descriptor of a data set
 
-Returns the descriptor of the data set with the given type and ID.
+Returns the descriptor of the data set with the given type and ID. Via
+JSON-RPC, it is also possible to get the descriptor of a data set by name.
 
-|              |                                                                    |
-| ------------ | ------------------------------------------------------------------ |
-| Rest API     | `GET /data/{type}/{id}/info`                                       |
-| JSON-RPC     | `data/get/descriptor`                                              |
-| Python/IPC   | `Client.get_descriptor`                                            |
-| Return type: | [`Ref`](https://greendelta.github.io/olca-schema/classes/Ref.html) |
+| JSON-RPC | REST | Parameters | Returns |
+| -------- | ---- | ---------- | ------- |
+| `data/get/descriptor` | `GET data/{type}/{id}/info` | `@type`, `@id` | [`Ref`](https://greendelta.github.io/olca-schema/classes/Ref.html) |
+| `data/get/descriptor` | – | `@type`, `name` | [`Ref`](https://greendelta.github.io/olca-schema/classes/Ref.html) |
 
 ## Examples
 

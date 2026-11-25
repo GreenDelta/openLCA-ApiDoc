@@ -6,13 +6,9 @@ of this method needs to be a product or waste flow (or an ID of that flow). The
 returned providers can be linked to respective product inputs or waste outputs
 of other processes in a product system.
 
-|              |                                                                                    |
-| ------------ | ---------------------------------------------------------------------------------- |
-| Rest API     | `GET /data/providers/{flow-id}`                                                    |
-| JSON-RPC     | `data/get/providers`                                                               |
-| Python IPC   | `Client.get_providers`                                                             |
-| Return type: | [`List[TechFlow]`](https://greendelta.github.io/olca-schema/classes/TechFlow.html) |
-
+| JSON-RPC | REST | Parameters | Returns |
+| -------- | ---- | ---------- | ------- |
+| `data/get/providers` | `GET data/providers/{id}` | `@id` of the flow | [`List[TechFlow]`](https://greendelta.github.io/olca-schema/classes/TechFlow.html) |
 
 ## Examples
 

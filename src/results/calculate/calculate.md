@@ -1,16 +1,16 @@
 # Calculate results
 
 This method schedules a new calculation for a given setup. It directly returns
-a state object that contains the result ID (field `@id`). With this ID the
+a state object that contains the result ID (field `@id`). With this ID
 the result state can be queried.
 
-|                |                                                                                           |
-| -------------- | ----------------------------------------------------------------------------------------- |
-| REST           | `POST result/calculate`                                                                   |
-| JSON-RPC            | `result/calculate`                                                                        |
-| Python IPC     | `Client.calculate`                                                                        |
-| Return type    | [`ResultState`](http://greendelta.github.io/olca-schema/classes/ResultState.html)         |
-| Parameter type | [CalculationSetup](http://greendelta.github.io/olca-schema/classes/CalculationSetup.html) |
+| Method      | Parameters | Returns |
+| ----------- | ---------- | ------- |
+| `calculate` | [`CalculationSetup`](https://greendelta.github.io/olca-schema/classes/CalculationSetup.html) | [`ResultState`](https://greendelta.github.io/olca-schema/classes/ResultState.html) |
+
+This is a method of the client and not of a result: via REST, it is
+`POST result/calculate` with the calculation setup as request body; in Python,
+it is `Client.calculate`.
 
 ## Examples
 

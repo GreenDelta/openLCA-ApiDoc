@@ -9,25 +9,16 @@ can be queried, and so on. Old iteration results are disposed automatically when
 a new iteration is started but you should dispose the last result when it is not
 needed anymore.
 
-The API method for the first iteration is:
+| Method          | Parameters | Returns |
+| --------------- | ---------- | ------- |
+| `simulate`      | [`CalculationSetup`](https://greendelta.github.io/olca-schema/classes/CalculationSetup.html) | [`ResultState`](https://greendelta.github.io/olca-schema/classes/ResultState.html) |
+| `simulate/next` |            | [`ResultState`](https://greendelta.github.io/olca-schema/classes/ResultState.html) |
 
-|                |                                                                                           |
-| -------------- | ----------------------------------------------------------------------------------------- |
-| REST           | `POST result/simulate`                                                                    |
-| JSON-RPC            | `result/simulate`                                                                         |
-| Python IPC     | `Client.simulate`                                                                         |
-| Return type    | [`ResultState`](http://greendelta.github.io/olca-schema/classes/ResultState.html)         |
-| Parameter type | [CalculationSetup](http://greendelta.github.io/olca-schema/classes/CalculationSetup.html) |
-
-For each subsequent calculation, the API method is:
-
-|                |                                                                                   |
-| -------------- | --------------------------------------------------------------------------------- |
-| REST           | `POST result/{result-id}/simulate/next`                                           |
-| JSON-RPC            | `result/simulate/next`                                                            |
-| Python IPC     | `Result.simulate_next`                                                            |
-| Return type    | [`ResultState`](http://greendelta.github.io/olca-schema/classes/ResultState.html) |
-| Parameter type | result id                                                                         |
+Like `calculate`, `simulate` is a method of the client: via REST, it is
+`POST result/simulate` with the calculation setup as request body; in Python, it
+is `Client.simulate`. `simulate/next` is called on the result:
+`POST result/{result-id}/simulate/next` via REST and `Result.simulate_next`
+in Python.
 
 ## Examples
 

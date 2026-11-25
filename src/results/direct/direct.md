@@ -8,6 +8,17 @@ columns, scaled by the scaling vector \\(s\\). There are methods for getting a
 row (the contributions of all processes to a single result element), a column
 (the direct result of a single process), or a single value of this matrix.
 
+| Method                    | Parameters                 | Returns                                                                                      | Formula                  |
+| ------------------------- | -------------------------- | -------------------------------------------------------------------------------------------- | ------------------------ |
+| `flow-contributions-of`   | `enviFlow`                 | [`List[TechFlowValue]`](https://greendelta.github.io/olca-schema/classes/TechFlowValue.html) | \\(G[i, :]\\)            |
+| `direct-interventions-of` | `techFlow`                 | [`List[EnviFlowValue]`](https://greendelta.github.io/olca-schema/classes/EnviFlowValue.html) | \\(G[:, j]\\)            |
+| `direct-intervention-of`  | `enviFlow`, `techFlow`     | [`EnviFlowValue`](https://greendelta.github.io/olca-schema/classes/EnviFlowValue.html)       | \\(G[i, j]\\)            |
+| `impact-contributions-of` | `impactCategory`           | [`List[TechFlowValue]`](https://greendelta.github.io/olca-schema/classes/TechFlowValue.html) | \\(H[k, :]\\)            |
+| `direct-impacts-of`       | `techFlow`                 | [`List[ImpactValue]`](https://greendelta.github.io/olca-schema/classes/ImpactValue.html)     | \\(H[:, j]\\)            |
+| `direct-impact-of`        | `impactCategory`, `techFlow` | [`ImpactValue`](https://greendelta.github.io/olca-schema/classes/ImpactValue.html)         | \\(H[k, j]\\)            |
+| `cost-contributions`      |                            | [`List[TechFlowValue]`](https://greendelta.github.io/olca-schema/classes/TechFlowValue.html) | \\(q^T diag(s)\\)        |
+| `direct-costs-of`         | `techFlow`                 | `number`                                                                                     | \\(q_j s_j\\)            |
+
 ## Intervention flows
 
 The direct contributions of the processes to the inventory result are given by
@@ -17,55 +28,27 @@ $$
 G = B \ diag(s)
 $$
 
-### Contributions to a flow
+* `flow-contributions-of` returns the row \\(G[i, :]\\): the direct
+  contribution of each process \\(j\\) in the system to the inventory result of
+  a flow \\(i\\).
+* `direct-interventions-of` returns the column \\(G[:, j]\\): the direct
+  intervention flows of a process \\(j\\) related to the final demand of the
+  product system.
+* `direct-intervention-of` returns the single value \\(G[i, j]\\).
 
-This method returns the direct contribution of each process \\(j\\) in the
-system to the inventory result of a flow \\(i\\). Mathematically, it is the row
-\\(G[i, :]\\):
+### Examples
 
-|             |                                                                                              |
-| ----------- | -------------------------------------------------------------------------------------------- |
-| REST        | `GET result/{result-id}/flow-contributions-of/{envi-flow}`                                   |
-| JSON-RPC    | `result/flow-contributions-of`                                                               |
-| Python IPC  | `Result.get_flow_contributions_of`                                                           |
-| Parameter   | [`EnviFlow`](https://greendelta.github.io/olca-schema/classes/EnviFlow.html)                 |
-| Return type | [`List[TechFlowValue]`](https://greendelta.github.io/olca-schema/classes/TechFlowValue.html) |
+#### Contributions to a flow
 
 ```js,run
 {{#include flow-contributions.js:2:32}}
 ```
 
-### Direct process result
-
-This method returns the direct intervention flows of a process \\(j\\) related
-to the final demand of the product system. Mathematically, it is the column
-\\(G[:, j]\\):
-
-|             |                                                                                              |
-| ----------- | -------------------------------------------------------------------------------------------- |
-| REST        | `GET result/{result-id}/direct-interventions-of/{tech-flow}`                                 |
-| JSON-RPC    | `result/direct-interventions-of`                                                             |
-| Python IPC  | `Result.get_direct_interventions_of`                                                         |
-| Parameter   | [`TechFlow`](https://greendelta.github.io/olca-schema/classes/TechFlow.html)                 |
-| Return type | [`List[EnviFlowValue]`](https://greendelta.github.io/olca-schema/classes/EnviFlowValue.html) |
+#### Direct interventions of a process
 
 ```js,run
 {{#include direct-interventions.js:2:31}}
 ```
-
-### Single value
-
-This method returns the direct result \\(G[i, j]\\) of a flow \\(i\\) and a
-process \\(j\\):
-
-|             |                                                                                        |
-| ----------- | -------------------------------------------------------------------------------------- |
-| REST        | `GET result/{result-id}/direct-intervention-of/{envi-flow}/{tech-flow}`                |
-| JSON-RPC    | `result/direct-intervention-of`                                                        |
-| Python IPC  | `Result.get_direct_intervention_of`                                                    |
-| Parameter 1 | [`EnviFlow`](https://greendelta.github.io/olca-schema/classes/EnviFlow.html)           |
-| Parameter 2 | [`TechFlow`](https://greendelta.github.io/olca-schema/classes/TechFlow.html)           |
-| Return type | [`EnviFlowValue`](https://greendelta.github.io/olca-schema/classes/EnviFlowValue.html) |
 
 ## Impact categories
 
@@ -76,54 +59,26 @@ $$
 H = C \ B \ diag(s)
 $$
 
-### Contributions to an impact category
+* `impact-contributions-of` returns the row \\(H[k, :]\\): the direct
+  contribution of each process \\(j\\) in the system to the impact assessment
+  result of an impact category \\(k\\).
+* `direct-impacts-of` returns the column \\(H[:, j]\\): the direct impacts of a
+  process \\(j\\) related to the final demand of the product system.
+* `direct-impact-of` returns the single value \\(H[k, j]\\).
 
-This method returns the direct contribution of each process \\(j\\) in the
-system to the impact assessment result of an impact category \\(k\\).
-Mathematically, it is the row \\(H[k, :]\\):
+### Examples
 
-|             |                                                                                              |
-| ----------- | -------------------------------------------------------------------------------------------- |
-| REST        | `GET result/{result-id}/impact-contributions-of/{impact-category}`                           |
-| JSON-RPC    | `result/impact-contributions-of`                                                             |
-| Python IPC  | `Result.get_impact_contributions_of`                                                         |
-| Parameter   | [`Ref[ImpactCategory]`](https://greendelta.github.io/olca-schema/classes/Ref.html)           |
-| Return type | [`List[TechFlowValue]`](https://greendelta.github.io/olca-schema/classes/TechFlowValue.html) |
+#### Contributions to an impact category
 
 ```js,run
 {{#include impact-contributions.js:body}}
 ```
 
-### Direct process result
-
-This method returns the direct impacts of a process \\(j\\) related to the final
-demand of the product system. Mathematically, it is the column \\(H[:, j]\\):
-
-|             |                                                                                          |
-| ----------- | ---------------------------------------------------------------------------------------- |
-| REST        | `GET result/{result-id}/direct-impacts-of/{tech-flow}`                                   |
-| JSON-RPC    | `result/direct-impacts-of`                                                               |
-| Python IPC  | `Result.get_direct_impacts_of`                                                           |
-| Parameter   | [`TechFlow`](https://greendelta.github.io/olca-schema/classes/TechFlow.html)             |
-| Return type | [`List[ImpactValue]`](https://greendelta.github.io/olca-schema/classes/ImpactValue.html) |
+#### Direct impacts of a process
 
 ```js,run
 {{#include direct-impacts.js:body}}
 ```
-
-### Single value
-
-This method returns the direct result \\(H[k, j]\\) of an impact category
-\\(k\\) and a process \\(j\\):
-
-|             |                                                                                    |
-| ----------- | ---------------------------------------------------------------------------------- |
-| REST        | `GET result/{result-id}/direct-impact-of/{impact-category}/{tech-flow}`            |
-| JSON-RPC    | `result/direct-impact-of`                                                          |
-| Python IPC  | `Result.get_direct_impact_of`                                                      |
-| Parameter 1 | [`Ref[ImpactCategory]`](https://greendelta.github.io/olca-schema/classes/Ref.html) |
-| Parameter 2 | [`TechFlow`](https://greendelta.github.io/olca-schema/classes/TechFlow.html)       |
-| Return type | [`ImpactValue`](https://greendelta.github.io/olca-schema/classes/ImpactValue.html) |
 
 ## Costs
 
@@ -134,34 +89,15 @@ $$
 q^T diag(s)
 $$
 
-### Contributions to the total costs
+* `cost-contributions` returns the direct contribution of each process \\(j\\)
+  in the system to the total cost result.
+* `direct-costs-of` returns the direct costs \\(q_j s_j\\) of a process
+  \\(j\\). Via JSON-RPC, the value is returned as plain number.
 
-This method returns the direct contribution of each process \\(j\\) in the
-system to the total cost result:
+### Examples
 
-|             |                                                                                              |
-| ----------- | -------------------------------------------------------------------------------------------- |
-| REST        | `GET result/{result-id}/cost-contributions`                                                  |
-| JSON-RPC    | `result/cost-contributions`                                                                  |
-| Python IPC  | `Result.get_cost_contributions`                                                              |
-| Return type | [`List[TechFlowValue]`](https://greendelta.github.io/olca-schema/classes/TechFlowValue.html) |
-
-The example below uses the
-[olca-ipc.ts](https://github.com/GreenDelta/olca-ipc.ts) client API:
+#### olca-ipc.ts
 
 ```js,run
 {{#include cost-contributions.js}}
 ```
-
-### Direct costs of a process
-
-This method returns the direct costs \\(q_j s_j\\) of a process \\(j\\). Via
-JSON-RPC, the value is returned as plain number:
-
-|             |                                                                              |
-| ----------- | ---------------------------------------------------------------------------- |
-| REST        | `GET result/{result-id}/direct-costs-of/{tech-flow}`                         |
-| JSON-RPC    | `result/direct-costs-of`                                                     |
-| Python IPC  | `Result.get_direct_costs_of`                                                 |
-| Parameter   | [`TechFlow`](https://greendelta.github.io/olca-schema/classes/TechFlow.html) |
-| Return type | `number`                                                                     |

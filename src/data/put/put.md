@@ -3,14 +3,9 @@
 Inserts or updates a provided data set in the database. This method is not
 available when a server runs in read-only mode.
 
-|              |                          |
-|--------------|--------------------------|
-| Rest API     | `PUT /data/{type}`       |
-| JSON-RPC     | `data/put`     |
-| Python/IPC   | `client.put`             |
-| Request body | [`E > RootEntity`](https://greendelta.github.io/olca-schema/classes/RootEntity.html) |
-| Return type: | [`Ref`](https://greendelta.github.io/olca-schema/classes/Ref.html) |
-
+| JSON-RPC | REST | Parameters | Returns |
+| -------- | ---- | ---------- | ------- |
+| `data/put` | `PUT data/{type}` | the data set, [`E > RootEntity`](https://greendelta.github.io/olca-schema/classes/RootEntity.html) | [`Ref`](https://greendelta.github.io/olca-schema/classes/Ref.html) |
 
 ## Examples
 

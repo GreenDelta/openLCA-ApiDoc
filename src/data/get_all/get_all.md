@@ -6,13 +6,9 @@ context. For example, it is fine to get all unit groups but a server would
 go down when you query for all processes in a large database. Typically, you
 just want to query all descriptors of a data set type.
 
-|              |                                                                                            |
-| ------------ | ------------------------------------------------------------------------------------------ |
-| Rest API     | `GET /data/{type}/all`                                                                     |
-| JSON-RPC     | `data/get/all`                                                                             |
-| Python IPC   | `Client.get_all`                                                                           |
-| Return type: | [`List[E > RootEntity]`](https://greendelta.github.io/olca-schema/classes/RootEntity.html) |
-
+| JSON-RPC | REST | Parameters | Returns |
+| -------- | ---- | ---------- | ------- |
+| `data/get/all` | `GET data/{type}/all` | `@type` | [`List[E > RootEntity]`](https://greendelta.github.io/olca-schema/classes/RootEntity.html) |
 
 ## Examples
 

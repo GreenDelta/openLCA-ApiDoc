@@ -3,13 +3,9 @@
 Deletes the specified data set from the database. This method is not available
 when the server runs in read-only mode.
 
-|              |                                                                    |
-| ------------ | ------------------------------------------------------------------ |
-| Rest API     | `DELETE /data/{type}/{id}`                                         |
-| JSON-RPC     | `data/delete`                                                      |
-| Python/IPC   | `Client.delete`                                                    |
-| Return type: | [`Ref`](https://greendelta.github.io/olca-schema/classes/Ref.html) |
-
+| JSON-RPC | REST | Parameters | Returns |
+| -------- | ---- | ---------- | ------- |
+| `data/delete` | `DELETE data/{type}/{id}` | `@type`, `@id` | [`Ref`](https://greendelta.github.io/olca-schema/classes/Ref.html) |
 
 ## Examples
 

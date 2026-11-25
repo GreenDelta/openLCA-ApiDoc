@@ -56,20 +56,55 @@ gives an overview of which result types are available for which elements:
 | [Grouped results](grouped/grouped.md)               |                                             | [✓](grouped/grouped.md#intervention-flows)            | [✓](grouped/grouped.md#impact-categories)             | [✓](grouped/grouped.md#costs)             |
 | [Tag results](tags/tags.md)                         |                                             | [✓](tags/tags.md#intervention-flows)                  | [✓](tags/tags.md#impact-categories)                   | [✓](tags/tags.md#costs)                   |
 
-## Request parameters
+## Method names and parameters
 
-All result methods take the ID of the result as parameter. Depending on the
-method, the result element for which a result should be returned is passed as
-additional parameter:
+Each result method has a name, like `flow-contributions-of`, from which the
+method names of the different protocols and client libraries are derived:
 
-| Parameter       | JSON-RPC                                                                      | REST path segment                                    |
-| --------------- | ----------------------------------------------------------------------------- | ---------------------------------------------------- |
-| result ID       | `"@id": "<result-id>"`                                                        | `{result-id}`                                        |
-| technosphere flow | `techFlow: { provider: { "@id": ... }, flow: { "@id": ... } }`              | `{tech-flow}`: `<provider-id>::<flow-id>`            |
-| intervention flow | `enviFlow: { flow: { "@id": ... }, location: { "@id": ... } }`              | `{envi-flow}`: `<flow-id>` or `<flow-id>::<location-id>` |
-| impact category | `impactCategory: { "@id": ... }`                                              | `{impact-category}`: `<impact-category-id>`          |
+| Protocol      | Method name                               | Example                                                     |
+| ------------- | ----------------------------------------- | ----------------------------------------------------------- |
+| JSON-RPC      | `result/<name>`                           | `result/flow-contributions-of`                              |
+| REST          | `GET result/{result-id}/<name>/{params}`  | `GET result/{result-id}/flow-contributions-of/{envi-flow}`  |
+| Python IPC    | `Result.get_<name>` in snake case         | `result.get_flow_contributions_of(envi_flow)`               |
+| olca-ipc.ts   | `Result.get<Name>` in camel case          | `result.getFlowContributionsOf(enviFlow)`                   |
+
+All methods take the ID of the result as parameter; the client libraries pass it
+automatically. Depending on the method, the result element for which a result
+should be returned is passed as additional parameter. Via JSON-RPC, the
+parameters are passed as an object with the following fields; via REST, they
+are passed as path segments in the order in which they are listed in the
+method tables:
+
+| Parameter         | JSON-RPC                                                         | REST path segment                                         |
+| ----------------- | ---------------------------------------------------------------- | --------------------------------------------------------- |
+| result ID         | `"@id": "<result-id>"`                                           | `{result-id}`                                             |
+| technosphere flow | `techFlow: { provider: { "@id": ... }, flow: { "@id": ... } }`   | `{tech-flow}`: `<provider-id>::<flow-id>`                 |
+| intervention flow | `enviFlow: { flow: { "@id": ... }, location: { "@id": ... } }`   | `{envi-flow}`: `<flow-id>` or `<flow-id>::<location-id>`  |
+| impact category   | `impactCategory: { "@id": ... }`                                 | `{impact-category}`: `<impact-category-id>`               |
 
 The location of an intervention flow is only required in regionalized results.
+There are a few exceptions from these rules:
+
+* `calculate` and `simulate` are methods of the client: `POST result/calculate`
+  and `POST result/simulate` with the calculation setup as request body,
+  `Client.calculate` and `Client.simulate` in Python.
+* `state` is `get_state` in Python. `dispose` and `simulate/next` are `POST`
+  requests in REST and `dispose` and `simulate_next` in Python.
+* The normalized and weighted results are `total-impacts/normalized` and
+  `total-impacts/weighted` in JSON-RPC and REST but `get_normalized_impacts`
+  and `get_weighted_impacts` in Python (`getNormalizedImpacts` and
+  `getWeightedImpacts` in olca-ipc.ts).
+* The upstream tree methods are `POST` requests in REST with the path in the
+  request body (see [upstream trees](upstream-trees/upstream-trees.md)).
+* `sankey` is a `POST` request in REST with the Sankey request as body; in
+  JSON-RPC, the Sankey request is passed in the field `config`. In Python, the
+  method is `Result.get_sankey_graph`.
+* The totality factors, the grouped results, and the tag results are only
+  available via JSON-RPC. The total cost values of all processes
+  (`total-cost-values`) are only available via REST.
+
+A complete list of the REST endpoints is given in the [REST API
+reference](../appendix/rest-api.md).
 
 ## Mathematical relations
 

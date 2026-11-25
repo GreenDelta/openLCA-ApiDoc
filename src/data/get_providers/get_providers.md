@@ -6,12 +6,9 @@ product as output. For waste flows, providers are waste treatment processes
 with an input of that waste flow. These provider and flow pairs can be linked
 to product inputs and waste outputs of other processes in a product system.
 
-|              |                                                                                    |
-| ------------ | ---------------------------------------------------------------------------------- |
-| Rest API     | `GET /data/providers`                                                              |
-| JSON-RPC     | `data/get/providers`                                                               |
-| Python IPC   | `Client.get_providers`                                                             |
-| Return type: | [`List[TechFlow]`](https://greendelta.github.io/olca-schema/classes/TechFlow.html) |
+| JSON-RPC | REST | Parameters | Returns |
+| -------- | ---- | ---------- | ------- |
+| `data/get/providers` | `GET data/providers` | | [`List[TechFlow]`](https://greendelta.github.io/olca-schema/classes/TechFlow.html) |
 
 ## Examples
 

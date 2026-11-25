@@ -7,83 +7,42 @@ to \\(t_j\\). Mathematically, it is the [intensity](../intensities/intensities.m
 of the flow scaled by its [totality
 factor](../requirements/requirements.md#totality-factors) \\(tf_j\\).
 
+| Method                   | Parameters                   | Returns                                                                                      | Formula                        |
+| ------------------------ | ---------------------------- | -------------------------------------------------------------------------------------------- | ------------------------------ |
+| `total-interventions-of` | `techFlow`                   | [`List[EnviFlowValue]`](https://greendelta.github.io/olca-schema/classes/EnviFlowValue.html) | \\(M[:, j] \ tf_j\\)           |
+| `total-intervention-of`  | `enviFlow`, `techFlow`       | [`EnviFlowValue`](https://greendelta.github.io/olca-schema/classes/EnviFlowValue.html)       | \\(M[i, j] \ tf_j\\)           |
+| `total-impacts-of`       | `techFlow`                   | [`List[ImpactValue]`](https://greendelta.github.io/olca-schema/classes/ImpactValue.html)     | \\(N[:, j] \ tf_j\\)           |
+| `total-impact-of`        | `impactCategory`, `techFlow` | [`ImpactValue`](https://greendelta.github.io/olca-schema/classes/ImpactValue.html)           | \\(N[k, j] \ tf_j\\)           |
+| `total-costs-of`         | `techFlow`                   | `number`                                                                                     | \\(q^T A^{-1}[:, j] \ tf_j\\)  |
+| `total-cost-values`¹     |                              | [`List[TechFlowValue]`](https://greendelta.github.io/olca-schema/classes/TechFlowValue.html) | \\(q^T A^{-1} diag(tf)\\)    |
+
+¹ only available via REST
+
 ## Intervention flows
 
-This method returns the total intervention flows of a technosphere flow
-\\(j\\). Mathematically, it is the column \\(j\\) of the intensity matrix
-\\(M\\) scaled by the totality factor \\(tf_j\\):
-
-$$
-M[:, j] \ tf_j
-$$
-
-|             |                                                                                              |
-| ----------- | -------------------------------------------------------------------------------------------- |
-| REST        | `GET result/{result-id}/total-interventions-of/{tech-flow}`                                  |
-| JSON-RPC    | `result/total-interventions-of`                                                              |
-| Python IPC  | `Result.get_total_interventions_of`                                                          |
-| Parameter   | [`TechFlow`](https://greendelta.github.io/olca-schema/classes/TechFlow.html)                 |
-| Return type | [`List[EnviFlowValue]`](https://greendelta.github.io/olca-schema/classes/EnviFlowValue.html) |
-
-It is also possible to get the total result \\(M[i, j] \ tf_j\\) of a single
-flow \\(i\\):
-
-|             |                                                                                        |
-| ----------- | -------------------------------------------------------------------------------------- |
-| REST        | `GET result/{result-id}/total-intervention-of/{envi-flow}/{tech-flow}`                 |
-| JSON-RPC    | `result/total-intervention-of`                                                         |
-| Python IPC  | `Result.get_total_intervention_of`                                                     |
-| Parameter 1 | [`EnviFlow`](https://greendelta.github.io/olca-schema/classes/EnviFlow.html)           |
-| Parameter 2 | [`TechFlow`](https://greendelta.github.io/olca-schema/classes/TechFlow.html)           |
-| Return type | [`EnviFlowValue`](https://greendelta.github.io/olca-schema/classes/EnviFlowValue.html) |
+The method `total-interventions-of` returns the total intervention flows of a
+technosphere flow \\(j\\): the column \\(j\\) of the intensity matrix \\(M\\)
+scaled by the totality factor \\(tf_j\\). The method `total-intervention-of`
+returns this value for a single flow \\(i\\).
 
 ## Impact categories
 
-This method returns the total impacts of a technosphere flow \\(j\\).
-Mathematically, it is the column \\(j\\) of the impact intensity matrix \\(N\\)
-scaled by the totality factor \\(tf_j\\):
+The method `total-impacts-of` returns the total impacts of a technosphere flow
+\\(j\\): the column \\(j\\) of the impact intensity matrix \\(N\\) scaled by the
+totality factor \\(tf_j\\). The method `total-impact-of` returns this value for
+a single impact category \\(k\\).
 
-$$
-N[:, j] \ tf_j
-$$
+### Examples
 
-|             |                                                                                          |
-| ----------- | ---------------------------------------------------------------------------------------- |
-| REST        | `GET result/{result-id}/total-impacts-of/{tech-flow}`                                    |
-| JSON-RPC    | `result/total-impacts-of`                                                                |
-| Python IPC  | `Result.get_total_impacts_of`                                                            |
-| Parameter   | [`TechFlow`](https://greendelta.github.io/olca-schema/classes/TechFlow.html)             |
-| Return type | [`List[ImpactValue]`](https://greendelta.github.io/olca-schema/classes/ImpactValue.html) |
+#### JSON-RPC via Fetch API
 
 ```js,run
 {{#include total-impacts.js:body}}
 ```
 
-It is also possible to get the total result \\(N[k, j] \ tf_j\\) of a single
-impact category \\(k\\):
-
-|             |                                                                                    |
-| ----------- | ---------------------------------------------------------------------------------- |
-| REST        | `GET result/{result-id}/total-impact-of/{impact-category}/{tech-flow}`             |
-| JSON-RPC    | `result/total-impact-of`                                                           |
-| Python IPC  | `Result.get_total_impact_of`                                                       |
-| Parameter 1 | [`Ref[ImpactCategory]`](https://greendelta.github.io/olca-schema/classes/Ref.html) |
-| Parameter 2 | [`TechFlow`](https://greendelta.github.io/olca-schema/classes/TechFlow.html)       |
-| Return type | [`ImpactValue`](https://greendelta.github.io/olca-schema/classes/ImpactValue.html) |
-
 ## Costs
 
-This method returns the total life cycle costs of a technosphere flow \\(j\\).
-Via JSON-RPC, the value is returned as plain number:
-
-$$
-q^T A^{-1}[:, j] \ tf_j
-$$
-
-|             |                                                                              |
-| ----------- | ---------------------------------------------------------------------------- |
-| REST        | `GET result/{result-id}/total-costs-of/{tech-flow}`                          |
-| JSON-RPC    | `result/total-costs-of`                                                      |
-| Python IPC  | `Result.get_total_costs_of`                                                  |
-| Parameter   | [`TechFlow`](https://greendelta.github.io/olca-schema/classes/TechFlow.html) |
-| Return type | `number`                                                                     |
+The method `total-costs-of` returns the total life cycle costs of a technosphere
+flow \\(j\\). Via JSON-RPC, the value is returned as plain number. Via REST,
+the method `total-cost-values` returns the total life cycle costs of all
+technosphere flows.

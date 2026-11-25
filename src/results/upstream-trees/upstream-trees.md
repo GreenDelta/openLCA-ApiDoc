@@ -13,10 +13,18 @@ the parent node of the returned nodes. If the path is empty, the root of the
 tree is returned. Note that such an upstream tree can be infinitely deep when
 the calculated system has cycles.
 
-With the client libraries, the path is passed as list of technosphere flows.
-Via JSON-RPC or REST, the path is passed as string in the field `path`: each
-technosphere flow is encoded as `<provider-id>::<flow-id>` and multiple
-technosphere flows are separated by `/`:
+| Method                      | Parameters               | Returns                                                                                    |
+| --------------------------- | ------------------------ | ------------------------------------------------------------------------------------------ |
+| `upstream-interventions-of` | `enviFlow`, `path`       | [`List[UpstreamNode]`](https://greendelta.github.io/olca-schema/classes/UpstreamNode.html) |
+| `upstream-impacts-of`       | `impactCategory`, `path` | [`List[UpstreamNode]`](https://greendelta.github.io/olca-schema/classes/UpstreamNode.html) |
+| `upstream-costs-of`         | `path`                   | [`List[UpstreamNode]`](https://greendelta.github.io/olca-schema/classes/UpstreamNode.html) |
+
+With the client libraries, the path is passed as list of
+[technosphere flows](https://greendelta.github.io/olca-schema/classes/TechFlow.html).
+Via JSON-RPC, the path is passed as string in the field `path`; via REST, these
+methods are `POST` requests with the path in the field `path` of the request
+body. In the path string, each technosphere flow is encoded as
+`<provider-id>::<flow-id>` and multiple technosphere flows are separated by `/`:
 
 ```
 <provider-id>::<flow-id>/<provider-id>::<flow-id>/...
@@ -24,14 +32,8 @@ technosphere flows are separated by `/`:
 
 ## Intervention flows
 
-|             |                                                                                            |
-| ----------- | ------------------------------------------------------------------------------------------ |
-| REST        | `POST result/{result-id}/upstream-interventions-of/{envi-flow}`                            |
-| JSON-RPC    | `result/upstream-interventions-of`                                                         |
-| Python IPC  | `Result.get_upstream_interventions_of`                                                     |
-| Parameter 1 | [`EnviFlow`](https://greendelta.github.io/olca-schema/classes/EnviFlow.html)               |
-| Parameter 2 | [`List[TechFlow]`](https://greendelta.github.io/olca-schema/classes/TechFlow.html), the path |
-| Return type | [`List[UpstreamNode]`](https://greendelta.github.io/olca-schema/classes/UpstreamNode.html) |
+The method `upstream-interventions-of` returns the upstream tree nodes of an
+intervention flow.
 
 ### Examples
 
@@ -49,14 +51,8 @@ technosphere flows are separated by `/`:
 
 ## Impact categories
 
-|             |                                                                                            |
-| ----------- | ------------------------------------------------------------------------------------------ |
-| REST        | `POST result/{result-id}/upstream-impacts-of/{impact-category}`                            |
-| JSON-RPC    | `result/upstream-impacts-of`                                                               |
-| Python IPC  | `Result.get_upstream_impacts_of`                                                           |
-| Parameter 1 | [`Ref[ImpactCategory]`](https://greendelta.github.io/olca-schema/classes/Ref.html)         |
-| Parameter 2 | [`List[TechFlow]`](https://greendelta.github.io/olca-schema/classes/TechFlow.html), the path |
-| Return type | [`List[UpstreamNode]`](https://greendelta.github.io/olca-schema/classes/UpstreamNode.html) |
+The method `upstream-impacts-of` returns the upstream tree nodes of an impact
+category.
 
 ### Examples
 
@@ -77,10 +73,5 @@ makes working with upstream trees a bit more convenient:
 
 ## Costs
 
-|             |                                                                                            |
-| ----------- | ------------------------------------------------------------------------------------------ |
-| REST        | `POST result/{result-id}/upstream-costs-of`                                                |
-| JSON-RPC    | `result/upstream-costs-of`                                                                 |
-| Python IPC  | `Result.get_upstream_costs_of`                                                             |
-| Parameter   | [`List[TechFlow]`](https://greendelta.github.io/olca-schema/classes/TechFlow.html), the path |
-| Return type | [`List[UpstreamNode]`](https://greendelta.github.io/olca-schema/classes/UpstreamNode.html) |
+The method `upstream-costs-of` returns the upstream tree nodes of the life cycle
+costs.

@@ -4,31 +4,25 @@ These methods return the results of the analysis groups of the calculated
 product system. An analysis group is a set of processes of the system for which
 the results are aggregated.
 
+| Method                      | Parameters       | Returns                                                                                |
+| --------------------------- | ---------------- | -------------------------------------------------------------------------------------- |
+| `grouped-flow-results-of`   | `enviFlow`       | [`List[GroupValue]`](https://greendelta.github.io/olca-schema/classes/GroupValue.html) |
+| `grouped-impact-results-of` | `impactCategory` | [`List[GroupValue]`](https://greendelta.github.io/olca-schema/classes/GroupValue.html) |
+| `grouped-cost-results`      |                  | [`List[GroupValue]`](https://greendelta.github.io/olca-schema/classes/GroupValue.html) |
+
+These methods are only available via JSON-RPC.
+
 ## Intervention flows
 
-|             |                                                                                        |
-| ----------- | -------------------------------------------------------------------------------------- |
-| REST        | `GET result/{result-id}/grouped-flow-results-of/{envi-flow}`                           |
-| JSON-RPC    | `result/grouped-flow-results-of`                                                       |
-| Python IPC  | `Result.get_grouped_flow_results_of`                                                   |
-| Parameter   | [`EnviFlow`](https://greendelta.github.io/olca-schema/classes/EnviFlow.html)           |
-| Return type | [`List[GroupValue]`](https://greendelta.github.io/olca-schema/classes/GroupValue.html) |
+The method `grouped-flow-results-of` returns the grouped results of an
+intervention flow.
 
 ## Impact categories
 
-|             |                                                                                        |
-| ----------- | -------------------------------------------------------------------------------------- |
-| REST        | `GET result/{result-id}/grouped-impact-results-of/{impact-category}`                   |
-| JSON-RPC    | `result/grouped-impact-results-of`                                                     |
-| Python IPC  | `Result.get_grouped_impact_results_of`                                                 |
-| Parameter   | [`Ref[ImpactCategory]`](https://greendelta.github.io/olca-schema/classes/Ref.html)     |
-| Return type | [`List[GroupValue]`](https://greendelta.github.io/olca-schema/classes/GroupValue.html) |
+The method `grouped-impact-results-of` returns the grouped results of an impact
+category.
 
 ## Costs
 
-|             |                                                                                        |
-| ----------- | -------------------------------------------------------------------------------------- |
-| REST        | `GET result/{result-id}/grouped-cost-results`                                          |
-| JSON-RPC    | `result/grouped-cost-results`                                                          |
-| Python IPC  | `Result.get_grouped_cost_results`                                                      |
-| Return type | [`List[GroupValue]`](https://greendelta.github.io/olca-schema/classes/GroupValue.html) |
+The method `grouped-cost-results` returns the grouped results of the life cycle
+costs.
