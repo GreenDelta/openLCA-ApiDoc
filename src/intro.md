@@ -12,6 +12,19 @@ examples. You can **modify and try** the interactive JavaScript examples right
 inside this manual. Simply start the IPC server in openLCA (see below) and click
 the `Run` button beneath an example:
 
+```js,run
+// list the impact assessment methods of the active database
+const methods = await call("data/get/descriptors", { "@type": "ImpactMethod" });
+console.log(`found ${methods.length} impact assessment methods:`);
+for (const method of methods) {
+  console.log(`- ${method.name}`);
+}
+```
+
+The example uses the small helper function `call` for sending requests to the
+IPC server, see [running the JavaScript
+examples](#running-the-javascript-examples) below.
+
 
 ## Starting an IPC server
 
@@ -95,7 +108,7 @@ async function call(method, params) {
 
 ----
 
-[^java_note] openLCA is a Java application and if your application is written in
+[^java_note]: openLCA is a Java application and if your application is written in
 a language that also runs on the Java virtual machine (like Java, Kotlin, Scala,
 Clojure etc.) it is recommended to directly use the [openLCA Java
 API](https://github.com/GreenDelta/olca-modules) instead of an IPC server. The
