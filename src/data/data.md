@@ -1,4 +1,4 @@
-# Data management
+# Working with data
 
 The openLCA IPC protocol is based on the [openLCA Schema](http://greendelta.github.io/olca-schema/) as data exchange format. Thus, parameter and return types of this documentation often link to their respective description in the openLCA schema documentation. The openLCA schema is a typed data format with the following [principles](http://greendelta.github.io/olca-schema/#format-concepts):
 

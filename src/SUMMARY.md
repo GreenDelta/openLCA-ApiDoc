@@ -1,7 +1,7 @@
 # Summary
 
 - [Introduction](intro.md)
-- [Data management](data/data.md)
+- [Working with data](data/data.md)
   - [Get descriptors](data/get_descriptors/get_descriptors.md)
   - [Get by ID](data/get_by_id/get_by_id.md)
   - [Get by name](data/get_by_name/get_by_name.md)

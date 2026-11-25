@@ -44,7 +44,7 @@ The server also accepts the singular forms of these path segments (e.g.
 | ----------------- | ------------------------------- |
 | `GET api/version` | the API version of the server   |
 
-## Data management
+## Working with data
 
 | Request                                               | Body                         | Returns           | Documentation                                                      |
 | ----------------------------------------------------- | ---------------------------- | ----------------- | ------------------------------------------------------------------ |

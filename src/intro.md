@@ -39,38 +39,26 @@ For headless stand-alone servers, please see the appendix [stand-alone
 servers](appendix/servers.md).
 
 
-## Available protocols
+## Available protocols and client libraries
 
-In the dialog, you can select to start a standard IPC server or a
-[gRPC](https://grpc.io/) server. The standard IPC server is based on the
-[JSON-RPC](https://www.jsonrpc.org/) protocol provided over HTTP. This protocol
-is easy to implement as it is just based on JSON and HTTP. For example, it can
-be directly used from a web-browser using the [Fetch
-API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API).
+Typically, you will use a client library such as
+[olca-ipc.py](https://github.com/GreenDelta/olca-ipc.py) to call the API. Under
+the hood, openLCA supports three protocols built on the same service back-end
+and the [openLCA schema](https://greendelta.github.io/olca-schema/) as data
+format:
 
-The [gRPC](https://grpc.io/) protocol is another option, especially when you are
-already familiar with it or when your platform has good support for this option.
-In this case, you can just generate the client side interface from the [openLCA
-service declaration](https://github.com/GreenDelta/olca-proto).
+* [JSON-RPC](https://www.jsonrpc.org/) over HTTP (default IPC server) –
+  lightweight and easy to use anywhere, including directly in a browser.
 
-A third option is the
-[REST](https://en.wikipedia.org/wiki/Representational_state_transfer) API
-provided by openLCA web-services. This protocol is also just based on JSON and
-HTTP and especially useful when integrating the openLCA back-end into
-web-applications.
+* [gRPC](https://grpc.io/) – great when you already use gRPC or want generated
+  client code from the [service
+  definitions](https://github.com/GreenDelta/olca-proto).
 
-In this documentation we try to cover all these protocols as they just provide
-an interface to the same service back-end of the openLCA kernel. Also, all of
-these protocols are based on the [openLCA
-Schema](http://greendelta.github.io/olca-schema/) as the data exchange format.
-Thus, parameter and return types in this documentation often link to their
-respective description in the openLCA schema documentation.
+* [REST](appendix/rest-api.md) (via openLCA web-services) – JSON over HTTP, well
+  suited for web applications.
 
-
-## Client libraries and example applications
-
-The table below lists some client libraries and demo applications based on the
-openLCA IPC protocol:
+The table below lists some available client libraries and demo projects by language
+and protocol:
 
 |                                                                       | Language              | Type           | Protocol       |
 | --------------------------------------------------------------------- | --------------------- | -------------- | -------------- |
@@ -109,12 +97,8 @@ async function call(method, params) {
 
 ----
 
-[^java_note]: openLCA is a Java application and if your application is written in
-a language that also runs on the Java virtual machine (like Java, Kotlin, Scala,
-Clojure etc.) it is recommended to directly use the [openLCA Java
-API](https://github.com/GreenDelta/olca-modules) instead of an IPC server. The
-kernel of openLCA can be used independently of the user interface and can be
-integrated as a set of standard Java libraries in JVM based applications. For
-example, the integrated Python editor in openLCA is in fact a Python
-implementation for the JVM ([Jython](https://www.jython.org/)), with which you
-can call the Java API of openLCA.
+[^java_note]: Because openLCA runs on the JVM, languages like Java, Kotlin,
+Scala, or Clojure can use the headless [openLCA Java
+API](https://github.com/GreenDelta/olca-modules) directly as standard libraries
+instead of going through an IPC server (this is also how openLCA's built-in
+Python (powered by [Jython](https://www.jython.org/)) editor accesses openLCA).
