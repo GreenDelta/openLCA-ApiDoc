@@ -1,8 +1,10 @@
 # Get the parameters of a data set
 
-Returns the (local) parameters of the specified data set. In case of processes
-and impact categories, a list of parameters is returned. For product systems,
-the respective parameter redefinitions are returned.
+Returns the local parameters defined for the specified root entity:
+
+* Processes and impact categories: Returns a list of `Parameter` objects.
+
+* Product systems: Returns a list of `ParameterRedef` objects (parameter redefinitions).
 
 | JSON-RPC | REST | Parameters | Returns |
 | -------- | ---- | ---------- | ------- |

@@ -10,7 +10,9 @@ application or by a server running only the openLCA back-end.
 This documentation covers the available API methods in detail with many
 examples. You can **modify and try** the interactive JavaScript examples right
 inside this manual. Simply start the IPC server in openLCA (see below) and click
-the `Run` button beneath an example:
+the `Run` button beneath an example. Your browser may prompt you for permission
+to access the local openLCA server, but everything runs locally on your
+machine, **no data is sent to external servers**.
 
 ```js,run
 // list the impact assessment methods of the active database

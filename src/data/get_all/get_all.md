@@ -1,10 +1,10 @@
 # Get all data sets of a given type
 
-Returns all data sets of a given type from a database. This is not a practical
-method for all types of data sets and may is not available in a specific
-context. For example, it is fine to get all unit groups but a server would
-go down when you query for all processes in a large database. Typically, you
-just want to query all descriptors of a data set type.
+Returns every complete entity of a given root type from the database. Depending
+on the protocol or server configuration, this method may be disabled and it is
+only practical for small collections (such as unit groups). Querying all
+processes or flows in a large database can overload the server; in most cases,
+you should [fetch descriptors](../get_descriptors/get_descriptors.md) instead.
 
 | JSON-RPC | REST | Parameters | Returns |
 | -------- | ---- | ---------- | ------- |
@@ -17,6 +17,7 @@ server is running on port `8080`:
 
 ```js,run
 {{#include get_all.js}}
+```
 
 ## Python IPC
 

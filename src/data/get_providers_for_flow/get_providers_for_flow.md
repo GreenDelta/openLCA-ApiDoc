@@ -1,10 +1,14 @@
 # Get providers for a flow
 
-This method returns the processes that produce a given product (as output) or
-provide the treatment of a given waste flow (as input). Thus, the flow parameter
-of this method needs to be a product or waste flow (or an ID of that flow). The
-returned providers can be linked to respective product inputs or waste outputs
-of other processes in a product system.
+Returns the provider processes (`Ref`) for a specific product or waste flow
+(passed as a flow reference or ID):
+
+* Product flow: Returns processes that produce the product as an output.
+
+* Waste flow: Returns waste treatment processes that accept the waste as an input.
+
+The returned providers can be linked to matching product inputs or waste outputs
+in a product system.
 
 | JSON-RPC | REST | Parameters | Returns |
 | -------- | ---- | ---------- | ------- |

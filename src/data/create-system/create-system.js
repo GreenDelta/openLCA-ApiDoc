@@ -1,5 +1,5 @@
-// this example tries to find a process with this name
-// and builds a product system from it
+// This example tries to find a process with this name and builds a product
+// system from it. Note that it can take a bit until this method completes.
 const processName = "grape production | grape | Cutoff, U";
 
 const processes = await call("data/get/descriptors", { "@type": "Process" });

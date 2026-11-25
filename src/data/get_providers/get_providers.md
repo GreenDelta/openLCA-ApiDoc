@@ -1,10 +1,13 @@
-# Get providers of technosphere flows
+# Get providers of technosphere flows 
 
-Technosphere flows are products or waste flows that can be linked in a product
-system model. For products, the providers are processes that produce this
-product as output. For waste flows, providers are waste treatment processes
-with an input of that waste flow. These provider and flow pairs can be linked
-to product inputs and waste outputs of other processes in a product system.
+Returns the available process–flow provider pairs for technosphere flows
+(products and waste flows) that can be linked inside a product system:
+
+* Products: Providers are processes that generate the product as an output
+  (linkable to product inputs of other processes).
+
+* Waste flows: Providers are waste treatment processes that accept the waste as
+  an input (linkable to waste outputs of other processes).
 
 | JSON-RPC | REST | Parameters | Returns |
 | -------- | ---- | ---------- | ------- |
