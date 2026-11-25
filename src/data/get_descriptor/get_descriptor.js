@@ -1,12 +1,13 @@
-const v = await call("data/get/descriptor", {
-  "@type": "Process",
-  "@id": "eacc4872-6f4e-4ff1-946e-c1bddeda24be",
+// get the descriptor of the flow property "Mass" by name
+const mass = await call("data/get/descriptor", {
+  "@type": "FlowProperty",
+  name: "Mass",
 });
-console.log(v);
-// {
-//   "@type": "Process",
-//   "@id": "eacc4872-6f4e-4ff1-946e-c1bddeda24be",
-//   name: "blast furnace gas, Recycled Content cut-off",
-//   processType: "LCI_RESULT",
-//   flowType: "PRODUCT_FLOW"
-// }
+console.log(mass);
+
+// the same descriptor, now requested by ID
+const byId = await call("data/get/descriptor", {
+  "@type": "FlowProperty",
+  "@id": mass["@id"],
+});
+console.log(byId.name);
