@@ -1,8 +1,8 @@
 # Get a full data set by name
 
-This method returns a full data set for the given type and name. Note that the
-name does not have to be unique in an openLCA database, and in this case, it
-will just return the first entity from the database with the given name.
+Returns the complete entity for a given root type and name. Because names in an
+openLCA database are not required to be unique, this method simply returns the
+first matching data set it finds.
 
 | JSON-RPC | REST | Parameters | Returns |
 | -------- | ---- | ---------- | ------- |

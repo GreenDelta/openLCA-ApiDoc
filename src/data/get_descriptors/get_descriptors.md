@@ -1,12 +1,10 @@
 # Get descriptors
 
-This function is useful for exploring the content of a database. It returns a
-list of data set descriptors for a given data set type. A descriptor contains
-just a few information, like the name or category path, to understand the
-content of a data set. Descriptors are valid [data set
-references](https://greendelta.github.io/olca-schema/classes/Ref.html); they can
-be used to reference a data set in a given context (e.g. referencing a process
-as calculation target in a calculation setup).
+Returns a list of lightweight descriptors (`Ref`) for all data sets of a given
+type. This is useful for browsing the contents of a database without loading
+full objects. Each descriptor includes only basic metadata (such as `@id`,
+`name`, and `category`) and can be passed directly as a reference in other API
+calls, such as specifying a target process in a calculation setup.
 
 | JSON-RPC | REST | Parameters | Returns |
 | -------- | ---- | ---------- | ------- |

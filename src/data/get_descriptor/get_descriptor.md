@@ -1,10 +1,6 @@
-# Get the descriptor of a data set
+# Get a single descriptor
 
-Returns a list of lightweight descriptors (`Ref`) for all data sets of a given
-type—useful for browsing the contents of a database without loading full
-objects. Each descriptor includes only basic metadata (such as `@id`, `name`,
-and `category`) and can be passed directly as a reference in other API calls,
-such as specifying a target process in a calculation setup.
+Returns the descriptor (`Ref`) of a root entity for a given type and ID (or name).
 
 | JSON-RPC | REST | Parameters | Returns |
 | -------- | ---- | ---------- | ------- |
@@ -18,4 +14,3 @@ such as specifying a target process in a calculation setup.
 ```py
 {{#include get_descriptor.py}}
 ```
-
