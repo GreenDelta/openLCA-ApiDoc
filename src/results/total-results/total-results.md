@@ -37,7 +37,7 @@ The method `total-flows` returns the complete inventory result and
 #### JSON-RPC via Fetch API
 
 ```js,run
-{{#include total-flows.js:2:22}}
+{{#include total-flows.js}}
 ```
 
 ## Impact assessment result
@@ -59,7 +59,7 @@ The method `total-impacts` returns the complete impact assessment result and
 #### JSON-RPC via Fetch API
 
 ```js,run
-{{#include total-impacts.js:body}}
+{{#include total-impacts.js}}
 ```
 
 ## Normalized results
@@ -84,7 +84,7 @@ $$
 #### JSON-RPC via Fetch API
 
 ```js,run
-{{#include normalized.js:body}}
+{{#include normalized.js}}
 ```
 
 ## Weighted results
@@ -109,7 +109,7 @@ $$
 #### JSON-RPC via Fetch API
 
 ```js,run
-{{#include weighted.js:body}}
+{{#include weighted.js}}
 ```
 
 ## Costs

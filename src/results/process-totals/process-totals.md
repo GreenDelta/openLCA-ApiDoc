@@ -37,7 +37,7 @@ a single impact category \\(k\\).
 #### JSON-RPC via Fetch API
 
 ```js,run
-{{#include total-impacts.js:body}}
+{{#include total-impacts.js}}
 ```
 
 ## Costs

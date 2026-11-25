@@ -17,6 +17,20 @@ style.textContent = `
 `;
 document.head.append(style);
 
+// The JSON-RPC helper that is passed as `call` into the runnable examples;
+// keep it in sync with the version shown in the introduction (intro.md)
+async function call(method, params) {
+  const resp = await fetch("http://localhost:8080", {
+    method: "POST",
+    body: JSON.stringify({ jsonrpc: "2.0", id: 1, method, params }),
+  });
+  const r = await resp.json();
+  if (r.error) {
+    throw new Error(r.error.message);
+  }
+  return r.result;
+}
+
 function highlight(code) {
   if (!window.hljs) return;
   if (hljs.highlightElement) hljs.highlightElement(code);
@@ -74,7 +88,7 @@ document.querySelectorAll("pre > code.language-js.run").forEach((code) => {
       error: (...a) => (out.textContent += "Error: " + a.map(fmt).join(" ") + "\n"),
     };
     try {
-      await new AsyncFunction("console", code.innerText)(con);
+      await new AsyncFunction("console", "call", code.innerText)(con, call);
     } catch (e) {
       con.error(String(e));
     }

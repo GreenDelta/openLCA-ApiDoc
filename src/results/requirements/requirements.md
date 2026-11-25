@@ -39,7 +39,7 @@ $$
 #### JSON-RPC via Fetch API
 
 ```js,run
-{{#include demand.js:body}}
+{{#include demand.js}}
 ```
 
 ## Scaling factors
@@ -59,7 +59,7 @@ $$
 #### JSON-RPC via Fetch API
 
 ```js,run
-{{#include scaling-factors.js:2:22}}
+{{#include scaling-factors.js}}
 ```
 
 ## Total requirements
@@ -82,7 +82,7 @@ technosphere flows and `total-requirements-of` the total requirements
 #### JSON-RPC via Fetch API
 
 ```js,run
-{{#include total-requirements.js:2:23}}
+{{#include total-requirements.js}}
 ```
 
 ## Totality factors
@@ -136,7 +136,7 @@ the technosphere flow \\(j\\) to which the other requirements are related.
 #### JSON-RPC via Fetch API
 
 ```js,run
-{{#include scaled-tech-flows.js:2:32}}
+{{#include scaled-tech-flows.js}}
 ```
 
 ## Unscaled technosphere flows
@@ -155,5 +155,5 @@ $$
 #### JSON-RPC via Fetch API
 
 ```js,run
-{{#include unscaled-tech-flows.js:2:29}}
+{{#include unscaled-tech-flows.js}}
 ```

@@ -67,6 +67,32 @@ openLCA IPC protocol:
 | [olcarpc.py](https://github.com/GreenDelta/olcarpc.py)                | Python                | Client library | gRPC           |
 
 
+## Running the JavaScript examples
+
+The JavaScript examples in this documentation can be edited and executed
+directly in the browser with the `Run` button below an example (or with
+`Ctrl+Enter` in the example). For this, an IPC server needs to run on port
+`8080` (in openLCA: `Tools > Developer tools > IPC Server`).
+
+Some examples use the following helper function `call` for the JSON-RPC calls.
+It is available in the runnable examples of this documentation; when you use
+such an example outside of this documentation, you need to add this function:
+
+```js
+async function call(method, params) {
+  const resp = await fetch("http://localhost:8080", {
+    method: "POST",
+    body: JSON.stringify({ jsonrpc: "2.0", id: 1, method, params }),
+  });
+  const r = await resp.json();
+  if (r.error) {
+    throw new Error(r.error.message);
+  }
+  return r.result;
+}
+```
+
+
 ----
 
 [^java_note] openLCA is a Java application and if your application is written in

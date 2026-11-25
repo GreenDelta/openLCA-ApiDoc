@@ -53,7 +53,7 @@ the intensity \\(N[k, j]\\) of a single impact category \\(k\\).
 #### JSON-RPC via Fetch API
 
 ```js,run
-{{#include impact-intensities.js:body}}
+{{#include impact-intensities.js}}
 ```
 
 ## Costs

@@ -106,6 +106,9 @@ There are a few exceptions from these rules:
 A complete list of the REST endpoints is given in the [REST API
 reference](../appendix/rest-api.md).
 
+The JavaScript examples call the JSON-RPC methods with the [`call`
+helper](../intro.md#running-the-javascript-examples).
+
 ## Mathematical relations
 
 Where possible, a short formula for calculating a respective result is provided

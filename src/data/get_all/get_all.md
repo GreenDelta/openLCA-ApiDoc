@@ -23,7 +23,8 @@ just want to query all descriptors of a data set type.
 The example below shows the usage of this method using the JSON-RPC protocol via
 the [Fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API)
 which is available in modern web-browsers or platforms like
-[Deno](https://deno.land/).
+[Deno](https://deno.land/). It uses the [`call`
+helper](../../intro.md#running-the-javascript-examples) for the JSON-RPC calls.
 
 ```js,run
-{{#include get_all.js:2:24}}
+{{#include get_all.js}}

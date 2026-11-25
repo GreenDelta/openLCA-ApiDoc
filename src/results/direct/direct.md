@@ -41,13 +41,13 @@ $$
 #### Contributions to a flow
 
 ```js,run
-{{#include flow-contributions.js:2:32}}
+{{#include flow-contributions.js}}
 ```
 
 #### Direct interventions of a process
 
 ```js,run
-{{#include direct-interventions.js:2:31}}
+{{#include direct-interventions.js}}
 ```
 
 ## Impact categories
@@ -71,13 +71,13 @@ $$
 #### Contributions to an impact category
 
 ```js,run
-{{#include impact-contributions.js:body}}
+{{#include impact-contributions.js}}
 ```
 
 #### Direct impacts of a process
 
 ```js,run
-{{#include direct-impacts.js:body}}
+{{#include direct-impacts.js}}
 ```
 
 ## Costs

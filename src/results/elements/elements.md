@@ -36,7 +36,7 @@ $$
 #### JSON-RPC via Fetch API
 
 ```js,run
-{{#include tech-flows.js:body}}
+{{#include tech-flows.js}}
 ```
 
 ## Intervention flows
@@ -65,7 +65,7 @@ $$
 #### JSON-RPC via Fetch API
 
 ```js,run
-{{#include envi-flows.js:body}}
+{{#include envi-flows.js}}
 ```
 
 ## Impact categories
@@ -91,5 +91,5 @@ $$
 #### JSON-RPC via Fetch API
 
 ```js,run
-{{#include impact-categories.js:2:31}}
+{{#include impact-categories.js}}
 ```
