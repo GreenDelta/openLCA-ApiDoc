@@ -44,7 +44,7 @@ servers](appendix/servers.md).
 Typically, you will use a client library such as
 [olca-ipc.py](https://github.com/GreenDelta/olca-ipc.py) to call the API. Under
 the hood, openLCA supports three protocols built on the same service back-end
-and the [openLCA schema](https://greendelta.github.io/olca-schema/) as data
+and the [openLCA Schema](https://greendelta.github.io/olca-schema/) as data
 format:
 
 * [JSON-RPC](https://www.jsonrpc.org/) over HTTP (default IPC server) –

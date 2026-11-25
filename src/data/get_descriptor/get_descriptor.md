@@ -1,7 +1,10 @@
 # Get the descriptor of a data set
 
-Returns the descriptor of the data set with the given type and ID. Via
-JSON-RPC, it is also possible to get the descriptor of a data set by name.
+Returns a list of lightweight descriptors (`Ref`) for all data sets of a given
+type—useful for browsing the contents of a database without loading full
+objects. Each descriptor includes only basic metadata (such as `@id`, `name`,
+and `category`) and can be passed directly as a reference in other API calls,
+such as specifying a target process in a calculation setup.
 
 | JSON-RPC | REST | Parameters | Returns |
 | -------- | ---- | ---------- | ------- |

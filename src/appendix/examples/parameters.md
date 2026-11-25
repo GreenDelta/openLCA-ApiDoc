@@ -67,7 +67,7 @@ calculation setup:
 {{#include parameters.py:setup}}
 ```
 
-The objects of the openLCA schema can be easily translated to JSON as done
+The objects of the openLCA Schema can be easily translated to JSON as done
 in the snippet above. This is the payload that is posted to the server in a
 [calculation request](../../results/calculate/calculate.md):
 

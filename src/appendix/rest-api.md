@@ -6,7 +6,7 @@ provided by the [gdt-server](https://github.com/GreenDelta/gdt-server) (see
 [Server.java](https://github.com/GreenDelta/gdt-server/blob/main/src/main/java/org/openlca/gdt/server/Server.java)).
 The paths are relative to the base URL of the server, e.g.
 `http://localhost:8080/`. Request and response bodies are JSON documents
-following the [openLCA schema](https://greendelta.github.io/olca-schema/).
+following the [openLCA Schema](https://greendelta.github.io/olca-schema/).
 
 The following placeholders are used in the paths:
 
