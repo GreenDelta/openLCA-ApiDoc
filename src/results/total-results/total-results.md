@@ -32,9 +32,10 @@ $$
 The method `total-flows` returns the complete inventory result and
 `total-flow-value-of` the result \\(g_i\\) of a single flow \\(i\\).
 
-### Examples
+### Try it
 
-#### JSON-RPC via Fetch API
+You can edit and execute the example below. Just make sure an openLCA IPC
+server is running on port `8080`:
 
 ```js,run
 {{#include total-flows.js}}
@@ -54,9 +55,10 @@ The method `total-impacts` returns the complete impact assessment result and
 `total-impact-value-of` the result \\(h_k\\) of a single impact category
 \\(k\\).
 
-### Examples
+### Try it
 
-#### JSON-RPC via Fetch API
+You can edit and execute the example below. Just make sure an openLCA IPC
+server is running on port `8080`:
 
 ```js,run
 {{#include total-impacts.js}}
@@ -73,18 +75,19 @@ $$
 diag(nv)^{-1} h
 $$
 
-### Examples
+### Try it
 
-#### Python IPC
-
-```py
-{{#include normalized.py}}
-```
-
-#### JSON-RPC via Fetch API
+You can edit and execute the example below. Just make sure an openLCA IPC
+server is running on port `8080`:
 
 ```js,run
 {{#include normalized.js}}
+```
+
+### Python IPC
+
+```py
+{{#include normalized.py}}
 ```
 
 ## Weighted results
@@ -98,18 +101,19 @@ $$
 diag(w) \ diag(nv)^{-1} h
 $$
 
-### Examples
+### Try it
 
-#### Python IPC
-
-```py
-{{#include weighted.py}}
-```
-
-#### JSON-RPC via Fetch API
+You can edit and execute the example below. Just make sure an openLCA IPC
+server is running on port `8080`:
 
 ```js,run
 {{#include weighted.js}}
+```
+
+### Python IPC
+
+```py
+{{#include weighted.py}}
 ```
 
 ## Costs
@@ -124,9 +128,10 @@ $$
 q^T s
 $$
 
-### Examples
+### Try it
 
-#### olca-ipc.ts
+You can edit and execute the example below. Just make sure an openLCA IPC
+server is running on port `8080`:
 
 ```js,run
 {{#include total-costs.js}}

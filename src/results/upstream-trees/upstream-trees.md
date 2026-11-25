@@ -35,18 +35,19 @@ body. In the path string, each technosphere flow is encoded as
 The method `upstream-interventions-of` returns the upstream tree nodes of an
 intervention flow.
 
-### Examples
+### Try it
 
-#### olca-ipc.py
-
-```py
-{{#include upstream-interventions.py}}
-```
-
-#### olca-ipc.ts
+You can edit and execute the example below. Just make sure an openLCA IPC
+server is running on port `8080`:
 
 ```js,run
 {{#include upstream-interventions.js}}
+```
+
+### Python IPC
+
+```py
+{{#include upstream-interventions.py}}
 ```
 
 ## Impact categories
@@ -54,21 +55,22 @@ intervention flow.
 The method `upstream-impacts-of` returns the upstream tree nodes of an impact
 category.
 
-### Examples
+### Try it
 
-#### olca-ipc.py
+You can edit and execute the example below. Just make sure an openLCA IPC
+server is running on port `8080`:
+
+```js,run
+{{#include upstream-impacts.js}}
+```
+
+### Python IPC
 
 The Python example below uses the `utree` module of the olca-ipc.py API which
 makes working with upstream trees a bit more convenient:
 
 ```py
 {{#include upstream-impacts-utree.py}}
-```
-
-#### olca-ipc.ts
-
-```js,run
-{{#include upstream-impacts.js}}
 ```
 
 ## Costs

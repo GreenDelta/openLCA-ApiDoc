@@ -10,22 +10,17 @@ of other processes in a product system.
 | -------- | ---- | ---------- | ------- |
 | `data/get/providers` | `GET data/providers/{id}` | `@id` of the flow | [`List[TechFlow]`](https://greendelta.github.io/olca-schema/classes/TechFlow.html) |
 
-## Examples
+## Try it
 
-### Python IPC
-
-```py
-{{#include get_providers_for_flow.py}}
-```
-
-### JSON-RPC via Fetch API
-
-The example below shows the usage of this method using the JSON-RPC protocol via
-the [Fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API)
-which is available in modern web-browsers or platforms like
-[Deno](https://deno.land/). It uses the [`call`
-helper](../../intro.md#running-the-javascript-examples) for the JSON-RPC calls.
+You can edit and execute the example below. Just make sure an openLCA IPC
+server is running on port `8080`:
 
 ```js,run
 {{#include get_providers_for_flow.js}}
+```
+
+## Python IPC
+
+```py
+{{#include get_providers_for_flow.py}}
 ```

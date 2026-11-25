@@ -13,22 +13,17 @@ results can be retrieved.
 In Python, the method is `Result.get_state`. There is also the method
 `Result.wait_until_ready` which polls the state until the result is ready.
 
-## Examples
+## Try it
 
-### Python IPC
-
-```py
-{{#include ../calculate/results_ipc.py:get_state}}
-```
-
-### JSON-RPC via Fetch API
-
-The example below shows the usage of this method using the JSON-RPC protocol via
-the [Fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API)
-which is available in modern web-browsers or platforms like
-[Deno](https://deno.land/). It uses the [`call`
-helper](../../intro.md#running-the-javascript-examples) for the JSON-RPC calls.
+You can edit and execute the example below. Just make sure an openLCA IPC
+server is running on port `8080`:
 
 ```js,run
 {{#include get_state.js}}
+```
+
+## Python IPC
+
+```py
+{{#include ../calculate/results_ipc.py:get_state}}
 ```

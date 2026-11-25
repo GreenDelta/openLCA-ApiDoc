@@ -12,22 +12,17 @@ This is a method of the client and not of a result: via REST, it is
 `POST result/calculate` with the calculation setup as request body; in Python,
 it is `Client.calculate`.
 
-## Examples
+## Try it
 
-### Python IPC
-
-```py
-{{#include results_ipc.py:calculate}}
-```
-
-### JSON-RPC via Fetch API
-
-The example below shows the usage of this method using the JSON-RPC protocol via
-the [Fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API)
-which is available in modern web-browsers or platforms like
-[Deno](https://deno.land/). It uses the [`call`
-helper](../../intro.md#running-the-javascript-examples) for the JSON-RPC calls.
+You can edit and execute the example below. Just make sure an openLCA IPC
+server is running on port `8080`:
 
 ```js,run
 {{#include calculate.js}}
+```
+
+## Python IPC
+
+```py
+{{#include results_ipc.py:calculate}}
 ```

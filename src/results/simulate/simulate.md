@@ -20,9 +20,7 @@ is `Client.simulate`. `simulate/next` is called on the result:
 `POST result/{result-id}/simulate/next` via REST and `Result.simulate_next`
 in Python.
 
-## Examples
-
-### Python IPC
+## Python IPC
 
 ```py
 {{#include simulate.py}}

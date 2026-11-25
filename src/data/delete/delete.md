@@ -7,23 +7,17 @@ when the server runs in read-only mode.
 | -------- | ---- | ---------- | ------- |
 | `data/delete` | `DELETE data/{type}/{id}` | `@type`, `@id` | [`Ref`](https://greendelta.github.io/olca-schema/classes/Ref.html) |
 
-## Examples
+## Try it
 
-### Python IPC
-
-```py
-{{#include delete.py}}
-```
-
-
-### JSON-RPC via Fetch API
-
-The example below shows the usage of this method using the JSON-RPC protocol via
-the [Fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API)
-which is available in modern web-browsers or platforms like
-[Deno](https://deno.land/). It uses the [`call`
-helper](../../intro.md#running-the-javascript-examples) for the JSON-RPC calls.
+You can edit and execute the example below. Just make sure an openLCA IPC
+server is running on port `8080`:
 
 ```js,run
 {{#include delete.js}}
+```
+
+## Python IPC
+
+```py
+{{#include delete.py}}
 ```

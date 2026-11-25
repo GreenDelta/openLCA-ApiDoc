@@ -48,9 +48,10 @@ The method `impact-intensities-of` returns the column \\(N[:, j]\\), the impacts
 related to one unit of the technosphere flow \\(j\\), and `impact-intensity-of`
 the intensity \\(N[k, j]\\) of a single impact category \\(k\\).
 
-### Examples
+### Try it
 
-#### JSON-RPC via Fetch API
+You can edit and execute the example below. Just make sure an openLCA IPC
+server is running on port `8080`:
 
 ```js,run
 {{#include impact-intensities.js}}

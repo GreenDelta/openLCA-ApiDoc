@@ -10,17 +10,17 @@ Via REST, it is a `POST` request with the Sankey request as body:
 `POST result/{result-id}/sankey`. In Python, the method is
 `Result.get_sankey_graph`.
 
+## Try it
 
-## Examples
-
-### Python IPC
-
-```py
-{{#include sankey.py}}
-```
-
-### JavaScript IPC
+You can edit and execute the example below. Just make sure an openLCA IPC
+server is running on port `8080`:
 
 ```js,run
 {{#include sankey.js}}
+```
+
+## Python IPC
+
+```py
+{{#include sankey.py}}
 ```

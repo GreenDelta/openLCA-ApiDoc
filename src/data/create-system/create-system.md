@@ -20,23 +20,17 @@ The linking configuration defines how the processes are linked:
   demand below this value, relative to one unit of the reference product of the
   system, are not linked further.
 
-## Examples
+## Try it
 
-### Python IPC
-
-```py
-{{#include create-system.py}}
-```
-
-### JSON-RPC via Fetch API
-
-The example below shows the usage of this method using the JSON-RPC protocol via
-the [Fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API)
-which is available in modern web-browsers or platforms like
-[Deno](https://deno.land/). It first searches the process by name and then
-creates the product system for it, using the [`call`
-helper](../../intro.md#running-the-javascript-examples) for the JSON-RPC calls.
+You can edit and execute the example below. Just make sure an openLCA IPC
+server is running on port `8080`:
 
 ```js,run
 {{#include create-system.js}}
+```
+
+## Python IPC
+
+```py
+{{#include create-system.py}}
 ```

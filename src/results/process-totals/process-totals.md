@@ -32,9 +32,10 @@ The method `total-impacts-of` returns the total impacts of a technosphere flow
 totality factor \\(tf_j\\). The method `total-impact-of` returns this value for
 a single impact category \\(k\\).
 
-### Examples
+### Try it
 
-#### JSON-RPC via Fetch API
+You can edit and execute the example below. Just make sure an openLCA IPC
+server is running on port `8080`:
 
 ```js,run
 {{#include total-impacts.js}}

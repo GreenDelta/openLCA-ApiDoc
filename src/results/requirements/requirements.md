@@ -34,9 +34,10 @@ $$
 f = \sum_j{A[:, j] \ s_j} = A s
 $$
 
-### Examples
+### Try it
 
-#### JSON-RPC via Fetch API
+You can edit and execute the example below. Just make sure an openLCA IPC
+server is running on port `8080`:
 
 ```js,run
 {{#include demand.js}}
@@ -54,9 +55,10 @@ $$
 A s = f
 $$
 
-### Examples
+### Try it
 
-#### JSON-RPC via Fetch API
+You can edit and execute the example below. Just make sure an openLCA IPC
+server is running on port `8080`:
 
 ```js,run
 {{#include scaling-factors.js}}
@@ -77,9 +79,10 @@ The method `total-requirements` returns the total requirements of all
 technosphere flows and `total-requirements-of` the total requirements
 \\(t_j = s_j \ A[j, j]\\) of a single technosphere flow \\(j\\).
 
-### Examples
+### Try it
 
-#### JSON-RPC via Fetch API
+You can edit and execute the example below. Just make sure an openLCA IPC
+server is running on port `8080`:
 
 ```js,run
 {{#include total-requirements.js}}
@@ -131,9 +134,10 @@ The returned values are negative for inputs and positive for outputs of the
 respective flows. Also, the returned values contain the total requirements of
 the technosphere flow \\(j\\) to which the other requirements are related.
 
-### Examples
+### Try it
 
-#### JSON-RPC via Fetch API
+You can edit and execute the example below. Just make sure an openLCA IPC
+server is running on port `8080`:
 
 ```js,run
 {{#include scaled-tech-flows.js}}
@@ -150,9 +154,10 @@ $$
 A[:, j]
 $$
 
-### Examples
+### Try it
 
-#### JSON-RPC via Fetch API
+You can edit and execute the example below. Just make sure an openLCA IPC
+server is running on port `8080`:
 
 ```js,run
 {{#include unscaled-tech-flows.js}}

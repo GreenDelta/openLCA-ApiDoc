@@ -8,22 +8,17 @@ will just return the first entity from the database with the given name.
 | -------- | ---- | ---------- | ------- |
 | `data/get` | `GET data/{type}/name/{name}` | `@type`, `name` | [`E > RootEntity`](https://greendelta.github.io/olca-schema/classes/RootEntity.html) |
 
-## Examples
+## Try it
 
-### Python IPC
-
-```py
-{{#include get_by_name.py}}
-```
-
-### JSON-RPC via Fetch API
-
-The example below shows the usage of this method using the JSON-RPC protocol via
-the [Fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API)
-which is available in modern web-browsers or platforms like
-[Deno](https://deno.land/). It uses the [`call`
-helper](../../intro.md#running-the-javascript-examples) for the JSON-RPC calls.
+You can edit and execute the example below. Just make sure an openLCA IPC
+server is running on port `8080`:
 
 ```js,run
 {{#include get_by_name.js}}
+```
+
+## Python IPC
+
+```py
+{{#include get_by_name.py}}
 ```

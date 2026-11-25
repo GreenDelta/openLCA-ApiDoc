@@ -25,18 +25,19 @@ $$
 A \in \mathbb{R}^{n \times n}
 $$
 
-### Examples
+### Try it
 
-#### Python IPC
-
-```py
-{{#include _elements.py:tech-flows}}
-```
-
-#### JSON-RPC via Fetch API
+You can edit and execute the example below. Just make sure an openLCA IPC
+server is running on port `8080`:
 
 ```js,run
 {{#include tech-flows.js}}
+```
+
+### Python IPC
+
+```py
+{{#include _elements.py:tech-flows}}
 ```
 
 ## Intervention flows
@@ -54,18 +55,19 @@ $$
 B \in \mathbb{R}^{m \times n}
 $$
 
-### Examples
+### Try it
 
-#### Python IPC
-
-```py
-{{#include _elements.py:envi-flows}}
-```
-
-#### JSON-RPC via Fetch API
+You can edit and execute the example below. Just make sure an openLCA IPC
+server is running on port `8080`:
 
 ```js,run
 {{#include envi-flows.js}}
+```
+
+### Python IPC
+
+```py
+{{#include _elements.py:envi-flows}}
 ```
 
 ## Impact categories
@@ -80,16 +82,17 @@ $$
 C \in \mathbb{R}^{l \times m}
 $$
 
-### Examples
+### Try it
 
-#### Python IPC
-
-```py
-{{#include _elements.py:impacts}}
-```
-
-#### JSON-RPC via Fetch API
+You can edit and execute the example below. Just make sure an openLCA IPC
+server is running on port `8080`:
 
 ```js,run
 {{#include impact-categories.js}}
+```
+
+### Python IPC
+
+```py
+{{#include _elements.py:impacts}}
 ```

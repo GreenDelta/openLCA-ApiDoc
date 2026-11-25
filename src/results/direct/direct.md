@@ -36,15 +36,18 @@ $$
   product system.
 * `direct-intervention-of` returns the single value \\(G[i, j]\\).
 
-### Examples
+### Try it
 
-#### Contributions to a flow
+You can edit and execute the examples below. Just make sure an openLCA IPC
+server is running on port `8080`.
+
+Contributions to a flow:
 
 ```js,run
 {{#include flow-contributions.js}}
 ```
 
-#### Direct interventions of a process
+Direct interventions of a process:
 
 ```js,run
 {{#include direct-interventions.js}}
@@ -66,15 +69,18 @@ $$
   process \\(j\\) related to the final demand of the product system.
 * `direct-impact-of` returns the single value \\(H[k, j]\\).
 
-### Examples
+### Try it
 
-#### Contributions to an impact category
+You can edit and execute the examples below. Just make sure an openLCA IPC
+server is running on port `8080`.
+
+Contributions to an impact category:
 
 ```js,run
 {{#include impact-contributions.js}}
 ```
 
-#### Direct impacts of a process
+Direct impacts of a process:
 
 ```js,run
 {{#include direct-impacts.js}}
@@ -94,9 +100,10 @@ $$
 * `direct-costs-of` returns the direct costs \\(q_j s_j\\) of a process
   \\(j\\). Via JSON-RPC, the value is returned as plain number.
 
-### Examples
+### Try it
 
-#### olca-ipc.ts
+You can edit and execute the example below. Just make sure an openLCA IPC
+server is running on port `8080`:
 
 ```js,run
 {{#include cost-contributions.js}}
