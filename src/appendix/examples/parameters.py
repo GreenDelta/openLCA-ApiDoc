@@ -4,7 +4,7 @@ import olca_schema as o
 import olca_ipc.rest as rest
 import json
 
-client = rest.RestClient("http://192.168.142.136:3000")
+client = rest.RestClient("http://localhost:3000")
 # ANCHOR_END: connect
 
 # %%

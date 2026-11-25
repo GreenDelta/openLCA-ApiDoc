@@ -1,24 +1,32 @@
 # Calculation parameters
 
 This example shows the calculation of an LCA model with different parameter
-values. We will use the openLCA Python IPC module and the REST API in this
-example. First, we need to make sure that the current olca-ipc package is
-installed. Currently the [latest
-version](https://pypi.org/project/olca-ipc/#history) for openLCA 2 is `2.0.0a4`:
+values. We will use the [olca-ipc.py](https://github.com/GreenDelta/olca-ipc.py)
+package and the REST API in this example. The package requires Python 3.12 or
+newer and can be installed via pip:
 
 ```
-pip install olca-ipc==2.0.0a4
+pip install olca-ipc
+```
+
+With a clone of this documentation, you can also run the example directly with
+[uv](https://docs.astral.sh/uv/), which installs the required packages
+automatically:
+
+```
+uv run src/appendix/examples/parameters.py
 ```
 
 We connect to a REST API in this example and assume that it is running at
-`http://192.168.142.136:3000`
+`http://localhost:3000`, e.g. a gdt-server Docker container as described in
+[stand-alone servers](../servers.md):
 
 ```py
 {{#include parameters.py:connect}}
 ```
 
 To check that we can access the server, we can also just call this URL in a
-browser: `http://192.168.142.136:3000/api/version`, which should then return the
+browser: `http://localhost:3000/api/version`, which should then return the
 API version of that server.
 
 Next, we check which models (product systems) are available and select the
@@ -36,10 +44,10 @@ battery model with EoL :: eb31db8a-8102-453d-a549-be989e83c592
 ```
 
 Again, we could just query an URL for this, for the example:
-`http://192.168.142.136:3000/data/product-systems`
+`http://localhost:3000/data/product-systems`
 
 We do the same for the available impact assessment methods (
-`http://192.168.142.136:3000/data/methods`):
+`http://localhost:3000/data/methods`):
 
 ```py
 {{#include parameters.py:methods}}
@@ -61,7 +69,7 @@ calculation setup:
 
 The objects of the openLCA schema can be easily translated to JSON as done
 in the snippet above. This is the payload that is posted to the server in a
-[calculation request](../results/calculate.md):
+[calculation request](../../results/calculate/calculate.md):
 
 ```json
 {
@@ -110,7 +118,7 @@ parameter: number_of_recharges = 1.0
 ```
 
 The corresponding URL is:
-`http://192.168.142.136:3000/data/product-systems/59327d11-9a0d-477b-9cc0-060ca74b6327/parameters`
+`http://localhost:3000/data/product-systems/59327d11-9a0d-477b-9cc0-060ca74b6327/parameters`
 
 Finally, we run a set of calculations over a parameter range:
 

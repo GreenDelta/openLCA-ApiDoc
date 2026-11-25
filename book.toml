@@ -14,6 +14,9 @@ additional-js = ["run.js"]
 # old URLs from before the data and result pages were restructured
 [output.html.redirect]
 "/servers.html" = "appendix/servers.html"
+"/examples/examples.html" = "../appendix/examples/pyipc_from_scratch.html"
+"/examples/pyipc_from_scratch.html" = "../appendix/examples/pyipc_from_scratch.html"
+"/examples/parameters.html" = "../appendix/examples/parameters.html"
 "/data/create-system.html" = "create-system/create-system.html"
 "/data/delete.html" = "delete/delete.html"
 "/data/get_all.html" = "get_all/get_all.html"

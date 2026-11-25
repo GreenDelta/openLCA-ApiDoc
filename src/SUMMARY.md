@@ -1,9 +1,6 @@
 # Summary
 
 - [Introduction](intro.md)
-- [Examples](examples/examples.md)
-  - [Python IPC: From scratch](examples/pyipc_from_scratch.md)
-  - [Calculation parameters](examples/parameters.md)
 - [Data management](data/data.md)
   - [Get descriptors](data/get_descriptors/get_descriptors.md)
   - [Get by ID](data/get_by_id/get_by_id.md)
@@ -38,3 +35,5 @@
 
 [Stand-alone servers](appendix/servers.md)
 [REST API reference](appendix/rest-api.md)
+[Example: Python IPC from scratch](appendix/examples/pyipc_from_scratch.md)
+[Example: Calculation parameters](appendix/examples/parameters.md)

@@ -8,11 +8,24 @@ empty database and start an IPC server for that database:
 ![](images/py_scratch_init_db.png)
 
 In the Python code, we first import the required packages that we will use in
-our example. The `olca-schema` packages comes is a dependency of the `olca-ipc`
+our example. The `olca-schema` package is a dependency of the `olca-ipc`
 package and contains the data type definitions of the openLCA model and some
 utility methods. We will use Pandas for formatting our data output and NumPy,
 which is a dependency of Pandas, for checking the calculation. Also, we will
-add type annotations in our code, compatible with Python 3.11.
+add type annotations in our code. The packages can be installed via pip
+(`olca-ipc` requires Python 3.12 or newer):
+
+```
+pip install olca-ipc pandas
+```
+
+With a clone of this documentation, you can also run the example directly with
+[uv](https://docs.astral.sh/uv/), which installs the required packages
+automatically:
+
+```
+uv run src/appendix/examples/pyipc_from_scratch.py
+```
 
 ```py
 {{#include pyipc_from_scratch.py:imports}}
